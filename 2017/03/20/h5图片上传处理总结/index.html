@@ -1,0 +1,879 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html5 canvas," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章主要是总结，我在做图片上传，图片处理，图片合成，生成图片遇到过的坑。这个项目只在微信上展示，所以移动端的浏览器都没怎么测试，都是在android和ios的微信上进行测试。主要的坑都是来自ios上。  HTML5图片上传遇到的坑图片上传使用input[type=”file”]获取图片使用input[type=”file”]进行图片的上传，这个标签就能让用户拍照或者上传相册的图片了。&amp;lt;">
+<meta name="keywords" content="html5 canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5图片上传处理总结">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/h5图片上传处理总结/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="这篇文章主要是总结，我在做图片上传，图片处理，图片合成，生成图片遇到过的坑。这个项目只在微信上展示，所以移动端的浏览器都没怎么测试，都是在android和ios的微信上进行测试。主要的坑都是来自ios上。  HTML5图片上传遇到的坑图片上传使用input[type=”file”]获取图片使用input[type=”file”]进行图片的上传，这个标签就能让用户拍照或者上传相册的图片了。&amp;lt;">
+<meta property="og:image" content="http://yoursite.com/images/iospic1.jpg">
+<meta property="og:updated_time" content="2017-03-30T06:34:45.016Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="h5图片上传处理总结">
+<meta name="twitter:description" content="这篇文章主要是总结，我在做图片上传，图片处理，图片合成，生成图片遇到过的坑。这个项目只在微信上展示，所以移动端的浏览器都没怎么测试，都是在android和ios的微信上进行测试。主要的坑都是来自ios上。  HTML5图片上传遇到的坑图片上传使用input[type=”file”]获取图片使用input[type=”file”]进行图片的上传，这个标签就能让用户拍照或者上传相册的图片了。&amp;lt;">
+<meta name="twitter:image" content="http://yoursite.com/images/iospic1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/20/h5图片上传处理总结/"/>
+
+
+
+
+
+  <title> h5图片上传处理总结 | Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8132e0d5ed8e5dd365f3f4508e378aac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/h5图片上传处理总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                h5图片上传处理总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T10:53:23+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/20/h5图片上传处理总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/20/h5图片上传处理总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这篇文章主要是总结，我在做图片上传，图片处理，图片合成，生成图片遇到过的坑。这个项目只在微信上展示，所以移动端的浏览器都没怎么测试，都是在android和ios的微信上进行测试。主要的坑都是来自ios上。</p>
+</blockquote>
+<h1 id="HTML5图片上传遇到的坑"><a href="#HTML5图片上传遇到的坑" class="headerlink" title="HTML5图片上传遇到的坑"></a>HTML5图片上传遇到的坑</h1><h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><h3 id="使用input-type-”file”-获取图片"><a href="#使用input-type-”file”-获取图片" class="headerlink" title="使用input[type=”file”]获取图片"></a>使用input[type=”file”]获取图片</h3><p>使用input[type=”file”]进行图片的上传，这个标签就能让用户拍照或者上传相册的图片了。<br><code>&lt;input type=&quot;file&quot;  accept=&quot;image/*&quot; capture=&quot;camera&quot;&gt;</code><br><code>accept=&#39;image/*</code>用来定义上传文件的类型<br><code>capture=&#39;camera&#39;</code>这个会强制打开相机拍摄，但只有一些浏览器会支持，我试了下，安卓的qq浏览器会，但是UC会直接打不开文件上传，而在微信没有什么问题。<br>当用户选择完毕后，我们就要处理返回的数据，而且input[type=’file’]获取的图片是跨域的。</p>
+<h3 id="对获取到图片进行处理，展示在img上"><a href="#对获取到图片进行处理，展示在img上" class="headerlink" title="对获取到图片进行处理，展示在img上"></a>对获取到图片进行处理，展示在img上</h3><p>上传后，不能直接用value值扔给img.src上的，要先获取上传图片的数据<code>var file = this.files[0]</code>，再使用<code>URL.createObjectURL(blob)</code>方法来实现的。</p>
+<p>URL.createObjectURL() 静态方法会创建一个DOMString，它的 URL 表示参数中的对象，这个新的URL <strong>对象表示着指定的 File 对象或者 Blob 对象。</strong><br>而Blob对象表示一个<strong>不可变的，原始数据的类似文件对象</strong>  反正就是一个存储数据的对象吧。<br>createObjectURL这个方法，是存在window.URL这个对象里的。在网上也有要写兼容的<code>var windowUrl = window.URL || window.webkitURL</code>。最终就是<code>var data = windowUrl.createObjectURL(file)</code>，就成功获取了可以展示的图片数据，然后<code>img.src=data</code>就行了。完整代码：</p>
+<pre><code>var oFile = document.getElementById(&apos;file&apos;),
+    oShowImg = document.getElementById(&apos;showImg&apos;)
+oFile.addEventListener(&apos;change&apos;, function(e){
+    //input值发生改变后
+    var file = this.files[0]
+    var windowUrl = window.URL || window.webkitURL;
+    //把上传的图片，赋值到Img
+    oShowImg.src = windowUrl.createObjectURL(file)
+}, false);
+</code></pre><hr>
+<h2 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h2><p>然后就是图片的处理。项目的需求是，让用户选择滤镜效果，然后再选择一个海报的图片，编辑里面的文字，最后生成一个新的图片。我看到滤镜那部分，只能去找下插件。<a href="https://github.com/arahaya/ImageFilters.js" target="_blank" rel="external">github图片滤镜</a>，我找到的是这个，按照它的用法，很简单，效果又多，然后就继续下一个效果的实现。<br>让用户选择一个海报的图片，然后编辑的里面的文字。我是用input标签先去代替，当用户输入完毕，要生成图片了，我就根据选择的海报图片和编辑的文字进行添加。</p>
+<hr>
+<h2 id="生成图片到canvas"><a href="#生成图片到canvas" class="headerlink" title="生成图片到canvas"></a>生成图片到canvas</h2><p>根据用户选择的滤镜效果，海报图片，输入的文字，用canvas进行合成，输出一个新的图片。这里用到canvas的toDataURL();</p>
+<pre><code>    //先把宽高给了canvas
+var oCan = document.getElementById(&apos;canvas&apos;),
+    gct = oCan.getContext(&apos;2d&apos;),
+    w = document.documentElement.clientWidth,
+    h = document.documentElement.clientHeight
+
+oCan.width = w
+oCan.height = h
+
+//写了个图片的公共方法
+function cacheImg(url , callback ){
+        if(!url){
+            callback.call()
+            return false;
+        }
+    var img = new Image()
+
+    img.crossOrigin = &quot;Anonymous&quot;;
+
+    img.onload = function() {
+        //图片加载完，执行回调
+      callback.call(img)
+    }
+    img.src = url;
+
+    }
+</code></pre><p>一开始先给canvas宽高，然后这个<code>cacheImg(url,callback)</code>的函数，设置图片的crossOrigin，当图片load完成后，执行回调。</p>
+<h3 id="crossOrigin"><a href="#crossOrigin" class="headerlink" title="crossOrigin"></a>crossOrigin</h3><p>MDN是这样解释crossOrigin:启用CORS的图像在<code>&lt;canvas&gt;</code>元素中可以重复使用而不会被污染。如果图像被污染了，在最后toDataURL中，就会输出不了，我们后面再看看会是怎么样。详情大家可以去MDN看下<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img" target="_blank" rel="external">img标签的crossOrigin属性</a>。<br><strong>一旦加了这个属性的话，如果图片的数据被改变了，在canvas中就会出现不了。</strong></p>
+<h3 id="img-onload"><a href="#img-onload" class="headerlink" title="img.onload"></a>img.onload</h3><p>然后就是img.onload了。如果没有在图片onload完，就进行toDataURL()，生成图片，就会出现白屏或黑屏的现象。因为图片还没加载完，就生成图片，就会没有画像。</p>
+<h3 id="生成图片到canvas-1"><a href="#生成图片到canvas-1" class="headerlink" title="生成图片到canvas"></a>生成图片到canvas</h3><pre><code>function createImg(){
+    cacheImg(oShowImg.src,function(){
+        gct.drawImage(this, 
+            0,0,w,h
+        );
+    })
+}
+</code></pre><p>上传图片后，触发这段代码，图片就会输出到canvas了。在安卓没问题，但是在ios上问题就大了，图片会出现横向。<br><img src="/images/iospic1.jpg" alt="ios拍摄的图片"><br>第一张图片是img上的，然后第二张图片是在canvas上的。canvas的图片就会出现变横向。这样问题就大了，然后只能百度了。看到解决的方法是用exif.js。要在上传图片后那步就开始处理图片。</p>
+<pre><code>//这个是处理图片旋转问题
+function getImgData(img,dir,next){
+    var image=new Image();
+    image.onload=function(){
+        var degree=0,drawWidth,drawHeight,width,height;
+        //原始宽高
+        drawWidth=this.naturalWidth;
+        drawHeight=this.naturalHeight;
+        //以下改变一下图片大小
+        var maxSide = Math.max(drawWidth, drawHeight);
+        if (maxSide &gt; 1024) {
+        var minSide = Math.min(drawWidth, drawHeight);
+        minSide = minSide / maxSide * 1024;
+        maxSide = 1024;
+        if (drawWidth &gt; drawHeight) {
+            drawWidth = maxSide;
+            drawHeight = minSide;
+        } else {
+            drawWidth = minSide;
+            drawHeight = maxSide;
+        }
+    }
+    //使用canvas修正图片的方向
+    var canvas=document.createElement(&apos;canvas&apos;);
+    canvas.width=width=drawWidth;
+    canvas.height=height=drawHeight;
+    var context=canvas.getContext(&apos;2d&apos;);
+    //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
+    switch(dir){
+        //iphone横屏拍摄，此时home键在左侧
+        case 3:
+        degree=180;
+        drawWidth=-width;
+        drawHeight=-height;
+    break;
+    //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
+    case 6:
+        canvas.width=height;
+        canvas.height=width;
+        degree=90;
+        drawWidth=width;
+        drawHeight=-height;
+    break;
+    //iphone竖屏拍摄，此时home键在上方
+    case 8:
+        canvas.width=height;
+        canvas.height=width;
+        degree=270;
+        drawWidth=-width;
+        drawHeight=height;
+    break;
+    }
+        //使用canvas旋转校正
+        context.rotate(degree*Math.PI/180);
+        context.drawImage(this,0,0,drawWidth,drawHeight);
+        //返回校正图片
+        next(canvas.toDataURL(&quot;image/png&quot;));
+    }
+    image.src=img;
+}
+
+function change(){
+    var file = this.files[0];
+    var orientation;
+    //EXIF js 可以读取图片的元信息 https://github.com/exif-js/exif-js
+    EXIF.getData(file,function(){
+        //获取图片的拍摄方向的数据
+        orientation=EXIF.getTag(this,&apos;Orientation&apos;);
+    });
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        //修正图片方向
+        getImgData(this.result,orientation,function(data){
+        var img = new Image();
+        img.onload = function(){
+            oShowImg.src = data
+            createImg()
+        }
+        img.src = data;
+
+
+    });
+    }
+    reader.readAsDataURL(file);
+}
+</code></pre><p>change这段代码，使用了new FileReader()，而不是我一开始那个createObjectURL，最后也能生成新的图片。ios测试，OK没问题。这里用的exif.js，可以获取图片的元数据，就比如这个拍摄方向的数据<code>EXIF.getTag(this,&#39;Orientation&#39;);</code>这就获取到了，我用iphone7拍摄试了下，有4个方向:</p>
+<ol>
+<li>1:横屏，home键在右边</li>
+<li>3:横屏，home键在左边</li>
+<li>6:竖屏，home键在下边</li>
+<li>8:竖屏，home键在上边<br>然后就是使用canvas的修改方向了。</li>
+</ol>
+<p>加了<code>img.crossOrigin = &quot;Anonymous&quot;</code>后，在ios上，canvas看不了图片，安卓没问题。好。。。真坑。然后不加这个属性的话，好像也没什么问题，那这个属性有什么用呢。。。<br>我们再看看<code>Anonymous</code>是什么作用。MDN是这解释的：<strong>执行一个跨域的请求（比如，有 Origin: HTTP header）。但是没有发送证书（比如，没有cookie，没有X.509证书，没有HTTP基本的授权认证）。如果服务器没有给源站证书（没有设置Access-Control-Allow-Origin: HTTP头），图像会被污染而且它的使用会被限制。</strong></p>
+<hr>
+<p>没有设置跨域头，图像被污染的话，会被限制使用。crossOrigin就是防止图片被污染，因为被污染的话，就不能使用canvas的toDataURL等一些的方法，会抛出安全错误。但是我在PC运行没报错，手机运行貌似没问题。好吧我要研究下，反正现在就是暂时不需要用它，因为用了它，污染了图片的数据化，会在ios的canvas显示不了，除非你设置了跨域头（我现在测试的时候没设置）。</p>
+<hr>
+<h2 id="生成一张新的图片"><a href="#生成一张新的图片" class="headerlink" title="生成一张新的图片"></a>生成一张新的图片</h2><p>使用canvas.toDataURL()这方法。这方法第一个参数，来指定生成的图片是什么格式的，’image/png’，或者’image/jpeg’，或者’image/webp’，第二个参数指定图片的质量，0到1，只有png格式不支持。最终<code>canvas.toDataURL(&#39;image/png&#39;)</code>就能生成图片了。<br>使用toDataURL这个方法，会发现可以使用canvas来搞出很多的效果，最终生成一张图片，各种diy，生成新的图片，这感觉是不错。比如对上传的图片进行涂鸦啊，添加文字，滤镜，各种美化。</p>
+<h3 id="在本地测试报错"><a href="#在本地测试报错" class="headerlink" title="在本地测试报错"></a>在本地测试报错</h3><pre><code>Uncaught SecurityError: Failed to execute &apos;toDataURL&apos; on &apos;HTMLCanvasElement&apos;: Tainted canvases may not be exported.(anonymous function) @ canvas_image.html:49img.onload @ canvas_image.html:70
+</code></pre><p>因为有海报图片，所有是要两张图片合成一张，在本地直接打开，就报错了，而线上却没事。然后加上<code>img.crossOrigin = &quot;Anonymous&quot;</code>就会报出跨域的错误了。在本地打开的图片是跨域的，所以在本地测试的话，要在服务器上打开。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总结下这里写的几个坑<br>1.没有在img.onload后才添加到src上，canvas会显示不出来。<br>2.img标签的crossOrigin属性，当图片数据被污染了，要设置了跨域头才能显示出来。<br>3.上传后的图片，在ios上，图片会变旋转，要用exit.js处理。</p>
+<p>其实还有的，图片上传后，尺寸的修正，上传的图片大小限制。这篇就大概总结一下，而且看了下exit.js的api，发现可以挖掘的图片数据很多，这个可以深究。<br>这是我第一次写文章，写得不太好，我会继续努力的。这是<a href="https://github.com/yiiouo/canvas-Image-processing" target="_blank" rel="external">demo地址</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html5-canvas/" rel="tag"># html5 canvas</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/18/first/" rel="next" title="first">
+                <i class="fa fa-chevron-left"></i> first
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/canvas-colorPicker/" rel="prev" title="canvas-colorPicker">
+                canvas-colorPicker <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'<%= config.duoshuo_shortname %>'};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'https://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+       || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.gif"
+               alt="Yiiouo" />
+          <p class="site-author-name" itemprop="name">Yiiouo</p>
+           
+              <p class="site-description motion-element" itemprop="description">who's your daddy?</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML5图片上传遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">HTML5图片上传遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片上传"><span class="nav-number">1.1.</span> <span class="nav-text">图片上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用input-type-”file”-获取图片"><span class="nav-number">1.1.1.</span> <span class="nav-text">使用input[type=”file”]获取图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对获取到图片进行处理，展示在img上"><span class="nav-number">1.1.2.</span> <span class="nav-text">对获取到图片进行处理，展示在img上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片处理"><span class="nav-number">1.2.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成图片到canvas"><span class="nav-number">1.3.</span> <span class="nav-text">生成图片到canvas</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crossOrigin"><span class="nav-number">1.3.1.</span> <span class="nav-text">crossOrigin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#img-onload"><span class="nav-number">1.3.2.</span> <span class="nav-text">img.onload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成图片到canvas-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">生成图片到canvas</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成一张新的图片"><span class="nav-number">1.4.</span> <span class="nav-text">生成一张新的图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在本地测试报错"><span class="nav-number">1.4.1.</span> <span class="nav-text">在本地测试报错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiiouo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yiiouo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
