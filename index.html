@@ -260,6 +260,189 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/php-workman-gateway/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/14/php-workman-gateway/" itemprop="url">
+                  'php-gateway的使用';
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T09:14:55+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/14/php-workman-gateway/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/14/php-workman-gateway/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="php-gateway"><a href="#php-gateway" class="headerlink" title="php-gateway"></a>php-gateway</h1><blockquote>
+<p>在<a href="https://github.com/yiiouo/js-vod-system" target="_blank" rel="external">自己的项目</a>中，用到了php的gateway，gateway是基于workerman再次开发的一个网络框架，看下<a href="http://doc2.workerman.net" target="_blank" rel="external">手册</a>和DEMO，就可以基本的使用了。</p>
+</blockquote>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="下载，增加php环境变量"><a href="#下载，增加php环境变量" class="headerlink" title="下载，增加php环境变量"></a>下载，增加php环境变量</h3><p>我电脑是Windows，所以下载的是Windos版本。在官网下载文件后（<a href="http://www.workerman.net/download" target="_blank" rel="external">下载地址</a>），随意找个地方解压就好了。然后在系统-&gt;高级系统设置-&gt;环境变量-&gt;用户变量中的path，编辑-&gt;添加你的php所在的目录地址。</p>
+<p>我用的是wamp，所以php的地址是：D:\wamp\bin\php\php5.3.10  </p>
+<p>最后打开解压后的文件，会有个start_for_win.bat的批处理，点击打开它就OK了。这样就会打开服务，可以使用。</p>
+<h3 id="使用Websocket"><a href="#使用Websocket" class="headerlink" title="使用Websocket"></a>使用Websocket</h3><p>Gateway文件夹，大部分文件我们不用理的，只要关注Applications/YourApp/文件中的Events.php 和start_gateway.php这两个文件就行了。</p>
+<p>Events.php是处理业务代码。start_gateway.php是处理使用什么协议，端口是多少。</p>
+<p>因为我用的是Websocket，在start_gateway.php中，将协议改成webscoket,并写上ip地址。</p>
+<pre><code>$gateway = new Gateway(&quot;websocket://127.0.0.1:8282&quot;);
+</code></pre><p>这里ip地址如果是<code>127.0.0.1</code>，只能让本机使用，<code>本机ip地址</code>，能让内网中的ip使用。</p>
+<h2 id="开发功能"><a href="#开发功能" class="headerlink" title="开发功能"></a>开发功能</h2><h3 id="Events-php"><a href="#Events-php" class="headerlink" title="Events.php"></a>Events.php</h3><p>在Events.php中，大概结构是这样的：</p>
+<pre><code>class Events{
+   public static function onConnect($client_id){}
+   public static function onMessage($client_id,$message){}
+   public static function onClose($client_id){}
+}
+</code></pre><ul>
+<li>onConnect：当链接连接成功后的回调函数</li>
+<li>onMessage：当客户端发送信息后的回调函数</li>
+<li>onClose：当链接关闭后的回调函数</li>
+</ul>
+<p>主要用到的是<code>onMessage</code>，客户端通过websocket发送信息，就会触发此函数，我们就可以通过gateway给的一些方法，把要处理的数据，发送给全部用户或者特定的用户。</p>
+<p>每个函数的参数功能，都如同它的名字一样。<code>$client_id</code>是发送数据的用户id，这个id由Gateway生成的，不用我们是理。<code>$message</code>是用户发送的数据，发送的数据格式，最好就是字符串，所以前端后端，要把数据发送出去，都要先将它转成字符串。</p>
+<pre><code>public static function onConnect($client_id){
+    //当客户端连接成功后，就发送一条当前用户的id给所有连接此连接的客户端
+    Gateway::sendToAll(&quot;$client_id&quot;);
+}
+</code></pre><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>前端的代码也是很简单</p>
+<pre><code>&lt;div&gt;send data&lt;/div&gt;
+&lt;script&gt;
+    //这里的地址要和start_gateway.php中注册的Gateway地址一样
+    var ws = new WebSocket(&apos;ws:127.0.0.1:8282&apos;)
+    ws.addEventListener(&apos;open&apos;, function(e){
+        console.log(e)
+    }, false)
+    ws.addEventListener(&apos;message&apos;, function(e){
+        console.log(e)
+    }, false)
+    document.querySelector(&apos;div&apos;).addEventListener(&apos;click&apos;,function(){
+        ws.send(&apos;我发了信息，111&apos;)
+    },false)
+&lt;/script&gt;
+</code></pre><p>页面打开后，连接成功，就会收到了一条信息。如果我们将再新建一个页面，同样的代码，两个页面都会收到信息。</p>
+<p>同样，我们主要写的代码，也是放在<code>message</code>的回调函数里。</p>
+<h3 id="Gateway常用的方法"><a href="#Gateway常用的方法" class="headerlink" title="Gateway常用的方法"></a>Gateway常用的方法</h3><p>这里列出我用到的，详细大家可以看手册。</p>
+<ul>
+<li>sendToAll：对所有用户发送数据，<code>Gateway::sendToAll($data)</code></li>
+<li>sendToClient：对某个用户发送数据，<code>Gateway::sendToClient($client_id,$data)</code></li>
+<li>joinGroup：添加用户到某个组，<code>Gateway::joinGroup($group_name,$client_id)</code></li>
+<li>sendToGroup：对某个组内的所有用户发送数据,<code>Gateway::sendToGroup($group_name,$data)</code></li>
+</ul>
+<p>我现在暂时用到这4个，其他还没研究。这里说下Gateway的group。一个组可以含有多个用户，一个用户可以加入多个组，而且用户断线后，会自动从组里删除。这个是非常好用的，指定某个群组的人，发送数据。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1293,7 +1476,7 @@ end tell
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1306,7 +1489,7 @@ end tell
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
