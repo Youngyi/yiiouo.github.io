@@ -1,0 +1,833 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章，主要是总结一下，我在移动端布局的方法。有三种，一种是响应式布局，利用@meida判断各个size；第二种是REM；最后是设置viewport中的width。  响应式布局这种感觉是最好理解了，利用@media进行断点，在每个断点中编写css。 @media (max-width:768px){     //css } 上面这段代码，在浏览器的宽度低于768时有效。同理，如果把max换成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端布局方式">
+<meta property="og:url" content="http://yoursite.com/2017/07/11/移动端布局方式/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="这篇文章，主要是总结一下，我在移动端布局的方法。有三种，一种是响应式布局，利用@meida判断各个size；第二种是REM；最后是设置viewport中的width。  响应式布局这种感觉是最好理解了，利用@media进行断点，在每个断点中编写css。 @media (max-width:768px){     //css } 上面这段代码，在浏览器的宽度低于768时有效。同理，如果把max换成">
+<meta property="og:image" content="http://yoursite.com/images/rem_2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rem_1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rem_3.jpg">
+<meta property="og:updated_time" content="2017-07-12T14:17:18.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端布局方式">
+<meta name="twitter:description" content="这篇文章，主要是总结一下，我在移动端布局的方法。有三种，一种是响应式布局，利用@meida判断各个size；第二种是REM；最后是设置viewport中的width。  响应式布局这种感觉是最好理解了，利用@media进行断点，在每个断点中编写css。 @media (max-width:768px){     //css } 上面这段代码，在浏览器的宽度低于768时有效。同理，如果把max换成">
+<meta name="twitter:image" content="http://yoursite.com/images/rem_2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/11/移动端布局方式/"/>
+
+
+
+
+
+  <title> 移动端布局方式 | Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8132e0d5ed8e5dd365f3f4508e378aac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/移动端布局方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                移动端布局方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T15:06:16+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/11/移动端布局方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/11/移动端布局方式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这篇文章，主要是总结一下，我在移动端布局的方法。有三种，一种是响应式布局，利用@meida判断各个size；第二种是REM；最后是设置viewport中的width。</p>
+</blockquote>
+<h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><p>这种感觉是最好理解了，利用@media进行断点，在每个断点中编写css。</p>
+<pre><code>@media (max-width:768px){
+    //css
+}
+</code></pre><p>上面这段代码，在浏览器的宽度低于768时有效。同理，如果把<code>max</code>换成<code>min</code>，就会变成高于768时有效。可以设置宽度，也可以设置高度，也可以同时设置多个值。</p>
+<p>在<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries" target="_blank" rel="external">MDN,@media</a>上，发现很多值都可以做判断的。宽，高，宽高比，颜色（这个是指定输出设备每个像素单位的比特值），是否横屏或竖屏，还有很多，可以去MDN看看。</p>
+<h3 id="媒体类型"><a href="#媒体类型" class="headerlink" title="媒体类型"></a>媒体类型</h3><p>@meida还可以根据媒体类型进行断点。</p>
+<ul>
+<li>all，所有设备</li>
+<li>print，打印</li>
+<li>screen，彩色的电脑屏幕</li>
+<li>speech，不知道什么来的。</li>
+</ul>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><pre><code>@media (max-width:1000px){
+    div{background:blue;}
+}
+@media (min-width:1000px) and (max-width:1150px){
+    div{background: yellow;}
+}
+@media only screen and (max-width:1150px){
+    div{border:solid 1px;}
+}
+@media not print and (max-width:1150px){
+    div{border-radius:50%;}
+}
+</code></pre><ul>
+<li>and，就是‘和’的意思，前后两个条件都达到时</li>
+<li>only，唯一</li>
+<li>not，除了这个之外</li>
+</ul>
+<p>上面4个@media，分别的效果是：</p>
+<ol>
+<li>当浏览器宽度低于1000px时</li>
+<li>当浏览器宽度大于1000px 和 小于1150px时</li>
+<li>当在屏幕上显示 和 宽度小于1150px时</li>
+<li>除了在打印上显示外 和 宽度小于1150px时</li>
+</ol>
+<h3 id="按需‘加载’css"><a href="#按需‘加载’css" class="headerlink" title="按需‘加载’css"></a>按需‘加载’css</h3><p>@media还可以用在link标签上。</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/1.css&quot; media=&apos;(max-width:500px)&apos;&gt;
+</code></pre><p>当浏览器宽度低于500px时，<code>1.css</code>的样式才会有效果。但这不代表大于500px时，就没加载了<code>1.css</code>。使用了<code>media</code>属性后，只会让你当条件符合了，才让对应的css文件有效果。</p>
+<h3 id="平常响应式网站的开发"><a href="#平常响应式网站的开发" class="headerlink" title="平常响应式网站的开发"></a>平常响应式网站的开发</h3><p>平时响应式网站的开发，我都会先对比PC和MOBILE的设计稿，看看有什么区别，然后才进行编写css。通常都是使用<code>flex</code>。宽度尽量用百分比，间距、高度、字体大小使用 <code>em</code>，就可以很方便的进行大小的控制。</p>
+<h2 id="REM"><a href="#REM" class="headerlink" title="REM"></a>REM</h2><p>REM这个单位，会根据html的<code>font-size</code>大小进行转换。</p>
+<pre><code>html{font-size:100px;}
+p{padding-top:.5rem;}
+</code></pre><p>.5rem = 50px / 100</p>
+<p>转换后p的<code>padding-top</code>就是<code>50px</code>了。只要我们进行适当的计算，当前屏幕的宽度，html的<code>font-size</code>是多少px就OK了。</p>
+<h3 id="如何计算当前html的font-size值"><a href="#如何计算当前html的font-size值" class="headerlink" title="如何计算当前html的font-size值"></a>如何计算当前html的font-size值</h3><p>比如，我们拿到的设计稿是750px，那就设置成当屏幕宽度是750的时候，html的<code>font-size</code>就是<code>100px</code>（当然这个100px你可以随意设置的，我设置成100px只是方便我计算），然后就根据当前屏幕的宽度 / 750 * 100，就得到了当前屏幕宽度的<code>font-size</code>值。</p>
+<pre><code>//当前屏幕宽度 / 750 = 当前屏幕宽度的font-size / 100
+//代码如下
+(function (doc, win) {
+    var docEl = doc.documentElement,
+    resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;,
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 100 * (clientWidth / 750) + &apos;px&apos;;
+    };
+
+    if (!doc.addEventListener) return;
+       win.addEventListener(resizeEvt, recalc, false);
+       doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+})(document, window);
+</code></pre><p>上面这段代码，是直接根据屏幕宽度进行计算font-size的。而<a href="https://github.com/amfe/article/issues/17" target="_blank" rel="external">淘宝移动端REM方案</a>，还根据你的dpr去计算，而且会进行整体的缩放。淘宝的这种方案，比上面的代码会好很多。</p>
+<p><img src="/images/rem_2.jpg" alt="第一种方案"></p>
+<p><img src="/images/rem_1.jpg" alt="第二种方案"></p>
+<p>大家注意边框的大小。第二张图的边框是比第一张图的小的，两个都是<code>border:solid 1px</code>。其他的边距都是一样。淘宝的方案，解决了另一个问题：边框1px的问题。</p>
+<p>大家可以打开以下链接，看看具体的效果：</p>
+<p><a href="http://www.rni-l.com/mobile/index2.html" target="_blank" rel="external">第一种方案</a></p>
+<p><a href="http://www.rni-l.com/mobile/index.html" target="_blank" rel="external">第二种方案</a></p>
+<h3 id="淘宝移动端REM"><a href="#淘宝移动端REM" class="headerlink" title="淘宝移动端REM"></a>淘宝移动端REM</h3><p>这个很简单，只需要加载js就好了</p>
+<pre><code>&lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-flexible/{{version}}/??flexible_css.js,flexible.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>然后在css中，将px转为rem就好了。我是用scss的，所以写个函数就好了。</p>
+<pre><code>@function s($px) {
+    @return ($px / 75) * 1rem;
+}
+p{
+    font-size:s(40);padding-left: s(52);
+}
+</code></pre><p>比如p的<code>font-size</code>在750的设计稿是<code>40px</code>，然后<code>s(40)</code>就OK了。</p>
+<h2 id="设置viewport中的width"><a href="#设置viewport中的width" class="headerlink" title="设置viewport中的width"></a>设置viewport中的width</h2><p>这种方案，就是定死viewport中的width大小。</p>
+<p>比如设计稿是750的，然后就在代码上写：</p>
+<pre><code>&lt;met name=&apos;viewport&apos; content=&apos;width=750&apos; /&gt;
+</code></pre><p>我们用同样的页面，看看效果是怎么样</p>
+<p><img src="/images/rem_3.jpg" alt="第一种方案"></p>
+<p>链接：<a href="http://www.rni-l.com/mobile/index3.html" target="_blank" rel="external">第三种方案</a></p>
+<p>效果和第二种是一样的，在手机上看也是。</p>
+<pre><code>.top{
+    display: flex;align-items:center;padding:50px 0 113.5px;justify-content:space-between;width:100%;
+    p{
+        font-size:40px;padding-left:52px;
+    }
+    img{
+        width:71.5px;height: 71.5px;display: block;margin-right: 63.5px;
+    }
+}
+</code></pre><p>而代码是直接使用px的，定死的。</p>
+<p>感觉从效果上来看，是很完美的，但是为什么不是这种方法最流行？</p>
+<pre><code>@media screen and (max-width:360px){
+    .box{color:red;}
+}
+
+@media screen and (max-width:520px){
+    .box{color:black;}
+}
+
+@media screen and (max-width:750px){
+    .box{color:yellow;}
+}
+</code></pre><p>我在iphone7，小米5s，谷歌浏览器模拟的iphone6plus上，字体颜色都是<strong>黄色</strong>的。所以<code>@media</code>媒体查询是无法使用的，因为已经将宽度定死了。而REM方案却可以使用媒体查询的。因为移动端有很多奇怪的大小，而且在不同的浏览器或者微信上，高度都是不同的，所以可能会造成间距有很大的问题。</p>
+<pre><code>window.screen.width
+</code></pre><p>用js，可以获取当前设备的宽度。</p>
+<h2 id="对比三种方式"><a href="#对比三种方式" class="headerlink" title="对比三种方式"></a>对比三种方式</h2><h3 id="响应式的优缺点"><a href="#响应式的优缺点" class="headerlink" title="响应式的优缺点"></a>响应式的优缺点</h3><p>优点：兼容性好，@media在ie9以上是支持的，PC和MOBILE是同一套代码的，不用分开。</p>
+<p>缺点：要写得css相对另外两个多很多，而且各个断点都要做好。css样式会稍微大点。</p>
+<h3 id="REM优缺点"><a href="#REM优缺点" class="headerlink" title="REM优缺点"></a>REM优缺点</h3><p>优点：能维持能整体的布局效果，移动端兼容性好，不用写多个css代码，而且还可以利用@media进行优化。</p>
+<p>缺点：开头要引入一段js代码，单位都要改成rem(font-size可以用px)，计算rem比较麻烦(可以引用预处理器，但是增加了编译过程，相对麻烦了点)。pc和mobile要分开。</p>
+<h3 id="设置viewport中的width-1"><a href="#设置viewport中的width-1" class="headerlink" title="设置viewport中的width"></a>设置viewport中的width</h3><p>优点：和REM相同，而且不用写rem，直接使用px，更加快捷。</p>
+<p>缺点：效果可能没rem的好，图片可能会相对模糊，而且无法使用@media进行断点，不同size的手机上显示，高度间距可能会相差很大。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是看项目需求，再决定使用哪种方案，如果就手机站的话，我使用REM比较多。如果对距离比较精确的话，大量css3动画的，就使用第三种。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/08/ajax的使用/" rel="next" title="ajax的使用">
+                <i class="fa fa-chevron-left"></i> ajax的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:'<%= config.duoshuo_shortname %>'};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'https://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+       || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.gif"
+               alt="Yiiouo" />
+          <p class="site-author-name" itemprop="name">Yiiouo</p>
+           
+              <p class="site-description motion-element" itemprop="description">who's your daddy?</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#响应式布局"><span class="nav-number">1.</span> <span class="nav-text">响应式布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#媒体类型"><span class="nav-number">1.1.</span> <span class="nav-text">媒体类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">1.2.</span> <span class="nav-text">关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按需‘加载’css"><span class="nav-number">1.3.</span> <span class="nav-text">按需‘加载’css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平常响应式网站的开发"><span class="nav-number">1.4.</span> <span class="nav-text">平常响应式网站的开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REM"><span class="nav-number">2.</span> <span class="nav-text">REM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何计算当前html的font-size值"><span class="nav-number">2.1.</span> <span class="nav-text">如何计算当前html的font-size值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#淘宝移动端REM"><span class="nav-number">2.2.</span> <span class="nav-text">淘宝移动端REM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置viewport中的width"><span class="nav-number">3.</span> <span class="nav-text">设置viewport中的width</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比三种方式"><span class="nav-number">4.</span> <span class="nav-text">对比三种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式的优缺点"><span class="nav-number">4.1.</span> <span class="nav-text">响应式的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REM优缺点"><span class="nav-number">4.2.</span> <span class="nav-text">REM优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置viewport中的width-1"><span class="nav-number">4.3.</span> <span class="nav-text">设置viewport中的width</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiiouo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yiiouo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
