@@ -413,7 +413,7 @@ p{padding-top:.5rem;}
        doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
 })(document, window);
 </code></pre><p>上面这段代码，是直接根据屏幕宽度进行计算font-size的。而<a href="https://github.com/amfe/article/issues/17" target="_blank" rel="external">淘宝移动端REM方案</a>，还根据你的dpr去计算，而且会进行整体的缩放。淘宝的这种方案，比上面的代码会好很多。</p>
-<p><img src="/images/rem_2.jpg" alt="第一种方案"></p>
+<p><img src="/images/rem_2.png" alt="第一种方案"></p>
 <p><img src="/images/rem_1.jpg" alt="第二种方案"></p>
 <p>大家注意边框的大小。第二张图的边框是比第一张图的小的，两个都是<code>border:solid 1px</code>。其他的边距都是一样。淘宝的方案，解决了另一个问题：边框1px的问题。</p>
 <p>大家可以打开以下链接，看看具体的效果：</p>
