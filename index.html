@@ -603,6 +603,57 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
 <h1 id="moongodb可视化工具"><a href="#moongodb可视化工具" class="headerlink" title="moongodb可视化工具"></a>moongodb可视化工具</h1><p>我这里使用的是<code>studio 3T</code></p>
 <p>到官网下载即可</p>
 <p>(<a href="https://studio3t.com/)[https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/)[https://studio3t.com/</a>]</p>
+<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ul>
+<li>show dbs：显示有什么数据库存在</li>
+<li>db：显示当前的数据库或集合</li>
+<li>use db：连接特定的数据库</li>
+</ul>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
+<li>database：数据库</li>
+<li>collection：集合（表）</li>
+<li>document：文档（row）</li>
+<li>field：域（字段）</li>
+<li>index：索引</li>
+<li>primary key（主键，自动将_id设置为主键）</li>
+</ol>
+<p>mongodb可以说是json的格式</p>
+<h4 id="document"><a href="#document" class="headerlink" title="document"></a>document</h4><p>文档是一组<strong>键值（Key-value）</strong>对</p>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
+<li>文档的键/值对是<strong>有序</strong>的</li>
+<li>不仅可以是在双引号里面的字符串，还可以是其他几种数据类型</li>
+<li>区分类型和大小写</li>
+<li>不能有重复的键</li>
+<li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符</li>
+</ol>
+<h5 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
+<li>键不能含有\0（空字符）</li>
+<li>.和$有特别意义</li>
+<li>以’_’开头的键是保留（不推荐）</li>
+</ol>
+<h4 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h4><h5 id="命名规范-1"><a href="#命名规范-1" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
+<li>不能说空字符串</li>
+<li>不能含有\0（空字符）</li>
+<li>不能以’system.’开头</li>
+</ol>
+<h5 id="capped-collections"><a href="#capped-collections" class="headerlink" title="capped collections"></a>capped collections</h5><p>固定大小的collection，性能更好</p>
+<p>collection的数据存储空间值要提前分配</p>
+<p><code>db.createCollection(&quot;mycoll&quot;, {capped:true, size:100000})</code></p>
+<h4 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h4><p>数据库的信息存储在集合中</p>
+<p><code>dbname.system.*</code></p>
+<p><em>. .namespaces：列出所有名字空间
+</em>. .indexes：列出所有索引<br><em>. .profile：包含数据库概要信息
+</em>. .users：列出所有可访问数据库的用户<br>*. .sources：包含复制对端的服务器信息和状态</p>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p><em>. String，在MongoDB中，UTF-8编码的字符串才是合法的
+</em>. Integer，整型，32位或64位<br><em>. Boolean
+</em>. Double，双精度浮点值<br><em>. Min/Max keys，将一个值与BSON元素的最低值和最高值相对比
+</em>. Arrays，数组或列表<br><em>. Timestamp，时间戳
+</em>. Object：内嵌文档<br><em>. Null
+</em>. Symbol，符号<br><em>. Date：日期时间
+</em>. Object ID，对象ID，用于创建文档的ID<br><em>. Binary Data：二进制数据
+</em>. Code：代码类型，用于在文档存储javascript代码<br>*. Regular expression：正则</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><em>. 本地：<code>mongodb://localhost</code>
+</em>. 有用户名和密码：<code>mongodb://user:pwd@localhost</code><br><em>. 数据库：<code>mongodb://fred:foobar@localhost/db</code>
+</em>. 连接服务器1和服务器2：<code>mongodb://example1.com:27017,example2.com:27017</code></p>
 
           
         
