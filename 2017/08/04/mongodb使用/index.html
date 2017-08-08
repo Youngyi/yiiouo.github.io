@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/04/mongodb使用/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="记录了mongodb安装、配置和基本的使用  安装 在官网下载你所需要的版本（我的是windows） 安装（可以指定目录） windows是要配置环境变量，不然会出现闪退的情况  在系统变量的PATH中，添加一个新的变量，是你mongodb下载的路径（我的是：C:\Program Files\MongoDB\Server\3.4\bin）  可以选择你数据库文件放在的位置（好像默认是在C盘的）">
-<meta property="og:updated_time" content="2017-08-06T15:50:15.558Z">
+<meta property="og:updated_time" content="2017-08-08T03:03:36.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongodb使用">
 <meta name="twitter:description" content="记录了mongodb安装、配置和基本的使用  安装 在官网下载你所需要的版本（我的是windows） 安装（可以指定目录） windows是要配置环境变量，不然会出现闪退的情况  在系统变量的PATH中，添加一个新的变量，是你mongodb下载的路径（我的是：C:\Program Files\MongoDB\Server\3.4\bin）  可以选择你数据库文件放在的位置（好像默认是在C盘的）">
@@ -399,13 +399,151 @@
 </code></pre><p>这样就能更改数据库数据存放的位置</p>
 <h1 id="moongodb可视化工具"><a href="#moongodb可视化工具" class="headerlink" title="moongodb可视化工具"></a>moongodb可视化工具</h1><p>我这里使用的是<code>studio 3T</code></p>
 <p>到官网下载即可</p>
-<p>(<a href="https://studio3t.com/)[https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/)[https://studio3t.com/</a>]</p>
-<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ul>
+<p><a href="https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/</a></p>
+<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="常用词"><a href="#常用词" class="headerlink" title="常用词"></a>常用词</h2><p>将比较长的词进行简写：</p>
+<p>*. COLLECTION_NAME:CN（集合名）</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
 <li>show dbs：显示有什么数据库存在</li>
+<li>show tables：显示集合</li>
 <li>db：显示当前的数据库或集合</li>
 <li>use db：连接特定的数据库</li>
 </ul>
-<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>进入目标数据库后，执行：<code>db.dropDatabase()</code></p>
+<h3 id="删除collection"><a href="#删除collection" class="headerlink" title="删除collection"></a>删除collection</h3><p><code>db.CN.drop()</code></p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>find(), findOne()</p>
+<pre><code>db.CN.find(query, projection)
+</code></pre><p><em>. query ：可选，使用查询操作符指定查询条件
+</em>. projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）</p>
+<p>例子：</p>
+<pre><code>db.CN.find()
+// 添加查询条件
+db.CN.find({&apos;_id&apos;: 2})
+// 只显示匹配到的第一条
+db.CN.findOne()
+// 美化查询结果
+db.CN.find().pretty()
+</code></pre><h4 id="数组查询"><a href="#数组查询" class="headerlink" title="数组查询"></a>数组查询</h4><p><code>$elemMath</code> 操作符为数组元素指定复合条件，以查询数组中至少一个元素满足所有指定条件的文档</p>
+<pre><code>// 查询 finished 数组至少包含 一个大于 ($gt) 15 并且小于 ($lt) 20 
+db.CN.find( { finished: { $elemMatch: { $gt: 15, $lt: 20 } } } )
+</code></pre><h3 id="映射字段"><a href="#映射字段" class="headerlink" title="映射字段"></a>映射字段</h3><p>指定显示或排除哪些字段</p>
+<p>1或true，为显示;0或false，为隐藏</p>
+<p><code>_id</code>字段，默认显示</p>
+<p>不能在映射文档中组合 包含和排除 语句</p>
+<pre><code>// 显示所有字段
+db.CN.find( { status: &quot;A&quot; } )
+
+// 只显示&apos;_id&apos; , status&apos; 和 &apos;name&apos;
+db.CN.find( { status: &quot;A&quot; }, { name: 1, status: 1 } )
+
+// 只显示&apos;status&apos;
+db.CN.find( { status: &quot;A&quot; }, { status: 1, _id: 0 } )
+
+// 除了&apos;favorites&apos; 和 &apos;points&apos;，其他字段都显示
+db.CN.find( { status: &quot;A&quot; }, { favorites: 0, points: 0 } )
+
+// 包含 favorites 文档中的 food 字段（排除同理）
+db.CN.find(
+   { status: &quot;A&quot; },
+   { name: 1, &quot;favorites.food&quot;: 1 }
+)
+// result
+{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;cake&quot; } }
+{ &quot;_id&quot; : 6, &quot;name&quot; : &quot;abc&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;pizza&quot; } }
+
+// 数组，points中的bonus字段（排除同理）
+db.CN.find( { status: &quot;A&quot; }, { name: 1, &quot;points.bonus&quot;: 1 } )
+// result
+{ &quot;_id&quot; : 2, &quot;name&quot; : &quot;bob&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 20 }, { &quot;bonus&quot; : 12 } ] }
+{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 8 }, { &quot;bonus&quot; : 20 } ] }
+</code></pre><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>insert() , insertOne() , insertMany()</p>
+<p>添加字段，如果没有<code>_id</code>字段的话，会自动生成</p>
+<p><code>db.CN.insert(document)</code></p>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><pre><code>db.CN.insert({
+  title: 1,
+  name: &apos;name&apos;
+})
+</code></pre><h4 id="insertMany"><a href="#insertMany" class="headerlink" title="insertMany"></a>insertMany</h4><pre><code>// 插入多条数据
+db.CN.insertMany(
+   [
+     { name: &quot;bob&quot;, age: 42, status: &quot;A&quot;, },
+     { name: &quot;ahn&quot;, age: 22, status: &quot;A&quot;, },
+     { name: &quot;xi&quot;, age: 34, status: &quot;D&quot;, }
+   ]
+)
+</code></pre><p><code>insert</code>方法貌似都可以代替<code>insertOne</code>和<code>insertMany</code>，根据其他文章所知，<code>insert</code>在主要驱动程序已被弃用</p>
+<p>同理，update,delete,find一样    </p>
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>update, updateOne, updateMany, replaceOne, save</p>
+<h4 id="update"><a href="#update" class="headerlink" title="update"></a>update</h4><pre><code>db.CN.update(
+  &lt;query&gt;,
+  &lt;update&gt;,
+  {
+    upsert: &lt;boolean&gt;,
+    multi: &lt;boolean&gt;,
+    writeConcern: &lt;document&gt;
+  }
+)
+</code></pre><h4 id="replaceOne"><a href="#replaceOne" class="headerlink" title="replaceOne"></a>replaceOne</h4><pre><code>// 替换&apos;name&apos; === &apos;abc&apos;那个文档
+db.CN.replaceOne(
+  { name: &quot;abc&quot; },
+  { name: &quot;amy&quot;, age: 34, type: 2, status: &quot;P&quot;, favorites: { &quot;artist&quot;: &quot;Dali&quot;, food: &quot;donuts&quot; } }
+)
+</code></pre><h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><pre><code>db.CN.save({
+  _id: 1
+  title: 1,
+  name: &apos;name&apos;
+})
+</code></pre><p>如果不指定id，和Insert一样，指定id，就会替换对应的数据</p>
+<p>参数：</p>
+<p><em>. query : update的查询条件
+</em>. update : update的对象和值<br><em>. upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入
+</em>. multi : 可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新<br>*. writeConcern :可选，抛出异常的级别</p>
+<p>例子：</p>
+<pre><code>// 将&apos;_id&apos;为2的数据，&apos;title&apos;改为&apos;hahahahaha&apos;
+db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos;}})
+</code></pre><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>remove , deleteOne , deleteMany</p>
+<h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><pre><code>db.CN.remove(
+  &lt;query&gt;,
+  {
+    justOne: &lt;boolean&gt;,
+    writeConcern: &lt;document&gt;
+  }
+)
+</code></pre><p><em>. query :（可选）删除的文档的条件
+</em>. justOne : （可选）如果设为 true 或 1，则只删除一个文档，默认false<br>*. writeConcern :（可选）抛出异常的级别</p>
+<p>例子：</p>
+<pre><code>db.CN.remove{
+  {&apos;_id&apos;: 2},
+  {
+    justOne: true // 删除全部匹配的
+  }
+}
+// 清空数据库
+db.CN.remove({})
+</code></pre><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><p><em>. (&gt;) 大于 - $gt
+</em>. (&lt;) 小于 - $lt<br><em>. (&gt;=) 大于等于 - $gte
+</em>. (&lt;= ) 小于等于 - $lte<br><em>. (!=) 不等于 - $ne
+</em>. (or) 或者 - $or<br>*. $in （在相同的字段，使用$in而不是$or）</p>
+<p>例子：</p>
+<pre><code>// 显示: &apos;likes&apos;大于100的数据
+db.col.find({&quot;likes&quot; : {$gt : 100}})
+// 显示：&apos;likes&apos;大于100且小于200的数据
+db.col.find({likes : {$lt :200, $gt : 100}})
+</code></pre><h4 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h4><pre><code>// status === &quot;A&quot; &amp;&amp; age &gt; 30
+db.CN.find( { status: &quot;A&quot;, age: { $lt: 30 } } )
+</code></pre><h4 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h4><pre><code>// status === &quot;A&quot; || age &gt; 30
+db.CN.find(
+   {
+     $or: [ { status: &quot;A&quot; }, { age: { $lt: 30 } } ]
+   }
+)
+</code></pre><h4 id="AND-和-OR-混用"><a href="#AND-和-OR-混用" class="headerlink" title="AND 和 OR 混用"></a>AND 和 OR 混用</h4><pre><code>// status === &quot;A&quot; &amp;&amp; ( age &gt; 30 || type === 1 )
+db.CN.find(
+  {
+    status: &quot;A&quot;,
+    $or: [ { age: { $lt: 30 } }, { type: 1 } ]
+  }
+)
+</code></pre><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
 <li>database：数据库</li>
 <li>collection：集合（表）</li>
 <li>document：文档（row）</li>
@@ -413,6 +551,7 @@
 <li>index：索引</li>
 <li>primary key（主键，自动将_id设置为主键）</li>
 </ol>
+<p>BSON是一种类json的一种二进制形式的存储格式,简称Binary JSON</p>
 <p>mongodb可以说是json的格式</p>
 <h4 id="document"><a href="#document" class="headerlink" title="document"></a>document</h4><p>文档是一组<strong>键值（Key-value）</strong>对</p>
 <h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
@@ -439,7 +578,7 @@
 <p><code>dbname.system.*</code></p>
 <p><em>. .namespaces：列出所有名字空间
 </em>. .indexes：列出所有索引<br><em>. .profile：包含数据库概要信息
-</em>. .users：列出所有可访问数据库的用户<br>*. .sources：包含复制对端的服务器信息和状态</p>
+</em>. .CN：列出所有可访问数据库的用户<br>*. .sources：包含复制对端的服务器信息和状态</p>
 <h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p><em>. String，在MongoDB中，UTF-8编码的字符串才是合法的
 </em>. Integer，整型，32位或64位<br><em>. Boolean
 </em>. Double，双精度浮点值<br><em>. Min/Max keys，将一个值与BSON元素的最低值和最高值相对比
@@ -571,7 +710,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -593,7 +732,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -628,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#moongodb可视化工具"><span class="nav-number">2.</span> <span class="nav-text">moongodb可视化工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习"><span class="nav-number">3.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">3.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">3.2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb组成"><span class="nav-number">3.2.1.</span> <span class="nav-text">mongodb组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#document"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">document</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">3.2.1.1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命名规范"><span class="nav-number">3.2.1.1.2.</span> <span class="nav-text">命名规范</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collection"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">collection</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命名规范-1"><span class="nav-number">3.2.1.2.1.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#capped-collections"><span class="nav-number">3.2.1.2.2.</span> <span class="nav-text">capped collections</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元数据"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">数据类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">3.3.1.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#moongodb可视化工具"><span class="nav-number">2.</span> <span class="nav-text">moongodb可视化工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习"><span class="nav-number">3.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用词"><span class="nav-number">3.1.</span> <span class="nav-text">常用词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">3.2.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">3.2.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库"><span class="nav-number">3.2.2.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除collection"><span class="nav-number">3.2.3.</span> <span class="nav-text">删除collection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">3.2.4.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组查询"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">数组查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射字段"><span class="nav-number">3.2.5.</span> <span class="nav-text">映射字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">3.2.6.</span> <span class="nav-text">插入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#insert"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#insertMany"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">insertMany</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新文档"><span class="nav-number">3.2.7.</span> <span class="nav-text">更新文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#update"><span class="nav-number">3.2.7.1.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceOne"><span class="nav-number">3.2.7.2.</span> <span class="nav-text">replaceOne</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#save"><span class="nav-number">3.2.7.3.</span> <span class="nav-text">save</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文档"><span class="nav-number">3.2.8.</span> <span class="nav-text">删除文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#remove"><span class="nav-number">3.2.8.1.</span> <span class="nav-text">remove</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符"><span class="nav-number">3.2.9.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AND"><span class="nav-number">3.2.9.1.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OR"><span class="nav-number">3.2.9.2.</span> <span class="nav-text">OR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AND-和-OR-混用"><span class="nav-number">3.2.9.3.</span> <span class="nav-text">AND 和 OR 混用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">3.3.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb组成"><span class="nav-number">3.3.1.</span> <span class="nav-text">mongodb组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#document"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">document</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命名规范"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">命名规范</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collection"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">collection</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命名规范-1"><span class="nav-number">3.3.1.2.1.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#capped-collections"><span class="nav-number">3.3.1.2.2.</span> <span class="nav-text">capped collections</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元数据"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">数据类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.4.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接"><span class="nav-number">3.4.1.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
