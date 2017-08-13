@@ -272,6 +272,253 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/mongoose的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/10/mongoose的使用/" itemprop="url">mongoose的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T11:14:37+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/10/mongoose的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/10/mongoose的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/10/mongoose的使用/" class="leancloud_visitors" data-flag-title="mongoose的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>学习了mongodb后，接着就是和nodejs进行对接，怎么在nodejs上使用mongodb。我这里选择的是mongoose，至于为啥，可能教程稍微多点吧。不过，这个mongoose还是有点复杂的。。。</p>
+</blockquote>
+<p><a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">官方文档</a></p>
+<p><a href="https://mongoose.shujuwajue.com/guide/schemas.html" target="_blank" rel="external">中文文档</a></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>// 安装包
+npm i mongoose -S
+</code></pre><p>我nodejs使用的框架是<code>express</code>。</p>
+<pre><code>// 首先导入mongoose
+var mongoose = require(&apos;mongoose&apos;)
+// 实例化一个骨架
+var Schema = mongoose.Schema
+/*
+  Schema里面的参数，{ paw: String }
+  是规定，执行操作的时，约定的字段和类型
+  让格式更清晰吧
+  而且可以定义默认值
+*/
+var testSchema = new Schema({
+  name: { type: String, default: &apos;Val&apos;},
+  paw: String
+})
+
+/* 
+  为&quot;users&quot;的model，添加自定义方法
+  这个&quot;users&quot;是你要操作的集合（collection）
+*/
+testSchema.methods.findSimilarTypes = function(cb) {
+  // .find({})这些就跟操作mongodb时一样了，cb就是回调函数
+  return this.model(&apos;users&apos;).find({ name: this.name }, cb)
+}
+testSchema.methods.findSimilarTypes2 = function(cb) {
+  return this.model(&apos;users&apos;).find({ paw: this.paw }, cb)
+}
+
+// 将骨架发布为model，同理这个&quot;users&quot;是要操作的集合
+var Test = mongoose.model(&apos;users&apos;, testSchema)
+
+// 实例一个实体(entity)，传一个{}参数
+var _entity = new Test({ name: &apos;232&apos;, paw: &apos;22&apos; })
+
+// 执行之前定义的方法，打印获取到的数据
+_entity.findSimilarTypes2(function(err, data) {
+  console.log(data)
+})
+</code></pre><p>总结下：</p>
+<ol>
+<li>首先定义一个骨架，约定好字段和字段的类型(String, Array, Number这些，还有很多种)</li>
+<li>为这个骨架添加自定义方法，这里就是要对数据库CRUD了</li>
+<li>然后根据这个骨架，发布一个model，对要操作的数据库，定义好</li>
+<li>接着就实例一个实体（entity），传入之前约定好的字段</li>
+<li>最后就是执行之前自定义好的方法，获取到数据</li>
+</ol>
+<p>还有，不一定使用自定义方法，mongoose内置很多定义的方法</p>
+<p>下面我们详细说下每个东西的详细值</p>
+<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>Schema，就是这个操作的骨架，形式，约定好字段和字段的类型。例如在后面的操作，会出现什么字段，是什么类型的，一些操作，都在这里定义好。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Buffer</li>
+<li>Boolean</li>
+<li>Mixed</li>
+<li>Objectid</li>
+<li><p>Array</p>
+<p>  new Schema({</p>
+<pre><code>name: String,
+data: Array,
+list: {
+  type: Array,
+  default: [1, 2, 3]
+}
+msg: {
+  type: String,
+  default: &apos;abc&apos;,
+  lowercase: true, // 小写
+  trim: true // 去空格
+},
+updated: { type: Date, default: Date.now },
+age: { type: Number, min: 18, max: 65 },
+</code></pre><p>  })</p>
+</li>
+</ul>
+<p>可以看到，有很多内置方法，这些都能减轻工作</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/微信小程序学习记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,8 +637,11 @@
             <blockquote>
 <p>公司要开发个小程序官网，所以就学习下微信小程序，顺带记录一下要点</p>
 </blockquote>
-<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><h2 id="根目录"><a href="#根目录" class="headerlink" title="根目录"></a>根目录</h2><p><em>. app.js - 入口文件
-</em>. app.json - 配置文件<br>*. app.wxss - css主体</p>
+<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><h2 id="根目录"><a href="#根目录" class="headerlink" title="根目录"></a>根目录</h2><ul>
+<li>app.js - 入口文件</li>
+<li>app.json - 配置文件</li>
+<li>app.wxss - css主体</li>
+</ul>
 <h3 id="app-json"><a href="#app-json" class="headerlink" title="app.json"></a>app.json</h3><p>决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 、是否开启debug模式</p>
 <h4 id="pages"><a href="#pages" class="headerlink" title="pages"></a>pages</h4><p>整个小程序的路由配置</p>
 <h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p>用于设置小程序的状态栏、导航条、标题、窗口背景色</p>
@@ -845,7 +1095,9 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
 <p>到官网下载即可</p>
 <p><a href="https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/</a></p>
 <h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="常用词"><a href="#常用词" class="headerlink" title="常用词"></a>常用词</h2><p>将比较长的词进行简写：</p>
-<p>*. COLLECTION_NAME:CN（集合名）</p>
+<ul>
+<li>COLLECTION_NAME:CN（集合名）</li>
+</ul>
 <h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
 <li>show dbs：显示有什么数据库存在</li>
 <li>show tables：显示集合</li>
@@ -856,8 +1108,10 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
 <h3 id="删除collection"><a href="#删除collection" class="headerlink" title="删除collection"></a>删除collection</h3><p><code>db.CN.drop()</code></p>
 <h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>find(), findOne()</p>
 <pre><code>db.CN.find(query, projection)
-</code></pre><p><em>. query ：可选，使用查询操作符指定查询条件
-</em>. projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）</p>
+</code></pre><ul>
+<li>query ：可选，使用查询操作符指定查询条件</li>
+<li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）</li>
+</ul>
 <p>例子：</p>
 <pre><code>db.CN.find()
 // 添加查询条件
@@ -938,9 +1192,13 @@ db.CN.replaceOne(
 })
 </code></pre><p>如果不指定id，和Insert一样，指定id，就会替换对应的数据</p>
 <p>参数：</p>
-<p><em>. query : update的查询条件
-</em>. update : update的对象和值<br><em>. upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入
-</em>. multi : 可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新<br>*. writeConcern :可选，抛出异常的级别</p>
+<ul>
+<li>query : update的查询条件</li>
+<li>update : update的对象和值</li>
+<li>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入</li>
+<li>multi : 可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新</li>
+<li>writeConcern :可选，抛出异常的级别</li>
+</ul>
 <p>例子：</p>
 <pre><code>// 将&apos;_id&apos;为2的数据，&apos;title&apos;改为&apos;hahahahaha&apos;
 db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos;}})
@@ -952,8 +1210,11 @@ db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos
     writeConcern: &lt;document&gt;
   }
 )
-</code></pre><p><em>. query :（可选）删除的文档的条件
-</em>. justOne : （可选）如果设为 true 或 1，则只删除一个文档，默认false<br>*. writeConcern :（可选）抛出异常的级别</p>
+</code></pre><ul>
+<li>query :（可选）删除的文档的条件</li>
+<li>justOne : （可选）如果设为 true 或 1，则只删除一个文档，默认false</li>
+<li>writeConcern :（可选）抛出异常的级别</li>
+</ul>
 <p>例子：</p>
 <pre><code>db.CN.remove{
   {&apos;_id&apos;: 2},
@@ -963,10 +1224,15 @@ db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos
 }
 // 清空数据库
 db.CN.remove({})
-</code></pre><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><p><em>. (&gt;) 大于 - $gt
-</em>. (&lt;) 小于 - $lt<br><em>. (&gt;=) 大于等于 - $gte
-</em>. (&lt;= ) 小于等于 - $lte<br><em>. (!=) 不等于 - $ne
-</em>. (or) 或者 - $or<br>*. $in （在相同的字段，使用$in而不是$or）</p>
+</code></pre><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
+<li>(&gt;) 大于 - $gt</li>
+<li>(&lt;) 小于 - $lt</li>
+<li>(&gt;=) 大于等于 - $gte</li>
+<li>(&lt;= ) 小于等于 - $lte</li>
+<li>(!=) 不等于 - $ne</li>
+<li>(or) 或者 - $or</li>
+<li>$in （在相同的字段，使用$in而不是$or）</li>
+</ul>
 <p>例子：</p>
 <pre><code>// 显示: &apos;likes&apos;大于100的数据
 db.col.find({&quot;likes&quot; : {$gt : 100}})
@@ -987,7 +1253,44 @@ db.CN.find(
     $or: [ { age: { $lt: 30 } }, { type: 1 } ]
   }
 )
-</code></pre><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
+</code></pre><h4 id="type"><a href="#type" class="headerlink" title="$type"></a>$type</h4><p>每种数据类型的$type值</p>
+<ul>
+<li>Double  1  </li>
+<li>String  2  </li>
+<li>Object  3  </li>
+<li>Array 4  </li>
+<li>Binary data 5  </li>
+<li>Undefined 6 已废弃。</li>
+<li>Object id 7  </li>
+<li>Boolean 8  </li>
+<li>Date  9  </li>
+<li>Null  10   </li>
+<li>Regular Expression  11   </li>
+<li>JavaScript  13   </li>
+<li>Symbol  14   </li>
+<li>JavaScript (with scope) 15   </li>
+<li>32-bit integer  16   </li>
+<li>Timestamp 17   </li>
+<li>64-bit integer  18   </li>
+<li>Min key 255 Query with -1.</li>
+<li><p>Max key 127</p>
+<p>  // 获取到’title’是字符串的数据<br>  db.CN.find({“title” : {$type : 2}})</p>
+</li>
+</ul>
+<h3 id="其他的一些方法"><a href="#其他的一些方法" class="headerlink" title="其他的一些方法"></a>其他的一些方法</h3><h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>限制读取数据的数量</p>
+<pre><code>// 限制读取的数量为2
+db.CN.find({},{&quot;title&quot;:1,_id:0}).limit(2)
+</code></pre><h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><p>从第几个开始</p>
+<pre><code>// 获取匹配到的数据，从第10行开始显示
+db.CN.find().skip(10)
+
+//混合使用，获取匹配到的数据，从10开始获取，获取100个
+db.CN.find().skip(10).limit(100)
+</code></pre><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><p>排序，1和-1，1为升序，-1为降序。</p>
+<p>sort() =&gt; skip() =&gt; limit()</p>
+<pre><code>// 以key值，升序排序
+db.CN.find().sort({KEY:1})
+</code></pre><h4 id="aggregate-gt-聚合"><a href="#aggregate-gt-聚合" class="headerlink" title="aggregate() =&gt; 聚合"></a>aggregate() =&gt; 聚合</h4><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
 <li>database：数据库</li>
 <li>collection：集合（表）</li>
 <li>document：文档（row）</li>
@@ -1020,20 +1323,36 @@ db.CN.find(
 <p><code>db.createCollection(&quot;mycoll&quot;, {capped:true, size:100000})</code></p>
 <h4 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h4><p>数据库的信息存储在集合中</p>
 <p><code>dbname.system.*</code></p>
-<p><em>. .namespaces：列出所有名字空间
-</em>. .indexes：列出所有索引<br><em>. .profile：包含数据库概要信息
-</em>. .CN：列出所有可访问数据库的用户<br>*. .sources：包含复制对端的服务器信息和状态</p>
-<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p><em>. String，在MongoDB中，UTF-8编码的字符串才是合法的
-</em>. Integer，整型，32位或64位<br><em>. Boolean
-</em>. Double，双精度浮点值<br><em>. Min/Max keys，将一个值与BSON元素的最低值和最高值相对比
-</em>. Arrays，数组或列表<br><em>. Timestamp，时间戳
-</em>. Object：内嵌文档<br><em>. Null
-</em>. Symbol，符号<br><em>. Date：日期时间
-</em>. Object ID，对象ID，用于创建文档的ID<br><em>. Binary Data：二进制数据
-</em>. Code：代码类型，用于在文档存储javascript代码<br>*. Regular expression：正则</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><em>. 本地：<code>mongodb://localhost</code>
-</em>. 有用户名和密码：<code>mongodb://user:pwd@localhost</code><br><em>. 数据库：<code>mongodb://fred:foobar@localhost/db</code>
-</em>. 连接服务器1和服务器2：<code>mongodb://example1.com:27017,example2.com:27017</code></p>
+<ul>
+<li>.namespaces：列出所有名字空间</li>
+<li>.indexes：列出所有索引</li>
+<li>.profile：包含数据库概要信息</li>
+<li>.CN：列出所有可访问数据库的用户</li>
+<li>.sources：包含复制对端的服务器信息和状态</li>
+</ul>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ul>
+<li>String，在MongoDB中，UTF-8编码的字符串才是合法的</li>
+<li>Integer，整型，32位或64位</li>
+<li>Boolean</li>
+<li>Double，双精度浮点值</li>
+<li>Min/Max keys，将一个值与BSON元素的最低值和最高值相对比</li>
+<li>Arrays，数组或列表</li>
+<li>Timestamp，时间戳</li>
+<li>Object：内嵌文档</li>
+<li>Null</li>
+<li>Symbol，符号</li>
+<li>Date：日期时间</li>
+<li>Object ID，对象ID，用于创建文档的ID</li>
+<li>Binary Data：二进制数据</li>
+<li>Code：代码类型，用于在文档存储javascript代码</li>
+<li>Regular expression：正则</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><ul>
+<li>本地：<code>mongodb://localhost</code></li>
+<li>有用户名和密码：<code>mongodb://user:pwd@localhost</code></li>
+<li>数据库：<code>mongodb://fred:foobar@localhost/db</code></li>
+<li>连接服务器1和服务器2：<code>mongodb://example1.com:27017,example2.com:27017</code></li>
+</ul>
 
           
         
@@ -2409,228 +2728,6 @@ $.ajax({
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/php-verificationCode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/23/php-verificationCode/" itemprop="url">'前后端分离，php验证码处理';</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T17:24:55+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/23/php-verificationCode/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/23/php-verificationCode/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/05/23/php-verificationCode/" class="leancloud_visitors" data-flag-title="'前后端分离，php验证码处理';">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前后端分离，php验证码处理"><a href="#前后端分离，php验证码处理" class="headerlink" title="前后端分离，php验证码处理"></a>前后端分离，php验证码处理</h1><blockquote>
-<p>在<a href="https://github.com/yiiouo/todo-vue" target="_blank" rel="external">自己的项目</a>，登录注册要用到验证码功能，而这个项目是接后端分离的。因为我是一边学php一边写接口，所以写得不怎么好，继续努力吧。</p>
-</blockquote>
-<h2 id="使用GD生成验证码"><a href="#使用GD生成验证码" class="headerlink" title="使用GD生成验证码"></a>使用GD生成验证码</h2><p>这个我google了下，看了下代码，很简单就能实现了。</p>
-<pre><code>$string = &quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;;
-$str = &quot;&quot;;
-
-for($i=0;$i&lt;6;$i++){
-  //随机获取验证码中的数字
-  $pos = rand(0,35);
-  $str .= $string{$pos};
-}
-
-$img_handle = Imagecreate(80, 20);  //图片大小80X20
-$back_color = ImageColorAllocate($img_handle, 255, 255, 255); //背景颜色（白色）
-$txt_color = ImageColorAllocate($img_handle, 0,0, 0);  //文本颜色（黑色）
-
-//加入干扰线
-for($i=0;$i&lt;3;$i++)
-{
-  $line = ImageColorAllocate($img_handle,rand(0,255),rand(0,255),rand(0,255));
-  Imageline($img_handle, rand(0,15), rand(0,15), rand(100,150),rand(10,50), $line);
-}
-//加入干扰象素
-for($i=0;$i&lt;200;$i++) 
-{
-  $randcolor = ImageColorallocate($img_handle,rand(0,255),rand(0,255),rand(0,255));
-  Imagesetpixel($img_handle, rand()%100 , rand()%50 , $randcolor);
-}
-
-Imagefill($img_handle, 0, 0, $back_color);             //填充图片背景色
-ImageString($img_handle, 28, 10, 0, $str, $txt_color);//水平填充一行字符串
-header(&quot;Content-type: image/jpg&quot;); //生成验证码图片    
-/*
-  比如这个接口链接是http://localhost:80/api/code.php，直接在img中的src给予链接，就会显示出验证码了。
- */
-Imagepng($img_handle);//显示图片
-</code></pre><p>因为这是前后端分离的，都是用token进行验证登录状态的，没有用到session（至于为什么，我还没去了解），所以要给一个标识id，知道用户发送的验证码对应的是后台中的哪一个。</p>
-<h2 id="将图片转成base64，发送给前端"><a href="#将图片转成base64，发送给前端" class="headerlink" title="将图片转成base64，发送给前端"></a>将图片转成base64，发送给前端</h2><p>上面GD生成的验证码，如果前端用ajax去获取的话，会一堆乱码，前端要用到<code>FileReader</code>对象的<code>readAsDataURL</code>方法，将它转成图片。但是这样就获取不了获取到的验证码的标识id了。</p>
-<p>所以我想将GD库生成的验证码图片，转成base64，这样就可以组合成个数组，发给前端了。</p>
-<p>谷歌了下，找到了方法：</p>
-<pre><code>ob_start (); 
-  //$img_handle，就是gd生成的图片
-  imagejpeg ($img_handle);
-  $image_data = ob_get_contents (); 
-
-ob_end_clean (); 
-//生成base64图片
-$image_data_base64 = &apos;data:image/base64;base64&apos;.base64_encode ($image_data);
-</code></pre><p>这样就能生成了base64的图片，是字符串来的，所以最后再组装下数据结构，就可以发送给前端了：</p>
-<pre><code>//生成此验证码图片的id, uniqid()方法生成验证码的标识id
-echo json_encode(array(
-    &apos;pic&apos;=&gt;$image_data_base64,
-    &apos;id&apos; =&gt; uniqid(),
-    &apos;status&apos; =&gt; 0
-))
-</code></pre><h2 id="验证码答案和标识id存放在哪里？"><a href="#验证码答案和标识id存放在哪里？" class="headerlink" title="验证码答案和标识id存放在哪里？"></a>验证码答案和标识id存放在哪里？</h2><p>这个问题困扰了我，可以存在数据库，txt文件，cookie，缓存。。。还有其他我就不知道了。缓存这个好像是最好的，后面再研究下。然后如果是读写数据库和txt文件的话，感觉会浪费性能，所以先用了cookie去存储，后面再去了解缓存是怎么操作的。<br>    //id是验证码的标识，pwd是验证码的答案<br>    setcookie(“code”, json_encode(array(‘id’=&gt;$id , ‘pwd’=&gt;$pwd)), time()+3600);</p>
-<p>要判断的时候获取下cookie再去判断就好了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>多尝试点不会的技术吧…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2681,7 +2778,7 @@ echo json_encode(array(
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2703,7 +2800,7 @@ echo json_encode(array(
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
