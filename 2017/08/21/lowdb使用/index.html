@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/21/lowdb使用/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="使用cnpm i lowdb --save-dev   // nodejs const low = require(&amp;apos;lowdb&amp;apos;) const FileSync = require(&amp;apos;lowdb/adapters/FileSync&amp;apos;) // 进行异步模式 const adapter = new FileSync(&amp;apos;db.json&amp;apos;) /">
-<meta property="og:updated_time" content="2017-08-21T13:47:58.295Z">
+<meta property="og:updated_time" content="2017-08-25T16:13:46.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lowdb使用">
 <meta name="twitter:description" content="使用cnpm i lowdb --save-dev   // nodejs const low = require(&amp;apos;lowdb&amp;apos;) const FileSync = require(&amp;apos;lowdb/adapters/FileSync&amp;apos;) // 进行异步模式 const adapter = new FileSync(&amp;apos;db.json&amp;apos;) /">
@@ -411,7 +411,7 @@ db.defaults({
 <p><code>db.get(&#39;posts&#39;).find({ title: &#39;low!&#39; }).assign({ title: &#39;hi!&#39;}).write()</code>，获取<code>posts</code>字段，搜索<code>title</code>为’low!’的值，替换成’hi!’，最后写入</p>
 <p><code>db.get(&#39;posts&#39;).remove({ title: &#39;low!&#39; }).write()</code> ，删除</p>
 <p><code>db.unset(&#39;user.name&#39;).write()</code>，删除一个字段</p>
-
+<h1 id="发现个严重问题"><a href="#发现个严重问题" class="headerlink" title="发现个严重问题"></a>发现个严重问题</h1>
       
     </div>
     
@@ -450,6 +450,10 @@ db.defaults({
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/git操作/" rel="prev" title="git操作">
+                git操作 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +537,7 @@ db.defaults({
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -555,7 +559,7 @@ db.defaults({
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -590,7 +594,7 @@ db.defaults({
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发现个严重问题"><span class="nav-number">2.</span> <span class="nav-text">发现个严重问题</span></a></li></ol></div>
             
 
           </div>

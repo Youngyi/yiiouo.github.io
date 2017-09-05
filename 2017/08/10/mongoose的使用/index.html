@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/10/mongoose的使用/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="学习了mongodb后，接着就是和nodejs进行对接，怎么在nodejs上使用mongodb。我这里选择的是mongoose，至于为啥，可能教程稍微多点吧。不过，这个mongoose还是有点复杂的。。。  官方文档 中文文档 使用// 安装包 npm i mongoose -S 我nodejs使用的框架是express。 // 首先导入mongoose var mongoose = requi">
-<meta property="og:updated_time" content="2017-08-13T08:48:20.079Z">
+<meta property="og:updated_time" content="2017-09-02T04:42:05.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongoose的使用">
 <meta name="twitter:description" content="学习了mongodb后，接着就是和nodejs进行对接，怎么在nodejs上使用mongodb。我这里选择的是mongoose，至于为啥，可能教程稍微多点吧。不过，这个mongoose还是有点复杂的。。。  官方文档 中文文档 使用// 安装包 npm i mongoose -S 我nodejs使用的框架是express。 // 首先导入mongoose var mongoose = requi">
@@ -467,7 +467,25 @@ age: { type: Number, min: 18, max: 65 },
 </li>
 </ul>
 <p>可以看到，有很多内置方法，这些都能减轻工作</p>
-
+<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><h3 id="内置方法"><a href="#内置方法" class="headerlink" title="内置方法"></a>内置方法</h3><p>先定义个骨架</p>
+<pre><code>var User = new Schema({
+  name: String,
+  pwd: String,
+  avatar: String,
+  createdTime: {
+    type: Date,
+    default: Date.now
+  },
+  email: String,
+  token: String
+})
+</code></pre><p>再生成一个model</p>
+<pre><code>var Test = mognoose.model(&apos;user&apos;, User)
+</code></pre><p>使用内置的方法</p>
+<pre><code>Test.find(function(error, data){
+  console.log(data)
+})
+</code></pre>
       
     </div>
     
@@ -593,7 +611,7 @@ age: { type: Number, min: 18, max: 65 },
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -615,7 +633,7 @@ age: { type: Number, min: 18, max: 65 },
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -650,7 +668,7 @@ age: { type: Number, min: 18, max: 65 },
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Schema"><span class="nav-number">1.1.</span> <span class="nav-text">Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Schema"><span class="nav-number">1.1.</span> <span class="nav-text">Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number">1.2.</span> <span class="nav-text">model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">内置方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

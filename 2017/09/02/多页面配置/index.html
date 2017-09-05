@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="这个主要是说明express + gulp的配置，重点在gulp，因为nodejs我也不怎么会  关键词nodejs: 后端 express: nodejs框架 pug(jade): nodejs模板 mongodb: 数据库 lowdb: 数据库 gulp：编译工具 browser-sync: 自动刷新页面 browserify: 转换es6代码 如何使用clone项目 npm i  安装依赖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多页面配置">
+<meta property="og:url" content="http://yoursite.com/2017/09/02/多页面配置/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="这个主要是说明express + gulp的配置，重点在gulp，因为nodejs我也不怎么会  关键词nodejs: 后端 express: nodejs框架 pug(jade): nodejs模板 mongodb: 数据库 lowdb: 数据库 gulp：编译工具 browser-sync: 自动刷新页面 browserify: 转换es6代码 如何使用clone项目 npm i  安装依赖">
+<meta property="og:image" content="http://yoursite.com/2017/09/02/多页面配置/images/gulp1.jpg">
+<meta property="og:updated_time" content="2017-09-04T11:55:15.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多页面配置">
+<meta name="twitter:description" content="这个主要是说明express + gulp的配置，重点在gulp，因为nodejs我也不怎么会  关键词nodejs: 后端 express: nodejs框架 pug(jade): nodejs模板 mongodb: 数据库 lowdb: 数据库 gulp：编译工具 browser-sync: 自动刷新页面 browserify: 转换es6代码 如何使用clone项目 npm i  安装依赖">
+<meta name="twitter:image" content="http://yoursite.com/2017/09/02/多页面配置/images/gulp1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/02/多页面配置/"/>
+
+
+
+
+
+  <title>多页面配置 | Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8132e0d5ed8e5dd365f3f4508e378aac";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/02/多页面配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多页面配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-02T17:30:20+08:00">
+                2017-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/02/多页面配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/02/多页面配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/02/多页面配置/" class="leancloud_visitors" data-flag-title="多页面配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这个主要是说明express + gulp的配置，重点在gulp，因为nodejs我也不怎么会</p>
+</blockquote>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>nodejs: 后端</p>
+<p>express: nodejs框架</p>
+<p>pug(jade): nodejs模板</p>
+<p>mongodb: 数据库</p>
+<p>lowdb: 数据库</p>
+<p>gulp：编译工具</p>
+<p>browser-sync: 自动刷新页面</p>
+<p>browserify: 转换es6代码</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p><code>clone</code>项目</p>
+<p><code>npm i</code>  安装依赖</p>
+<p><code>gulp build</code>  生成静态文件</p>
+<p><code>gulp watch</code>  进行开发</p>
+<hr>
+<h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h2><p><a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">gulp中文文档</a></p>
+<h3 id="gulp语法"><a href="#gulp语法" class="headerlink" title="gulp语法"></a>gulp语法</h3><p><code>gulp</code>是基于<strong>流</strong>进行操作的</p>
+<p>而“流”，是数据的集合可以通过<code>pipe</code>方法，对上一个处理好的数据传递到下一个要处理的位置上</p>
+<pre><code>gulp.src(&apos;main.js&apos;).pipe(uglify())
+</code></pre><p>上面这一行代码，<code>gulp</code>通过<code>src</code>的方法获取<code>main.js</code>的流数据，通过<code>pipe</code>方法，把数据传递给<code>uglify</code>方法并执行</p>
+<p><a href="http://nodejs.cn/api/stream.html" target="_blank" rel="external">nodejs官方文档</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/24432941" target="_blank" rel="external">Node.js流的解析</a></p>
+<p><code>gulp</code>的方法，官方文档就给出了4个：src, task, dest, watch</p>
+<h4 id="gulp-src-globs-options"><a href="#gulp-src-globs-options" class="headerlink" title="gulp.src(globs[, options])"></a>gulp.src(globs[, options])</h4><p>可以接受两个参数，第一个参数必选，可以是字符串或者数组。第一个参数用来匹配相应的文件</p>
+<pre><code>// 这里会匹配&quot;src/js&quot;下面的所有.js文件
+gulp.src(&apos;./src/js/*.js&apos;)
+
+// 这里会匹配&quot;src/js&quot; 和 &quot;src/test&quot;下面的所有.js文件
+gulp.src([&apos;./src/js/*.js&apos;, &apos;.s/src/test/*.js&apos;])
+</code></pre><p><a href="https://github.com/isaacs/node-glob" target="_blank" rel="external">这里有很多匹配的规则</a></p>
+<p>第二个参数是<code>options</code>，选择配置等，详细看<code>gulp</code>文档</p>
+<h4 id="gulp-task-name-deps-fn"><a href="#gulp-task-name-deps-fn" class="headerlink" title="gulp.task(name[, deps], fn)"></a>gulp.task(name[, deps], fn)</h4><p>可以接受三个参数，第一个参数是字符串，声明这个任务的名字</p>
+<p>第二个参数是数组，可选，在这个<code>fn</code>前，要执行的任务</p>
+<p>第三个参数回调函数，必选，定义这个任务要干嘛</p>
+<pre><code>gulp.task(&apos;say&apos;, function() {
+  // ...
+  console.log(&apos;say&apos;)
+})
+// 在执行&apos;hello&apos;任务之前，会先执行&apos;say&apos;任务
+gulp.task(&apos;hello&apos;, [&apos;say&apos;], function(){
+  // ...
+  console.log(&apos;hello&apos;)
+})
+// 执行任务
+gulp hello
+// 终端就会打印出两行
+...
+say
+...
+hello
+</code></pre><p><img src="./images/gulp1.jpg" alt=""></p>
+<p><code>gulp.task</code>就是定义一个任务</p>
+<h4 id="gulp-dest-path-options"><a href="#gulp-dest-path-options" class="headerlink" title="gulp.dest(path[, options])"></a>gulp.dest(path[, options])</h4><p>可以接受两个参数，第一个参数<code>path</code>，输出的路径</p>
+<p>第二个参数配置选项，详情看<code>gulp</code>文档</p>
+<p><code>gulp.dest</code>会把流数据，生成一个新的文件，如果指定的路径文件夹不存在，就会自动创建</p>
+<pre><code>// 比如我将es6的代码转为es5后，最终输出到&apos;/dist/&apos;目录下
+gulp.src(&apos;index.js&apos;)
+    .pipe(babel())
+    .......
+    .pipe(gulp.dest(&apos;./dist/&apos;))
+</code></pre><p><code>gulp.dest</code>就是指定文件输出到哪里</p>
+<h4 id="gulp-watch"><a href="#gulp-watch" class="headerlink" title="gulp.watch()"></a>gulp.watch()</h4><p><code>gulp.watch</code>就是监听文件，当文件发生变化后，执行你定义好的操作</p>
+<pre><code>// 监听&apos;js&apos;文件夹下面的所有.js文件 和 &apos;js&apos;文件夹中的子级文件夹的下面所有的.js文件，当这些文件变化后，执行定义好的&apos;js&apos;任务
+gulp.watch([&apos;./js/*.js&apos;, &apos;./js/*/*.js&apos;], [&apos;js&apos;])
+
+// 执行回调函数
+gulp.watch([&apos;*.js&apos;], function(e) {
+  console.log(e)
+})
+</code></pre><p><code>gulp.watch</code>还有其他一些参数配置，详情看<code>gulp</code>官方文档</p>
+<h3 id="gulp插件"><a href="#gulp插件" class="headerlink" title="gulp插件"></a>gulp插件</h3><h4 id="js"><a href="#js" class="headerlink" title="js"></a>js</h4><ul>
+<li><p>babelify</p>
+<p>解析es6代码</p>
+</li>
+<li><p>browerify</p>
+<p>解析<code>module</code>语法为AMD或CMD</p>
+</li>
+<li><p>vinyl-source-stream, vinyl-buffer</p>
+<p>将常规流转换为包含Stream的vinyl对象，再转为Buffer，大概的作用是配合browerify一起使用  </p>
+</li>
+<li><p>gulp-uglify</p>
+<p>压缩js文件</p>
+</li>
+</ul>
+<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><ul>
+<li><p>gulp-sass/gulp-less</p>
+<p>解析scss/less文件</p>
+</li>
+<li><p>gulp-clean-css</p>
+<p><a href="https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-api" target="_blank" rel="external">https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-api</a></p>
+<p>打包处理css文件</p>
+</li>
+<li><p>gulp-autoprefixer</p>
+<p>自动添加css前缀</p>
+</li>
+</ul>
+<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><ul>
+<li><p>gulp-imagemin</p>
+<p>压缩图片</p>
+</li>
+</ul>
+<h4 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h4><ul>
+<li><p>gulp-sourcemaps</p>
+<p><code>es6</code>的代码，转译成可执行的代码后，是非常难看的，这样不利于我们<code>debug</code>，这个插件可以告诉你错误的代码在哪一行</p>
+</li>
+<li><p>gulp-plumber</p>
+<p>如果js或css发生了语法错误的话，<code>gulp</code>会停止运行的，使用了<code>gulp-plumber</code>之后，错误会显示在终端，而且大部分的错误不会使<code>gulp</code>停止运行。这个插件可以用于<code>js</code>, <code>css</code>, <code>es-lint</code>都可以。</p>
+</li>
+<li><p>gulp-notify</p>
+<p>在终端打印信息</p>
+</li>
+<li><p>browser-sync</p>
+<p>自动刷新工具，监测文件变化，从而自动刷新，<code>css</code>更新的话，会直接插入新的<code>css</code>，不会直接更新。而且可以带起代理，服务</p>
+</li>
+</ul>
+<h3 id="这份配置文件，实现了什么功能"><a href="#这份配置文件，实现了什么功能" class="headerlink" title="这份配置文件，实现了什么功能"></a>这份配置文件，实现了什么功能</h3><ol>
+<li><p>可以使用es7, es6的语法，自动压缩、合并js文件</p>
+</li>
+<li><p>可以使用less和sass，添加前缀，压缩css文件</p>
+</li>
+<li><p>文件变化，自动刷新页面</p>
+</li>
+<li><p>es-lint</p>
+</li>
+<li><p>压缩图片大小</p>
+</li>
+</ol>
+<p>前端的配置，这里是使用<code>gulp</code>完成一系列的任务，<code>gulp</code>的使用，可以自定义的进行操作，最终我们只需要关注打包之后的文件就可以了</p>
+<p>后续再看看如何增加版本号、hash值这些</p>
+<h3 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h3><p>使用<code>pug(jade)</code>模板，进行服务端渲染。</p>
+<p>默认配置了lowdb和mongodb，使用哪一个，在<code>app.js</code>调用就好</p>
+<h4 id="database"><a href="#database" class="headerlink" title="database"></a>database</h4><p>lowdb是基于操作<code>.json</code>文件的，所有的数据存储在一个<code>.json</code>文件上，简单易上手，无脑配置，如果数据量大，性能会不好</p>
+<p>mongodb是一种NoSQL(Not only SQL)，不是关系型数据库，以<code>json</code>的格式存储数据，但不是操作<code>.json</code>文件，数据文件是二进制的。相对lowdb会复杂点，但还是容易上手</p>
+<h4 id="关系型数据库和非关系型数据库的区别"><a href="#关系型数据库和非关系型数据库的区别" class="headerlink" title="关系型数据库和非关系型数据库的区别"></a>关系型数据库和非关系型数据库的区别</h4><p>RDBMS </p>
+<ul>
+<li><p>高度组织化结构化数据 </p>
+</li>
+<li><p>结构化查询语言（SQL） (SQL) </p>
+</li>
+<li><p>数据和关系都存储在单独的表中。 </p>
+</li>
+<li><p>数据操纵语言，数据定义语言 </p>
+</li>
+<li><p>严格的一致性</p>
+</li>
+<li><p>基础事务</p>
+</li>
+</ul>
+<p>NoSQL </p>
+<ul>
+<li><p>代表着不仅仅是SQL</p>
+</li>
+<li><p>没有声明性查询语言</p>
+</li>
+<li><p>没有预定义的模式</p>
+</li>
+</ul>
+<p>-键 - 值对存储，列存储，文档存储，图形数据库</p>
+<ul>
+<li><p>最终一致性，而非ACID属性</p>
+</li>
+<li><p>非结构化和不可预知的数据</p>
+</li>
+<li><p>CAP定理 </p>
+</li>
+<li><p>高性能，高可用性和可伸缩性</p>
+</li>
+</ul>
+<h4 id="mongoose"><a href="#mongoose" class="headerlink" title="mongoose"></a>mongoose</h4><p>mongoose是基于mongodb封装好的一个对象模型库，封装了一些方法，使我们更加规范的去操作数据库</p>
+<h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><pre><code>+---lib                      ----    数据库文件        
+|   +---lowdb                ----                                      
+|   |                        ----          
+|   \---mongodb              ----                                      
+|                            ----      
++---logs                     ----    日志文件
+|                            ----
++---public                   ----    前端打包后的文件   
+|   +---dist                 ----                 
+|   |   +---css              ----                    
+|   |   \---js               ----                   
+|   +---img                  ----                
+|   \---lib                  ----    前端公共库            
++---routes                   ----    后端路由                   
+|                            ----      
++---src                      ----    前端静态文件      
+|   +---css                  ----                                        
+|   |                        ----          
+|   +---img                  ----                                     
+|   |                        ----          
+|   \---js                   ----                                   
+|                            ----      
++---util                     ----    后端工具文件                                
+|                            ----      
+\---views                    ----    前端模板文件       
+|   |   404.pug              ----                    
+|   |   error.pug            ----                      
+|   |   index.pug            ----                      
+|   |   layout.pug           ----                       
+|   |                        ----                          
+|   .babelrc                 ----                 
+|   .eslintrc                ----                  
+|   .gitignore               ----     入口文件             
+|   app.js                   ----               
+|   config.example.js        ----     配置文件                         
+|   gulpfile.js              ----                    
+|   package.json             ----                     
+|   README.md                ----                  
+|
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/git操作/" rel="next" title="git操作">
+                <i class="fa fa-chevron-left"></i> git操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/03/你不知道的JavasScript笔记/" rel="prev" title="你不知道的JavasScript笔记">
+                你不知道的JavasScript笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.gif"
+               alt="Yiiouo" />
+          <p class="site-author-name" itemprop="name">Yiiouo</p>
+           
+              <p class="site-description motion-element" itemprop="description">who's your daddy?</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键词"><span class="nav-number">1.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用"><span class="nav-number">2.</span> <span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp"><span class="nav-number">3.</span> <span class="nav-text">gulp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp语法"><span class="nav-number">3.1.</span> <span class="nav-text">gulp语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-src-globs-options"><span class="nav-number">3.1.1.</span> <span class="nav-text">gulp.src(globs[, options])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-task-name-deps-fn"><span class="nav-number">3.1.2.</span> <span class="nav-text">gulp.task(name[, deps], fn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-dest-path-options"><span class="nav-number">3.1.3.</span> <span class="nav-text">gulp.dest(path[, options])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-watch"><span class="nav-number">3.1.4.</span> <span class="nav-text">gulp.watch()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp插件"><span class="nav-number">3.2.</span> <span class="nav-text">gulp插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js"><span class="nav-number">3.2.1.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#css"><span class="nav-number">3.2.2.</span> <span class="nav-text">css</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#image"><span class="nav-number">3.2.3.</span> <span class="nav-text">image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他工具"><span class="nav-number">3.2.4.</span> <span class="nav-text">其他工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这份配置文件，实现了什么功能"><span class="nav-number">3.3.</span> <span class="nav-text">这份配置文件，实现了什么功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs"><span class="nav-number">3.4.</span> <span class="nav-text">nodejs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#database"><span class="nav-number">3.4.1.</span> <span class="nav-text">database</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关系型数据库和非关系型数据库的区别"><span class="nav-number">3.4.2.</span> <span class="nav-text">关系型数据库和非关系型数据库的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mongoose"><span class="nav-number">3.4.3.</span> <span class="nav-text">mongoose</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件格式"><span class="nav-number">4.</span> <span class="nav-text">文件格式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yiiouo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-yiiouo-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/09/02/多页面配置/';
+          this.page.identifier = '2017/09/02/多页面配置/';
+          this.page.title = '多页面配置';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-yiiouo-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("vD9lHLi5QOmwQClMGaq1YWsW-gzGzoHsz", "O9GPrsAJNYIaQClj8yNKSrFH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
