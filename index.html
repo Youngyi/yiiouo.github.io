@@ -301,6 +301,274 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/technology/nodemailer的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/06/technology/nodemailer的使用/" itemprop="url">nodemailer的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T15:21:08+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/06/technology/nodemailer的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/06/technology/nodemailer的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/06/technology/nodemailer的使用/" class="leancloud_visitors" data-flag-title="nodemailer的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。</p>
+</blockquote>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>这里就先上配置</p>
+<p>nodejs: v6.9.4</p>
+<p>npm: 3.10.10</p>
+<p>nodemailer: ^4.1.0</p>
+<pre><code>const params = {
+  host: &apos;smtp.163.com&apos;, // 设置服务
+  port: 465, // 端口
+  sercure: true, // 是否使用TLS，true，端口为465，否则其他或者568
+  auth: {
+    user: config.user, // 邮箱和密码
+    pass: config.emailPwd
+  }
+}
+
+// 邮件信息
+const mailOptions = {
+  from: config.user, // 发送邮箱
+  to: config.emailTo, // 接受邮箱
+  subject: config.title, // 标题
+  html: config.html // 内容
+}
+
+// 发送邮件
+const transporter = nodemailer.createTransport(params)
+transporter.sendMail(mailOptions, (error, info) =&gt; {
+  if (error) {
+    return console.log(error);
+  }
+  console.log(&apos;Message %s sent: %s&apos;, info.messageId, info.response);
+  // success
+  // ...
+})
+</code></pre><p>按照这个格式，发送成功是没什么问题的。不过在<strong>密码</strong>这里要注意，不是邮箱的登录密码。</p>
+<h2 id="163和qq获取授权码"><a href="#163和qq获取授权码" class="headerlink" title="163和qq获取授权码"></a>163和qq获取授权码</h2><p>163邮箱的话，要开启POP3/SMTP服务，在设置 –&gt; POP3/SMTP/IMAP页面，设置。开通后会有个授权码的，配置里的密码，就是用这个授权码</p>
+<p>qq邮箱的话，同样也要开启这个服务，设置 –&gt; 账户 –&gt; POP3服务，点击开启，就会有个授权码，如果忘了记录，在开启服务下面有个“生成授权码”的，可以获取到的。</p>
+<p>这样qq和163就能开启了</p>
+<h2 id="Gmail"><a href="#Gmail" class="headerlink" title="Gmail"></a>Gmail</h2><p>如果是Gmail的话，这个就有点麻烦了，在nodemailer官网也有说到：</p>
+<p>Gmail either works well or it does not work at all. It is probably easier to switch to an alternative service instead of fixing issues with Gmail. If Gmail does not work for you then don’t use it.</p>
+<p>我这里用自己的谷歌邮箱试了下，在上面的配置修改一下</p>
+<pre><code>const params = {
+  service: &apos;Gmail&apos;, // 注意，host修改为service
+  port: 465, // 端口
+  sercure: true, // 是否使用TLS，true，端口为465，否则其他或者568
+  auth: {
+    user: config.user, // 邮箱和密码
+    pass: config.emailPwd
+  }
+}
+</code></pre><p>如果这样不行的话，<a href="https://myaccount.google.com/lesssecureapps" target="_blank" rel="external">打开这个链接，开启谷歌允许不够安全应用</a></p>
+<p>如果还不行的话，就要配置谷歌的XOAuth2了</p>
+<h3 id="配置XOAuth2"><a href="#配置XOAuth2" class="headerlink" title="配置XOAuth2"></a>配置XOAuth2</h3><p>就算使用了这种方法，也未必可能成功</p>
+<p><a href="http://masashi-k.blogspot.hk/2013/06/sending-mail-with-gmail-using-xoauth2.html" target="_blank" rel="external">这是我在网上找到的配置XOAuth2的教程</a></p>
+<p><a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="external">在这里创建一个凭据</a>，选择OAuth客户端ID，应用类型选择“网页应用”，然后填写名称，重定向URI要记得填写，我填写的是这个”<a href="https://developers.google.com/oauthplayground" target="_blank" rel="external">https://developers.google.com/oauthplayground</a>“</p>
+<p><img src="./images/nodemailer1.jpg" alt=""></p>
+<p>然后记录下id和密钥</p>
+<p><a href="https://developers.google.com/oauthplayground/" target="_blank" rel="external">进入此页面，进行配置</a></p>
+<p><img src="./images/nodemailer2.jpg" alt=""></p>
+<p>填写之前的id和密钥</p>
+<p>然后就是step1，选择api</p>
+<p><img src="./images/nodemailer3.jpg" alt=""></p>
+<p>到step2，点击’Exchange authorization code for tokens’按钮，生成token，这样就完成了。</p>
+<p>回到nodejs，重写下配置</p>
+<pre><code>const params = {
+  service: &apos;Gmail&apos;,
+  auth: {
+    type: &apos;OAuth2&apos;,
+    user: config.user,
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    refreshToken: config.refreshToken,
+    accessToken: config.accessToken
+  }
+}
+</code></pre><p><a href="https://nodemailer.com/smtp/oauth2/" target="_blank" rel="external">这里是官方的OAuth2配置</a></p>
+<h1 id="nodemailer其他功能"><a href="#nodemailer其他功能" class="headerlink" title="nodemailer其他功能"></a>nodemailer其他功能</h1><p>这里列出我自己用过的功能，<code>nodemailer</code>看官方介绍，貌似是很多功能的</p>
+<h2 id="发送多个用户："><a href="#发送多个用户：" class="headerlink" title="发送多个用户："></a>发送多个用户：</h2><pre><code>// 在配置发送信息的时候
+const mailOptions = {
+  from: config.user, // 发送邮箱
+  to: config.emailTo + &apos;, &apos; + config.emailTo2, // 用&apos;, &apos;分隔
+  subject: config.title, // 标题
+  html: config.html // 内容
+}
+</code></pre><h2 id="发送html内容"><a href="#发送html内容" class="headerlink" title="发送html内容"></a>发送html内容</h2><pre><code>const mailOptions = {
+  ....
+  html: config.html // 这里可以是html字符串
+}
+</code></pre><h2 id="发送附件"><a href="#发送附件" class="headerlink" title="发送附件"></a>发送附件</h2><p>可以同时发送多个</p>
+<p>   const mailOptions = {<br>     …<br>     attachments: [{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’<br>    },{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’,<br>      contentType: ‘text/plain’<br>    }]<br>   }</p>
+<p>官方给出的配置</p>
+<ul>
+<li>filename - filename to be reported as the name of the attached file. Use of unicode is allowed.</li>
+<li>content - String, Buffer or a Stream contents for the attachment</li>
+<li>path - path to the file if you want to stream the file instead of including it (better for larger attachments)</li>
+<li>href – an URL to the file (data uris are allowed as well)</li>
+<li>contentType - optional content type for the attachment, if not set will be derived from the filename property</li>
+<li>contentDisposition - optional content disposition type for the attachment, defaults to ‘attachment’</li>
+<li>cid - optional content id for using inline images in HTML message source</li>
+<li>encoding - If set and content is string, then encodes the content to a Buffer using the specified encoding. Example values: ‘base64’, ‘hex’, ‘binary’ etc. Useful if you want to use binary attachments in a JSON formatted email object.</li>
+<li>headers - custom headers for the attachment node. Same usage as with message headers</li>
+<li>raw - is an optional special value that overrides entire contents of current mime node including mime headers. Useful if you want to prepare node contents yourself</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>刚使用<code>nodemailer</code>踩了不少坑，弄了我一天，<code>Gmail</code>不怎么稳定，后面主管就叫换成<code>qq</code>了，据说<code>qq</code>企业邮箱发送邮件的次数比较多。这篇文章就是记录下使用<code>nodemailer</code>的一些经验。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/recording/你不知道的JavasScript笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -342,6 +610,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -572,6 +862,28 @@ function foo() {
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -935,8 +1247,8 @@ gulp.watch([&apos;*.js&apos;], function(e) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -1107,8 +1419,8 @@ gulp.watch([&apos;*.js&apos;], function(e) {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -1298,8 +1610,8 @@ db.defaults({
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -1563,8 +1875,8 @@ age: { type: Number, min: 18, max: 65 },
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -1807,8 +2119,8 @@ getApp()
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -2005,8 +2317,8 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -2448,8 +2760,8 @@ db.CN.find().sort({KEY:1})
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -2563,177 +2875,6 @@ npm i hexo -g
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/life/日记-独立的第一天-7-23/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/life/日记-独立的第一天-7-23/" itemprop="url">日记-独立的第一天-7.23</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T21:44:01+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/23/life/日记-独立的第一天-7-23/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/23/life/日记-独立的第一天-7-23/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/07/23/life/日记-独立的第一天-7-23/" class="leancloud_visitors" data-flag-title="日记-独立的第一天-7.23">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>今天是自己真正独立的第一天，搬出家里，自己一个人住，自己照顾自己。。。</p>
-</blockquote>
-<p>今天下午，把东西都搬到了广州的新家，除了我的猫和一些杂物还在家中。猫咪因为刚做完绝育手术，过几天还要去复诊，拆线，所以就先放在家里。</p>
-<p>稍微把东西整理了下，然后出去黄埔古村溜达一下，看看周围的情况，发现吃的还不小，而且不怎么贵。然后吃了个饭，才10块钱，感觉还是挺便宜的，虽然不怎么好吃。再去超市买了点生活用品，就回家洗澡洗衣服了。不知不觉就8点多了，写了下代码，和朋友聊了下天，不知道今晚什么时候才能睡着了。</p>
-<p>自己搬出来住后，第一感觉，还是有点寂寞，感觉舍不得家里人，比高中、大学出去住宿，遭得多，高中大学住宿的时候，起码有同学、舍友的陪伴，而现在就只有一个人了，聊天只能通过网络和手机。还是真人聊天实在点。</p>
-<p>生活还是不容易啊，稍微买了点日常用品和办公桌等等，花了不少钱，而且每月还是交房租、水电费等等，杂七杂八，一切都要靠自己啦。不过我觉得这是锻炼自己的机会，我是想自己一个人生活，锻炼自己，才搬出来住的，不然就应聘佛山的工作了。要对时间有更好的把控，在家里没什么心思学习啊，做事都是半途而废，看看一年的生活会变得怎么样吧，加油！</p>
-<p><img src="./images/diary_1.jpg" alt="小花"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2784,7 +2925,7 @@ npm i hexo -g
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2795,7 +2936,7 @@ npm i hexo -g
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2806,7 +2947,7 @@ npm i hexo -g
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

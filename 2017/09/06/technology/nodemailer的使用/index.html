@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="lowdb," />
+  <meta name="keywords" content="nodemailer nodejs," />
 
 
 
@@ -94,17 +94,21 @@
 
 
 
-<meta name="description" content="使用cnpm i lowdb --save-dev   // nodejs const low = require(&amp;apos;lowdb&amp;apos;) const FileSync = require(&amp;apos;lowdb/adapters/FileSync&amp;apos;) // 进行异步模式 const adapter = new FileSync(&amp;apos;db.json&amp;apos;) /">
-<meta name="keywords" content="lowdb">
+<meta name="description" content="前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。  如何使用这里就先上配置 nodejs: v6.9.4 npm: 3.10.10 nodemailer: ^4.1.0 const params = {   host: &amp;apos;smtp.163.com&amp;apos;">
+<meta name="keywords" content="nodemailer nodejs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lowdb使用">
-<meta property="og:url" content="http://yoursite.com/2017/08/21/recording/lowdb使用/index.html">
+<meta property="og:title" content="nodemailer的使用">
+<meta property="og:url" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="使用cnpm i lowdb --save-dev   // nodejs const low = require(&amp;apos;lowdb&amp;apos;) const FileSync = require(&amp;apos;lowdb/adapters/FileSync&amp;apos;) // 进行异步模式 const adapter = new FileSync(&amp;apos;db.json&amp;apos;) /">
-<meta property="og:updated_time" content="2017-09-06T07:24:05.020Z">
+<meta property="og:description" content="前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。  如何使用这里就先上配置 nodejs: v6.9.4 npm: 3.10.10 nodemailer: ^4.1.0 const params = {   host: &amp;apos;smtp.163.com&amp;apos;">
+<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer3.jpg">
+<meta property="og:updated_time" content="2017-09-06T09:51:27.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lowdb使用">
-<meta name="twitter:description" content="使用cnpm i lowdb --save-dev   // nodejs const low = require(&amp;apos;lowdb&amp;apos;) const FileSync = require(&amp;apos;lowdb/adapters/FileSync&amp;apos;) // 进行异步模式 const adapter = new FileSync(&amp;apos;db.json&amp;apos;) /">
+<meta name="twitter:title" content="nodemailer的使用">
+<meta name="twitter:description" content="前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。  如何使用这里就先上配置 nodejs: v6.9.4 npm: 3.10.10 nodemailer: ^4.1.0 const params = {   host: &amp;apos;smtp.163.com&amp;apos;">
+<meta name="twitter:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer1.jpg">
 
 
 
@@ -133,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/21/recording/lowdb使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/06/technology/nodemailer的使用/"/>
 
 
 
 
 
-  <title>lowdb使用 | Blog</title>
+  <title>nodemailer的使用 | Blog</title>
   
 
 
@@ -301,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/recording/lowdb使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/technology/nodemailer的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rni-L">
@@ -318,7 +322,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">lowdb使用</h2>
+          <h2 class="post-title" itemprop="name headline">nodemailer的使用</h2>
         
 
         <div class="post-meta">
@@ -330,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T21:04:49+08:00">
-                2017-08-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T15:21:08+08:00">
+                2017-09-06
               </time>
             
 
@@ -353,8 +357,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
                   </a>
                 </span>
 
@@ -371,9 +375,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/21/recording/lowdb使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/06/technology/nodemailer的使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/21/recording/lowdb使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/06/technology/nodemailer的使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -381,7 +385,7 @@
 
           
           
-             <span id="/2017/08/21/recording/lowdb使用/" class="leancloud_visitors" data-flag-title="lowdb使用">
+             <span id="/2017/09/06/technology/nodemailer的使用/" class="leancloud_visitors" data-flag-title="nodemailer的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,35 +416,112 @@
       
 
       
-        <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>cnpm i lowdb --save-dev
+        <blockquote>
+<p>前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。</p>
+</blockquote>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>这里就先上配置</p>
+<p>nodejs: v6.9.4</p>
+<p>npm: 3.10.10</p>
+<p>nodemailer: ^4.1.0</p>
+<pre><code>const params = {
+  host: &apos;smtp.163.com&apos;, // 设置服务
+  port: 465, // 端口
+  sercure: true, // 是否使用TLS，true，端口为465，否则其他或者568
+  auth: {
+    user: config.user, // 邮箱和密码
+    pass: config.emailPwd
+  }
+}
 
+// 邮件信息
+const mailOptions = {
+  from: config.user, // 发送邮箱
+  to: config.emailTo, // 接受邮箱
+  subject: config.title, // 标题
+  html: config.html // 内容
+}
 
-// nodejs
-const low = require(&apos;lowdb&apos;)
-const FileSync = require(&apos;lowdb/adapters/FileSync&apos;)
-// 进行异步模式
-const adapter = new FileSync(&apos;db.json&apos;)
-// 实例一个db对象
-const db = low(adapter)
-// 设置默认值，并写入
-db.defaults({
-  banner: [],
-  category: [],
-  product: [],
-  usre: []
-}).write()
-</code></pre><p><code>db.get(&#39;banner[0]&#39;), db.get(&#39;user.title&#39;), db.get(&#39;banner[0].title&#39;)</code>，都是获取某个值，最后要加上<code>.value()</code></p>
-<p><code>db.getState()</code>，查看db的状态</p>
-<p><code>db.setState({})</code>，清空db</p>
-<p><code>db.write().id</code>，自动插入随机id值</p>
-<p><code>db.has(&#39;posts&#39;).value()</code>，判断是否有这个值</p>
-<p><code>db.set(&#39;posts&#39;, []).write()</code>，将<code>posts</code>值设置为[]</p>
-<p>使用<code>.push()</code>插入数据，在插入数据前，要先<code>get(&#39;filed&#39;)</code>，声明向谁插入，最后就写入<code>write()</code></p>
-<p><code>db.get(&#39;banner&#39;).size().value()</code>，获取banner有多少条数据</p>
-<p><code>db.get(&#39;posts&#39;).find({ title: &#39;low!&#39; }).assign({ title: &#39;hi!&#39;}).write()</code>，获取<code>posts</code>字段，搜索<code>title</code>为’low!’的值，替换成’hi!’，最后写入</p>
-<p><code>db.get(&#39;posts&#39;).remove({ title: &#39;low!&#39; }).write()</code> ，删除</p>
-<p><code>db.unset(&#39;user.name&#39;).write()</code>，删除一个字段</p>
-<h1 id="发现个严重问题"><a href="#发现个严重问题" class="headerlink" title="发现个严重问题"></a>发现个严重问题</h1>
+// 发送邮件
+const transporter = nodemailer.createTransport(params)
+transporter.sendMail(mailOptions, (error, info) =&gt; {
+  if (error) {
+    return console.log(error);
+  }
+  console.log(&apos;Message %s sent: %s&apos;, info.messageId, info.response);
+  // success
+  // ...
+})
+</code></pre><p>按照这个格式，发送成功是没什么问题的。不过在<strong>密码</strong>这里要注意，不是邮箱的登录密码。</p>
+<h2 id="163和qq获取授权码"><a href="#163和qq获取授权码" class="headerlink" title="163和qq获取授权码"></a>163和qq获取授权码</h2><p>163邮箱的话，要开启POP3/SMTP服务，在设置 –&gt; POP3/SMTP/IMAP页面，设置。开通后会有个授权码的，配置里的密码，就是用这个授权码</p>
+<p>qq邮箱的话，同样也要开启这个服务，设置 –&gt; 账户 –&gt; POP3服务，点击开启，就会有个授权码，如果忘了记录，在开启服务下面有个“生成授权码”的，可以获取到的。</p>
+<p>这样qq和163就能开启了</p>
+<h2 id="Gmail"><a href="#Gmail" class="headerlink" title="Gmail"></a>Gmail</h2><p>如果是Gmail的话，这个就有点麻烦了，在nodemailer官网也有说到：</p>
+<p>Gmail either works well or it does not work at all. It is probably easier to switch to an alternative service instead of fixing issues with Gmail. If Gmail does not work for you then don’t use it.</p>
+<p>我这里用自己的谷歌邮箱试了下，在上面的配置修改一下</p>
+<pre><code>const params = {
+  service: &apos;Gmail&apos;, // 注意，host修改为service
+  port: 465, // 端口
+  sercure: true, // 是否使用TLS，true，端口为465，否则其他或者568
+  auth: {
+    user: config.user, // 邮箱和密码
+    pass: config.emailPwd
+  }
+}
+</code></pre><p>如果这样不行的话，<a href="https://myaccount.google.com/lesssecureapps" target="_blank" rel="external">打开这个链接，开启谷歌允许不够安全应用</a></p>
+<p>如果还不行的话，就要配置谷歌的XOAuth2了</p>
+<h3 id="配置XOAuth2"><a href="#配置XOAuth2" class="headerlink" title="配置XOAuth2"></a>配置XOAuth2</h3><p>就算使用了这种方法，也未必可能成功</p>
+<p><a href="http://masashi-k.blogspot.hk/2013/06/sending-mail-with-gmail-using-xoauth2.html" target="_blank" rel="external">这是我在网上找到的配置XOAuth2的教程</a></p>
+<p><a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="external">在这里创建一个凭据</a>，选择OAuth客户端ID，应用类型选择“网页应用”，然后填写名称，重定向URI要记得填写，我填写的是这个”<a href="https://developers.google.com/oauthplayground" target="_blank" rel="external">https://developers.google.com/oauthplayground</a>“</p>
+<p><img src="./images/nodemailer1.jpg" alt=""></p>
+<p>然后记录下id和密钥</p>
+<p><a href="https://developers.google.com/oauthplayground/" target="_blank" rel="external">进入此页面，进行配置</a></p>
+<p><img src="./images/nodemailer2.jpg" alt=""></p>
+<p>填写之前的id和密钥</p>
+<p>然后就是step1，选择api</p>
+<p><img src="./images/nodemailer3.jpg" alt=""></p>
+<p>到step2，点击’Exchange authorization code for tokens’按钮，生成token，这样就完成了。</p>
+<p>回到nodejs，重写下配置</p>
+<pre><code>const params = {
+  service: &apos;Gmail&apos;,
+  auth: {
+    type: &apos;OAuth2&apos;,
+    user: config.user,
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    refreshToken: config.refreshToken,
+    accessToken: config.accessToken
+  }
+}
+</code></pre><p><a href="https://nodemailer.com/smtp/oauth2/" target="_blank" rel="external">这里是官方的OAuth2配置</a></p>
+<h1 id="nodemailer其他功能"><a href="#nodemailer其他功能" class="headerlink" title="nodemailer其他功能"></a>nodemailer其他功能</h1><p>这里列出我自己用过的功能，<code>nodemailer</code>看官方介绍，貌似是很多功能的</p>
+<h2 id="发送多个用户："><a href="#发送多个用户：" class="headerlink" title="发送多个用户："></a>发送多个用户：</h2><pre><code>// 在配置发送信息的时候
+const mailOptions = {
+  from: config.user, // 发送邮箱
+  to: config.emailTo + &apos;, &apos; + config.emailTo2, // 用&apos;, &apos;分隔
+  subject: config.title, // 标题
+  html: config.html // 内容
+}
+</code></pre><h2 id="发送html内容"><a href="#发送html内容" class="headerlink" title="发送html内容"></a>发送html内容</h2><pre><code>const mailOptions = {
+  ....
+  html: config.html // 这里可以是html字符串
+}
+</code></pre><h2 id="发送附件"><a href="#发送附件" class="headerlink" title="发送附件"></a>发送附件</h2><p>可以同时发送多个</p>
+<p>   const mailOptions = {<br>     …<br>     attachments: [{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’<br>    },{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’,<br>      contentType: ‘text/plain’<br>    }]<br>   }</p>
+<p>官方给出的配置</p>
+<ul>
+<li>filename - filename to be reported as the name of the attached file. Use of unicode is allowed.</li>
+<li>content - String, Buffer or a Stream contents for the attachment</li>
+<li>path - path to the file if you want to stream the file instead of including it (better for larger attachments)</li>
+<li>href – an URL to the file (data uris are allowed as well)</li>
+<li>contentType - optional content type for the attachment, if not set will be derived from the filename property</li>
+<li>contentDisposition - optional content disposition type for the attachment, defaults to ‘attachment’</li>
+<li>cid - optional content id for using inline images in HTML message source</li>
+<li>encoding - If set and content is string, then encodes the content to a Buffer using the specified encoding. Example values: ‘base64’, ‘hex’, ‘binary’ etc. Useful if you want to use binary attachments in a JSON formatted email object.</li>
+<li>headers - custom headers for the attachment node. Same usage as with message headers</li>
+<li>raw - is an optional special value that overrides entire contents of current mime node including mime headers. Useful if you want to prepare node contents yourself</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>刚使用<code>nodemailer</code>踩了不少坑，弄了我一天，<code>Gmail</code>不怎么稳定，后面主管就叫换成<code>qq</code>了，据说<code>qq</code>企业邮箱发送邮件的次数比较多。这篇文章就是记录下使用<code>nodemailer</code>的一些经验。</p>
+
       
     </div>
     
@@ -457,7 +538,7 @@ db.defaults({
       
         <div class="post-tags">
           
-            <a href="/tags/lowdb/" rel="tag"># lowdb</a>
+            <a href="/tags/nodemailer-nodejs/" rel="tag"># nodemailer nodejs</a>
           
         </div>
       
@@ -470,8 +551,8 @@ db.defaults({
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/10/recording/mongoose的使用/" rel="next" title="mongoose的使用">
-                <i class="fa fa-chevron-left"></i> mongoose的使用
+              <a href="/2017/09/03/recording/你不知道的JavasScript笔记/" rel="next" title="你不知道的JavasScript笔记">
+                <i class="fa fa-chevron-left"></i> 你不知道的JavasScript笔记
               </a>
             
           </div>
@@ -479,10 +560,6 @@ db.defaults({
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/24/recording/git操作/" rel="prev" title="git操作">
-                git操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -636,7 +713,7 @@ db.defaults({
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发现个严重问题"><span class="nav-number">2.</span> <span class="nav-text">发现个严重问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何使用"><span class="nav-number">1.</span> <span class="nav-text">如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#163和qq获取授权码"><span class="nav-number">1.1.</span> <span class="nav-text">163和qq获取授权码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gmail"><span class="nav-number">1.2.</span> <span class="nav-text">Gmail</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置XOAuth2"><span class="nav-number">1.2.1.</span> <span class="nav-text">配置XOAuth2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodemailer其他功能"><span class="nav-number">2.</span> <span class="nav-text">nodemailer其他功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发送多个用户："><span class="nav-number">2.1.</span> <span class="nav-text">发送多个用户：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送html内容"><span class="nav-number">2.2.</span> <span class="nav-text">发送html内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送附件"><span class="nav-number">2.3.</span> <span class="nav-text">发送附件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -779,9 +856,9 @@ db.defaults({
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/08/21/recording/lowdb使用/';
-          this.page.identifier = '2017/08/21/recording/lowdb使用/';
-          this.page.title = 'lowdb使用';
+          this.page.url = 'http://yoursite.com/2017/09/06/technology/nodemailer的使用/';
+          this.page.identifier = '2017/09/06/technology/nodemailer的使用/';
+          this.page.title = 'nodemailer的使用';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-yiiouo-github-io.disqus.com/embed.js';
