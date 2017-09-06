@@ -101,14 +101,14 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。  如何使用这里就先上配置 nodejs: v6.9.4 npm: 3.10.10 nodemailer: ^4.1.0 const params = {   host: &amp;apos;smtp.163.com&amp;apos;">
-<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer1.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer2.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer3.jpg">
-<meta property="og:updated_time" content="2017-09-06T09:51:27.674Z">
+<meta property="og:image" content="http://yoursite.com/images/nodemailer1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/nodemailer2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/nodemailer3.jpg">
+<meta property="og:updated_time" content="2017-09-06T09:57:10.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodemailer的使用">
 <meta name="twitter:description" content="前段时间有个很普通的项目需要发邮件的功能，而且是刚开始学nodejs，所以只是搜索了下用什么好的库能实现，就找到了nodemailer了。这篇文章主要是记录一下使用的过程和经验。  如何使用这里就先上配置 nodejs: v6.9.4 npm: 3.10.10 nodemailer: ^4.1.0 const params = {   host: &amp;apos;smtp.163.com&amp;apos;">
-<meta name="twitter:image" content="http://yoursite.com/2017/09/06/technology/nodemailer的使用/images/nodemailer1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/nodemailer1.jpg">
 
 
 
@@ -472,13 +472,13 @@ transporter.sendMail(mailOptions, (error, info) =&gt; {
 <h3 id="配置XOAuth2"><a href="#配置XOAuth2" class="headerlink" title="配置XOAuth2"></a>配置XOAuth2</h3><p>就算使用了这种方法，也未必可能成功</p>
 <p><a href="http://masashi-k.blogspot.hk/2013/06/sending-mail-with-gmail-using-xoauth2.html" target="_blank" rel="external">这是我在网上找到的配置XOAuth2的教程</a></p>
 <p><a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="external">在这里创建一个凭据</a>，选择OAuth客户端ID，应用类型选择“网页应用”，然后填写名称，重定向URI要记得填写，我填写的是这个”<a href="https://developers.google.com/oauthplayground" target="_blank" rel="external">https://developers.google.com/oauthplayground</a>“</p>
-<p><img src="./images/nodemailer1.jpg" alt=""></p>
+<p><img src="/images/nodemailer1.jpg" alt=""></p>
 <p>然后记录下id和密钥</p>
 <p><a href="https://developers.google.com/oauthplayground/" target="_blank" rel="external">进入此页面，进行配置</a></p>
-<p><img src="./images/nodemailer2.jpg" alt=""></p>
+<p><img src="/images/nodemailer2.jpg" alt=""></p>
 <p>填写之前的id和密钥</p>
 <p>然后就是step1，选择api</p>
-<p><img src="./images/nodemailer3.jpg" alt=""></p>
+<p><img src="/images/nodemailer3.jpg" alt=""></p>
 <p>到step2，点击’Exchange authorization code for tokens’按钮，生成token，这样就完成了。</p>
 <p>回到nodejs，重写下配置</p>
 <pre><code>const params = {
@@ -506,8 +506,18 @@ const mailOptions = {
   html: config.html // 这里可以是html字符串
 }
 </code></pre><h2 id="发送附件"><a href="#发送附件" class="headerlink" title="发送附件"></a>发送附件</h2><p>可以同时发送多个</p>
-<p>   const mailOptions = {<br>     …<br>     attachments: [{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’<br>    },{<br>      filename: ‘test.txt’,<br>      content: ‘hello world!’,<br>      contentType: ‘text/plain’<br>    }]<br>   }</p>
-<p>官方给出的配置</p>
+<pre><code>const mailOptions = {
+  ...
+  attachments: [{
+    filename: &apos;test.txt&apos;,
+    content: &apos;hello world!&apos;
+  },{
+    filename: &apos;test.txt&apos;,
+    content: &apos;hello world!&apos;,
+    contentType: &apos;text/plain&apos;
+  }]
+}
+</code></pre><p>官方给出的配置</p>
 <ul>
 <li>filename - filename to be reported as the name of the attached file. Use of unicode is allowed.</li>
 <li>content - String, Buffer or a Stream contents for the attachment</li>
@@ -654,7 +664,7 @@ const mailOptions = {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -665,7 +675,7 @@ const mailOptions = {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
