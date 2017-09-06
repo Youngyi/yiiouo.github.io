@@ -492,14 +492,13 @@ transporter.sendMail(mailOptions, (error, info) =&gt; {
     accessToken: config.accessToken
   }
 }
-</code></pre><p><a href="https://nodemailer.com/smtp/oauth2/" target="_blank" rel="external">这里是官方的OAuth2配置</a></p>
+</code></pre><p>我这里测试是成功的（本地服务器），如果还不成功的话，这个你只能在搜搜有什么解决方法了。</p>
+<p><a href="https://nodemailer.com/smtp/oauth2/" target="_blank" rel="external">这里是官方的OAuth2配置</a></p>
 <h1 id="nodemailer其他功能"><a href="#nodemailer其他功能" class="headerlink" title="nodemailer其他功能"></a>nodemailer其他功能</h1><p>这里列出我自己用过的功能，<code>nodemailer</code>看官方介绍，貌似是很多功能的</p>
 <h2 id="发送多个用户："><a href="#发送多个用户：" class="headerlink" title="发送多个用户："></a>发送多个用户：</h2><pre><code>// 在配置发送信息的时候
 const mailOptions = {
   from: config.user, // 发送邮箱
-  to: config.emailTo + &apos;, &apos; + config.emailTo2, // 用&apos;, &apos;分隔
-  subject: config.title, // 标题
-  html: config.html // 内容
+  to: config.emailTo + &apos;, &apos; + config.emailTo2 // 用&apos;, &apos;分隔
 }
 </code></pre><h2 id="发送html内容"><a href="#发送html内容" class="headerlink" title="发送html内容"></a>发送html内容</h2><pre><code>const mailOptions = {
   ....
