@@ -143,12 +143,21 @@
 
 
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102257497-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?8132e0d5ed8e5dd365f3f4508e378aac";
+      hm.src = "https://hm.baidu.com/hm.js?f11380fcb075224d78c5110a02679bd1";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
@@ -190,7 +199,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -216,6 +225,26 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -272,10 +301,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/你不知道的JavasScript笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/recording/你不知道的JavasScript笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -289,9 +318,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/03/你不知道的JavasScript笔记/" itemprop="url">你不知道的JavasScript笔记</a></h1>
+                <a class="post-title-link" href="/2017/09/03/recording/你不知道的JavasScript笔记/" itemprop="url">你不知道的JavasScript笔记</a></h2>
         
 
         <div class="post-meta">
@@ -322,9 +351,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/03/你不知道的JavasScript笔记/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/03/recording/你不知道的JavasScript笔记/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/03/你不知道的JavasScript笔记/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/03/recording/你不知道的JavasScript笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -332,7 +361,7 @@
 
           
           
-             <span id="/2017/09/03/你不知道的JavasScript笔记/" class="leancloud_visitors" data-flag-title="你不知道的JavasScript笔记">
+             <span id="/2017/09/03/recording/你不知道的JavasScript笔记/" class="leancloud_visitors" data-flag-title="你不知道的JavasScript笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -413,7 +442,48 @@
 <p>UMD，将运行的函数放在第二位，通过参数导入运行</p>
 <p>块作用域</p>
 <p><code>let</code>不会再块作用域，声明提升</p>
+<pre><code>var a = 1
+console.log(a)
+obj.addEventListener(&apos;click&apos;, function(e) {
+  // ...
+}, false)
+</code></pre><p>上面代码，打印<code>a</code>后，就没有再引用到<code>a</code>，理论上应该是被回收了。然而<code>click</code>点击事件函数，覆盖了整个作用域的闭包，引擎很有可能会保存这个结构 （这是书中所说的，待考证）</p>
+<pre><code>{
+  let a = 1
+  console.log(a)
+}
+</code></pre><p>通过块结构，让引擎回收<code>a</code></p>
+<h1 id="1-4提升"><a href="#1-4提升" class="headerlink" title="1.4提升"></a>1.4提升</h1><p>先声明，后赋值。使用<code>var</code>和函数声明，都会把变量提升</p>
+<p>避免重复声明同一个变量函数</p>
+<pre><code>foo() // 1
 
+var foo
+
+function foo() {
+  console.log(1)
+}
+
+foo = function() {
+  console.log(2)
+}
+
+------
+
+// 首先foo(1)，然后foo(3)覆盖了foo(1)
+foo() //3
+
+function foo() {
+  console.log(1)
+}
+
+var foo = function() {
+  console.log(2)
+}
+
+function foo() {
+  console.log(3)
+}
+</code></pre>
           
         
       
@@ -461,10 +531,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/02/多页面配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/02/technology/多页面配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -478,9 +548,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/02/多页面配置/" itemprop="url">多页面配置</a></h1>
+                <a class="post-title-link" href="/2017/09/02/technology/多页面配置/" itemprop="url">多页面配置</a></h2>
         
 
         <div class="post-meta">
@@ -511,9 +581,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/02/多页面配置/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/02/technology/多页面配置/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/02/多页面配置/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/02/technology/多页面配置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -521,7 +591,7 @@
 
           
           
-             <span id="/2017/09/02/多页面配置/" class="leancloud_visitors" data-flag-title="多页面配置">
+             <span id="/2017/09/02/technology/多页面配置/" class="leancloud_visitors" data-flag-title="多页面配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -811,10 +881,10 @@ gulp.watch([&apos;*.js&apos;], function(e) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/git操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/recording/git操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -828,9 +898,9 @@ gulp.watch([&apos;*.js&apos;], function(e) {
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/24/git操作/" itemprop="url">git操作</a></h1>
+                <a class="post-title-link" href="/2017/08/24/recording/git操作/" itemprop="url">git操作</a></h2>
         
 
         <div class="post-meta">
@@ -883,9 +953,9 @@ gulp.watch([&apos;*.js&apos;], function(e) {
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/24/git操作/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/24/recording/git操作/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/24/git操作/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/24/recording/git操作/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -893,7 +963,7 @@ gulp.watch([&apos;*.js&apos;], function(e) {
 
           
           
-             <span id="/2017/08/24/git操作/" class="leancloud_visitors" data-flag-title="git操作">
+             <span id="/2017/08/24/recording/git操作/" class="leancloud_visitors" data-flag-title="git操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -983,10 +1053,10 @@ gulp.watch([&apos;*.js&apos;], function(e) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/lowdb使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/recording/lowdb使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -1000,9 +1070,9 @@ gulp.watch([&apos;*.js&apos;], function(e) {
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/21/lowdb使用/" itemprop="url">lowdb使用</a></h1>
+                <a class="post-title-link" href="/2017/08/21/recording/lowdb使用/" itemprop="url">lowdb使用</a></h2>
         
 
         <div class="post-meta">
@@ -1055,9 +1125,9 @@ gulp.watch([&apos;*.js&apos;], function(e) {
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/21/lowdb使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/21/recording/lowdb使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/21/lowdb使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/21/recording/lowdb使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1065,7 +1135,7 @@ gulp.watch([&apos;*.js&apos;], function(e) {
 
           
           
-             <span id="/2017/08/21/lowdb使用/" class="leancloud_visitors" data-flag-title="lowdb使用">
+             <span id="/2017/08/21/recording/lowdb使用/" class="leancloud_visitors" data-flag-title="lowdb使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1174,10 +1244,10 @@ db.defaults({
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/mongoose的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/recording/mongoose的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -1191,9 +1261,9 @@ db.defaults({
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/10/mongoose的使用/" itemprop="url">mongoose的使用</a></h1>
+                <a class="post-title-link" href="/2017/08/10/recording/mongoose的使用/" itemprop="url">mongoose的使用</a></h2>
         
 
         <div class="post-meta">
@@ -1228,8 +1298,8 @@ db.defaults({
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
+                  <a href="/categories/recording/" itemprop="url" rel="index">
+                    <span itemprop="name">recording</span>
                   </a>
                 </span>
 
@@ -1246,9 +1316,9 @@ db.defaults({
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/10/mongoose的使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/10/recording/mongoose的使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/10/mongoose的使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/10/recording/mongoose的使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1256,7 +1326,7 @@ db.defaults({
 
           
           
-             <span id="/2017/08/10/mongoose的使用/" class="leancloud_visitors" data-flag-title="mongoose的使用">
+             <span id="/2017/08/10/recording/mongoose的使用/" class="leancloud_visitors" data-flag-title="mongoose的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1439,10 +1509,10 @@ age: { type: Number, min: 18, max: 65 },
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/微信小程序学习记录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/recording/微信小程序学习记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -1456,9 +1526,9 @@ age: { type: Number, min: 18, max: 65 },
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/07/微信小程序学习记录/" itemprop="url">微信小程序学习记录</a></h1>
+                <a class="post-title-link" href="/2017/08/07/recording/微信小程序学习记录/" itemprop="url">微信小程序学习记录</a></h2>
         
 
         <div class="post-meta">
@@ -1511,9 +1581,9 @@ age: { type: Number, min: 18, max: 65 },
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/微信小程序学习记录/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/07/recording/微信小程序学习记录/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/07/微信小程序学习记录/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/07/recording/微信小程序学习记录/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1521,7 +1591,7 @@ age: { type: Number, min: 18, max: 65 },
 
           
           
-             <span id="/2017/08/07/微信小程序学习记录/" class="leancloud_visitors" data-flag-title="微信小程序学习记录">
+             <span id="/2017/08/07/recording/微信小程序学习记录/" class="leancloud_visitors" data-flag-title="微信小程序学习记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1683,10 +1753,10 @@ getApp()
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/nodejs的学习和使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/nodejs的学习和使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -1700,9 +1770,9 @@ getApp()
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/04/nodejs的学习和使用/" itemprop="url">nodejs的学习和使用</a></h1>
+                <a class="post-title-link" href="/2017/08/04/recording/nodejs的学习和使用/" itemprop="url">nodejs的学习和使用</a></h2>
         
 
         <div class="post-meta">
@@ -1755,9 +1825,9 @@ getApp()
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/04/nodejs的学习和使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/04/recording/nodejs的学习和使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/04/nodejs的学习和使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/04/recording/nodejs的学习和使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1765,7 +1835,7 @@ getApp()
 
           
           
-             <span id="/2017/08/04/nodejs的学习和使用/" class="leancloud_visitors" data-flag-title="nodejs的学习和使用">
+             <span id="/2017/08/04/recording/nodejs的学习和使用/" class="leancloud_visitors" data-flag-title="nodejs的学习和使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1881,10 +1951,10 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/mongodb使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/mongodb使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -1898,9 +1968,9 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/04/mongodb使用/" itemprop="url">mongodb使用</a></h1>
+                <a class="post-title-link" href="/2017/08/04/recording/mongodb使用/" itemprop="url">mongodb使用</a></h2>
         
 
         <div class="post-meta">
@@ -1953,9 +2023,9 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/04/mongodb使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/04/recording/mongodb使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/04/mongodb使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/04/recording/mongodb使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1963,7 +2033,7 @@ app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
 
           
           
-             <span id="/2017/08/04/mongodb使用/" class="leancloud_visitors" data-flag-title="mongodb使用">
+             <span id="/2017/08/04/recording/mongodb使用/" class="leancloud_visitors" data-flag-title="mongodb使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2324,10 +2394,10 @@ db.CN.find().sort({KEY:1})
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/hexo操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/recording/hexo操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -2341,9 +2411,9 @@ db.CN.find().sort({KEY:1})
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/hexo操作/" itemprop="url">hexo操作</a></h1>
+                <a class="post-title-link" href="/2017/08/02/recording/hexo操作/" itemprop="url">hexo操作</a></h2>
         
 
         <div class="post-meta">
@@ -2396,9 +2466,9 @@ db.CN.find().sort({KEY:1})
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/02/hexo操作/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/02/recording/hexo操作/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/02/hexo操作/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/02/recording/hexo操作/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2406,7 +2476,7 @@ db.CN.find().sort({KEY:1})
 
           
           
-             <span id="/2017/08/02/hexo操作/" class="leancloud_visitors" data-flag-title="hexo操作">
+             <span id="/2017/08/02/recording/hexo操作/" class="leancloud_visitors" data-flag-title="hexo操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2506,10 +2576,10 @@ npm i hexo -g
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/日记-独立的第一天-7-23/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/life/日记-独立的第一天-7-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yiiouo">
+      <meta itemprop="name" content="Rni-L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/logo.gif">
     </span>
@@ -2523,9 +2593,9 @@ npm i hexo -g
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/23/日记-独立的第一天-7-23/" itemprop="url">日记-独立的第一天-7.23</a></h1>
+                <a class="post-title-link" href="/2017/07/23/life/日记-独立的第一天-7-23/" itemprop="url">日记-独立的第一天-7.23</a></h2>
         
 
         <div class="post-meta">
@@ -2578,9 +2648,9 @@ npm i hexo -g
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/23/日记-独立的第一天-7-23/#comments" itemprop="discussionUrl">
+                <a href="/2017/07/23/life/日记-独立的第一天-7-23/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/23/日记-独立的第一天-7-23/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/07/23/life/日记-独立的第一天-7-23/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2588,7 +2658,7 @@ npm i hexo -g
 
           
           
-             <span id="/2017/07/23/日记-独立的第一天-7-23/" class="leancloud_visitors" data-flag-title="日记-独立的第一天-7.23">
+             <span id="/2017/07/23/life/日记-独立的第一天-7-23/" class="leancloud_visitors" data-flag-title="日记-独立的第一天-7.23">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2703,11 +2773,11 @@ npm i hexo -g
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/logo.gif"
-               alt="Yiiouo" />
-          <p class="site-author-name" itemprop="name">Yiiouo</p>
+               alt="Rni-L" />
+          <p class="site-author-name" itemprop="name">Rni-L</p>
            
-              <p class="site-description motion-element" itemprop="description">who's your daddy?</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
@@ -2724,10 +2794,10 @@ npm i hexo -g
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -2735,10 +2805,10 @@ npm i hexo -g
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -2747,6 +2817,19 @@ npm i hexo -g
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yiiouo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
           
         </div>
 
@@ -2782,7 +2865,7 @@ npm i hexo -g
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Yiiouo</span>
+  <span class="author" itemprop="copyrightHolder">Rni-L</span>
 </div>
 
 
