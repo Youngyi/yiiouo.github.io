@@ -301,6 +301,265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/11/recording/vue-baidu-map的使用/" itemprop="url">vue-baidu-map的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T23:32:39+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/recording/" itemprop="url" rel="index">
+                    <span itemprop="name">recording</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/11/recording/vue-baidu-map的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/11/recording/vue-baidu-map的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/11/recording/vue-baidu-map的使用/" class="leancloud_visitors" data-flag-title="vue-baidu-map的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="vue-baidu-map的使用"><a href="#vue-baidu-map的使用" class="headerlink" title="vue-baidu-map的使用"></a>vue-baidu-map的使用</h1><blockquote>
+<p>vue-baidu-map是百度地图插件封装成vue的一个组件，能让我们更好在vue中使用百度地图的功能</p>
+</blockquote>
+<p>三个任务： 自定义覆盖物、自定义菜单、画轨迹</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><ul>
+<li><a href="http://lbsyun.baidu.com/index.php?title=jspopular/guide/introduction" target="_blank" rel="external">百度地图</a></li>
+<li><a href="https://github.com/Dafrok/vue-baidu-map" target="_blank" rel="external">vue-baidu-map</a></li>
+<li>经纬度</li>
+<li>百度地图坐标</li>
+</ul>
+<h2 id="百度地图一些基础知识"><a href="#百度地图一些基础知识" class="headerlink" title="百度地图一些基础知识"></a>百度地图一些基础知识</h2><h3 id="百度api-key"><a href="#百度api-key" class="headerlink" title="百度api key"></a>百度api key</h3><p>使用百度地图前，要有自己的密钥才能使用</p>
+<h3 id="坐标（经纬度）"><a href="#坐标（经纬度）" class="headerlink" title="坐标（经纬度）"></a>坐标（经纬度）</h3><p>WGS84 – 通常我们手机和浏览器获取到的gps坐标，是通用类型的坐标系</p>
+<p>BD09 – 这是百度地图使用的坐标系</p>
+<p>所以我们使用百度地图<code>api</code>以外的方法获取到的经纬度，要经过转换，才能在百度地图上使用，而百度有提供<code>api</code>去转换这个坐标</p>
+<p>而且，百度地图大部分的组件，都是需要坐标才能显示</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code>&lt;baidu-map :center=&apos;center&apos; class=&quot;map&quot; ak=&quot;bb1wdmvddqf1Ghaov4lr3txx&quot; @ready=&quot;handler&quot; :zoom=&quot;zoom&quot;  :scroll-wheel-zoom=&quot;true&quot;&gt;&lt;/baidu-map&gt;
+// 引入组件
+import { BaiduMap } from &apos;vue-baidu-map&apos;
+</code></pre><p>像我们平时使用<code>vue</code>组件一样，使用即可，然后一些属性和方法</p>
+<p><code>center</code>这个属性，接受一个对象，百度地图显示就会根据经纬度的值进行显示相应的位置。当我们改变<code>center</code>值，百度地图就会相应地改变</p>
+<pre><code>// 经纬度
+{
+  lng: 123,
+  lat: 123
+}
+</code></pre><h3 id="获取百度地图实例"><a href="#获取百度地图实例" class="headerlink" title="获取百度地图实例"></a>获取百度地图实例</h3><p>这里只说明<code>vue</code>组件的</p>
+<p>伪代码：</p>
+<pre><code>// html
+&lt;baidu-map :center=&apos;center&apos; @ready=&quot;handler&quot;&gt;&lt;/baidu-map&gt;
+
+// js
+import &apos;baiduMap&apos; from &apos;vue-baidu-map&apos;
+// 地图组件初始化，获取实例
+handler: function({ BMap }) {
+    this.BMap = BMap
+}
+</code></pre><p>获取了百度地图实例后，就能使用相应的<code>api</code>方法，比如转换<code>gps</code>坐标</p>
+<h2 id="自定义覆盖物"><a href="#自定义覆盖物" class="headerlink" title="自定义覆盖物"></a>自定义覆盖物</h2><p>自定义覆盖物功能，传入坐标数据，在地图某个点显示<code>marker</code>和信息窗口</p>
+<p>下面大概说下，如何实现点击地图某个位置，显示一个<code>marker</code>和信息窗口</p>
+<pre><code>// html
+&lt;baidu-map @click=&apos;getClickMapData&apos;&gt;
+  &lt;!-- 自定义标记和信息框 --&gt;
+  &lt;div v-for=&apos;v, i in markerArr&apos; :key=&apos;v.title&apos;&gt;
+    &lt;bm-marker :position=&quot;v.markerPoint&quot; :dragging=&quot;true&quot; :icon=&quot;icon&quot;&gt;&lt;/bm-marker&gt;
+    &lt;bm-info-window :position=&quot;v.markerPoint&quot; :title=&quot;v.title&quot; :show=&quot;v.ifShowWindow&quot; &gt;
+      &lt;p v-text=&quot;v.contents&quot;&gt;&lt;/p&gt;
+    &lt;/bm-info-window&gt;
+  &lt;/div&gt;
+&lt;/baidu-map&gt;
+
+// js
+// 引用bm-marker和bm-info-window组件
+import { BmMarker, BmInfoWindow } from &apos;vue-baidu-map&apos;
+
+// 给baidu-map组件添加点击事件，点击地图，获取对应的百度坐标
+getClickMapData({ point }) {
+  // 添加一个新的对象
+  this.markerArr.push({
+    markerPoint: point,
+    ifShowWindow: false,
+    title: &apos;Info Window Title&apos;,
+    contents: &apos;1&apos;
+  })
+}
+</code></pre><h2 id="自定义菜单"><a href="#自定义菜单" class="headerlink" title="自定义菜单"></a>自定义菜单</h2><p>在百度地图，显示一个自定义的菜单，有一系列的自定义功能</p>
+<pre><code>// html
+&lt;bm-control anchor=&apos;BMAP_ANCHOR_TOP_RIGHT&apos; :offset=&apos;{width: 20, height: 20}&apos; class=&apos;map-control&apos;&gt;
+  &lt;div class=&quot;map-control-wrap&quot;&gt;
+    &lt;div class=&quot;map-control-btnOne map-control-btn&quot; @click=&apos;backInPlace&apos;&gt;回到原位&lt;/div&gt;
+    &lt;div class=&quot;map-control-btnTwo map-control-btn&quot; @click=&apos;createAutoMarker&apos;&gt;{{ createMarkerBtnTxt }}&lt;/div&gt;
+    &lt;div class=&quot;map-control-btnthr map-control-btn&quot; @click=&quot;addPolyLinePath&quot;&gt;添加路径&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/bm-control&gt;
+
+// js
+import { BmControl } from &apos;vue-baidu-map&apos;
+</code></pre><p><code>anchor</code>是显示的位置，有4个选项，左上左下，右上右下。<code>offset</code>是偏离的位置</p>
+<p>要实现自定义的功能，就添加事件就好了，比如<code>回到当前位置</code>的功能：</p>
+<p>触发点击事件 –&gt;  获取当前gps坐标 –&gt; 转换成百度坐标 –&gt; 更改<code>baidu-map</code>的<code>center</code>值</p>
+<h2 id="画轨迹"><a href="#画轨迹" class="headerlink" title="画轨迹"></a>画轨迹</h2><p>使用折线，<code>BmPolyline</code>这个组件，进行画轨迹</p>
+<pre><code>// html
+&lt;bm-polyline :path=&quot;comPolylinePath&quot; &gt;&lt;/bm-polyline&gt;
+
+//js
+data: function() {
+  return {
+    comPolylinePath: [{
+      lat: 123,
+      lng: 123
+    }]
+  }
+}
+</code></pre><p><code>path</code>接受一个数组，根据这个数组的一个个坐标点，按顺序连接成线</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><code>navigator.geolocation.getCurrentPosition</code>使用这个方法可以获取到当前位置坐标，但是这个方法只能在<code>https</code>下才能使用，有个替代方法，使用百度获取位置的<code>api</code>，但只能精确到市的位置</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>vue-baidu-map</code>是一个百度地图封装成<code>vue</code>的组件，方便在<code>vue</code>使用</p>
+<p>我之前发现了一个<code>bug</code>，使用<code>h5</code>方法获取当前位置的<code>gps</code>坐标，再转换成百度地图坐标，赋值给<code>center</code>，然后点击一些标识，例如商场或者停车场，百度地图会跳转到别的地方去。然后我在<code>github</code>提了个<code>issue</code>，当天就有人解决了这个<code>bug</code>，这个组件还是有人在维护的，效率也挺不错的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/technology/nodemailer的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -696,7 +955,7 @@ const mailOptions = {
             <blockquote>
 <p>记录读这本书的时候，一些笔记，方便以后再看</p>
 </blockquote>
-<h1 id="1-1作用域是什么"><a href="#1-1作用域是什么" class="headerlink" title="1.1作用域是什么"></a>1.1作用域是什么</h1><p>传统编译语言，代码在执行前，会经历三个步骤：</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1作用域是什么"><a href="#1-1作用域是什么" class="headerlink" title="1.1作用域是什么"></a>1.1作用域是什么</h2><p>传统编译语言，代码在执行前，会经历三个步骤：</p>
 <ol>
 <li><p>分词/词法分析</p>
 <p>词法分析，会把一段代码分成一个个模块：<code>var a = 1</code>，会被分成<code>var  a  =  1</code></p>
@@ -735,8 +994,8 @@ const mailOptions = {
 </li>
 </ul>
 <p>作用域的查找，会在当前作用域查询，找不到就会一步一步往上找，直到全局作用域。</p>
-<h1 id="1-2词法作用域"><a href="#1-2词法作用域" class="headerlink" title="1.2词法作用域"></a>1.2词法作用域</h1><p>看不懂。。。。不要使用<code>eval</code>和<code>with</code></p>
-<h1 id="1-3函数作用域和块作用域"><a href="#1-3函数作用域和块作用域" class="headerlink" title="1.3函数作用域和块作用域"></a>1.3函数作用域和块作用域</h1><p><code>function</code>是声明的一个词，就是一个函数声明，否则就是函数表达式</p>
+<h2 id="1-2词法作用域"><a href="#1-2词法作用域" class="headerlink" title="1.2词法作用域"></a>1.2词法作用域</h2><p>看不懂。。。。不要使用<code>eval</code>和<code>with</code></p>
+<h2 id="1-3函数作用域和块作用域"><a href="#1-3函数作用域和块作用域" class="headerlink" title="1.3函数作用域和块作用域"></a>1.3函数作用域和块作用域</h2><p><code>function</code>是声明的一个词，就是一个函数声明，否则就是函数表达式</p>
 <p>IIFE，立即执行函数表达式</p>
 <p>UMD，将运行的函数放在第二位，通过参数导入运行</p>
 <p>块作用域</p>
@@ -752,7 +1011,7 @@ obj.addEventListener(&apos;click&apos;, function(e) {
   console.log(a)
 }
 </code></pre><p>通过块结构，让引擎回收<code>a</code></p>
-<h1 id="1-4提升"><a href="#1-4提升" class="headerlink" title="1.4提升"></a>1.4提升</h1><p>先声明，后赋值。使用<code>var</code>和函数声明，都会把变量提升</p>
+<h2 id="1-4提升"><a href="#1-4提升" class="headerlink" title="1.4提升"></a>1.4提升</h2><p>先声明，后赋值。使用<code>var</code>和函数声明，都会把变量提升</p>
 <p>避免重复声明同一个变量函数</p>
 <pre><code>foo() // 1
 
@@ -782,7 +1041,138 @@ var foo = function() {
 function foo() {
   console.log(3)
 }
-</code></pre>
+</code></pre><h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="2-1-关于this"><a href="#2-1-关于this" class="headerlink" title="2.1 关于this"></a>2.1 关于this</h2><p><code>this</code>的上下文，取决于函数调用时的条件，与函数所在的位置无关</p>
+<h2 id="2-2-this全面解析"><a href="#2-2-this全面解析" class="headerlink" title="2.2 this全面解析"></a>2.2 this全面解析</h2><p>理解函数调用的位置。首先分析<code>调用栈</code> –&gt; 就是为了到达当前执行位置所调用的所有函数</p>
+<pre><code>// 书中例子
+function baz() {
+  // 调用栈：baz
+  // 调用位置： window
+  console.log(&apos;baz&apos;)
+  bar()
+}
+
+function bar(){
+  // 调用栈： baz -&gt; bar
+  // 调用位置：baz
+  console.log(&apos;bar&apos;)
+  foo()
+}
+
+function foo(){
+  // 调用栈： baz -&gt; bar -&gt; foo
+  // 调用位置：bar
+  console.log(&apos;foo&apos;)
+}
+</code></pre><p>根据函数执行的区域，判断调用的位置</p>
+<p>绑定规则：</p>
+<h3 id="默认绑定，在非严格模式下，当function在全局调用，this默认指向window"><a href="#默认绑定，在非严格模式下，当function在全局调用，this默认指向window" class="headerlink" title="默认绑定，在非严格模式下，当function在全局调用，this默认指向window"></a>默认绑定，在非严格模式下，当<code>function</code>在全局调用，<code>this</code>默认指向<code>window</code></h3><h3 id="隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"><a href="#隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么" class="headerlink" title="隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"></a>隐式绑定，根据调用位置的上下文对象，也就是说调用这个<code>function</code>时，的作用域是什么</h3><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+obj.foo() // 2
+</code></pre><p>上面代码，调用<code>foo</code>时，是在obj的上下文对象下执行，所以<code>this</code>绑定到<code>obj</code>对象上。对象属性引用链治国在最后一层的调用位置上起作用</p>
+<p>隐式绑定有个常见的问题：隐式丢失</p>
+<pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+var bar = obj.foo // 引用了foo
+
+var a = &apos;global&apos;
+
+bar() // &apos;global&apos;
+</code></pre><p>上面代码，<code>bar</code>引用了<code>foo</code>函数，再调用时，是在全局上下文执行的，所以<code>this</code>绑定到全局对象上</p>
+<h3 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h3><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+foo.call(obj) // 2
+</code></pre><p>上面代码，强制把<code>this</code>绑定到<code>obj</code>上</p>
+<h4 id="硬绑定："><a href="#硬绑定：" class="headerlink" title="硬绑定："></a>硬绑定：</h4><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+var bar = function() {
+  foo.call(obj)
+}
+
+bar() // 2
+setTimeout(bar, 100) // 2
+bar.call(window) // 2
+</code></pre><p>上面代码，在<code>bar</code>函数内部，直接调用<code>foo.call(obj)</code>，所以无论<code>bar</code>在哪里调用，<code>foo</code>的上下文都是<code>obj</code></p>
+<h3 id="new绑定，使用new来调用函数时，会发生以下操作："><a href="#new绑定，使用new来调用函数时，会发生以下操作：" class="headerlink" title="new绑定，使用new来调用函数时，会发生以下操作："></a>new绑定，使用new来调用函数时，会发生以下操作：</h3><ol>
+<li>创建一个新的对象</li>
+<li>这个新对象会被执行到<code>[[Prototype]]</code>连接</li>
+<li>这个新对象会绑定到函数调用的this</li>
+<li><p>如果函数没有返回其他对象，那么<code>new</code>后会返回这个新对象</p>
+<p> function foo(a) {<br>   this.a = a<br> }</p>
+<p> var bar = new foo(2)<br> console.log(bar.a) // 2</p>
+</li>
+</ol>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>默认绑定是最低级的</p>
+<p>显式大于隐式</p>
+<p>new大于隐式</p>
+<p>显示绑定后的对象，new一个新的实例，<code>this</code>是指向新的实例</p>
+<h3 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h3><p><code>foo.call(null)</code>, 会触发默认绑定</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>根据外层作用域来判断<code>this</code>的指向</p>
+<h2 id="2-3-对象"><a href="#2-3-对象" class="headerlink" title="2.3 对象"></a>2.3 对象</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>在<code>js</code>中，有六种基本类型：</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+</ul>
+<p>为什么<code>typeof null</code>也是’object’呢？原理：不同的对象在底层都表示为二进制，在<code>js</code>中，前三位为<code>0</code>，判断为<code>object</code>，而<code>null</code>的二进制全为0，所以才会出现<code>object</code></p>
+<p>基本类型都有其内置函数</p>
+<h3 id="复制对象"><a href="#复制对象" class="headerlink" title="复制对象"></a>复制对象</h3><p>有浅拷贝和深拷贝</p>
+<h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><p>基本类型值会复制，而对象，则会引用</p>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>对象，把每一层的值，复制到新的对象里，如果是数组和对象，就会遍历它，一个个的复制</p>
+<p><code>JSON.parse(JSON.stringify(data))</code>，粗暴的复制</p>
+<h3 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h3><pre><code>var my = {
+  a: 2
+}
+Object.getOwnPropertyDescriptor(my, &apos;1&apos;)
+// {
+//  value: 2,
+//  writable: true,  可写
+//  enumerable: true,  可枚举
+//  configurable: true  可配置
+// }
+</code></pre><p>使用<code>getOwnPropertyDescriptor</code>，就能获取到这几个属性描述符</p>
+<p>我们可以使用<code>defineProperty</code>来设置这4个值</p>
+<pre><code>var my = {}
+Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
+ value: 2,
+ writable: true,  可写
+ enumerable: true,  可枚举
+ configurable: true  可配置
+})
+</code></pre><h4 id="writable"><a href="#writable" class="headerlink" title="writable"></a>writable</h4><p>设置为<code>false</code>，就不能再修改这个对象，修改了也会无效，严格模式下回报错</p>
+<h4 id="enumerable"><a href="#enumerable" class="headerlink" title="enumerable"></a>enumerable</h4><p>设置为<code>false</code>，<code>for..in</code>就不会枚举到此属性</p>
+<h4 id="configurable"><a href="#configurable" class="headerlink" title="configurable"></a>configurable</h4><p>设置为<code>false</code>,不可配置，就不能设置这四个属性</p>
+
           
         
       
@@ -2702,188 +3092,6 @@ db.CN.find().sort({KEY:1})
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/recording/hexo操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/recording/hexo操作/" itemprop="url">hexo操作</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:42:13+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/02/recording/hexo操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/02/recording/hexo操作/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/02/recording/hexo操作/" class="leancloud_visitors" data-flag-title="hexo操作">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>记录平常常用的hexo操作</p>
-</blockquote>
-<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><pre><code>// 在全局安装hexo
-npm i hexo -g
-</code></pre><h1 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h1><ol>
-<li>先在博客根目录里，<code>git clone</code>你要安装的主题</li>
-<li>在博客的<code>_config.yml</code>配置文件中，修改<code>themes</code></li>
-<li>完成</li>
-</ol>
-<p>每个主题，作者都会有配置介绍的，根据配置来调整就好了。</p>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ol>
-<li>hexo n ‘name’ – 新建文章</li>
-<li>hexo clean – 清除缓存（根据网上文章，每次上传前，都要先清除缓存）</li>
-<li>hexo s – 开发模式</li>
-<li>hexo g – 生成文件</li>
-<li>hexo d – 上传文件</li>
-</ol>
-<h1 id="设置分类"><a href="#设置分类" class="headerlink" title="设置分类"></a>设置分类</h1><p>每篇文章中的tag下面加上<code>categories:</code>，就会自动生成你想要的分类了，还可以在根目录文件中，<code>scaffolds/post.md</code>加上<code>categories:</code>，这样就会自动添加分类了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2934,7 +3142,7 @@ npm i hexo -g
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2945,7 +3153,7 @@ npm i hexo -g
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2956,7 +3164,7 @@ npm i hexo -g
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

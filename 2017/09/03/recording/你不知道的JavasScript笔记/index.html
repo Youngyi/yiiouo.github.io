@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="记录读这本书的时候，一些笔记，方便以后再看  1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -| |--">
+<meta name="description" content="记录读这本书的时候，一些笔记，方便以后再看  第一章1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -|">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你不知道的JavasScript笔记">
 <meta property="og:url" content="http://yoursite.com/2017/09/03/recording/你不知道的JavasScript笔记/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="记录读这本书的时候，一些笔记，方便以后再看  1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -| |--">
-<meta property="og:updated_time" content="2017-09-06T07:23:35.325Z">
+<meta property="og:description" content="记录读这本书的时候，一些笔记，方便以后再看  第一章1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -|">
+<meta property="og:updated_time" content="2017-09-11T16:28:51.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的JavasScript笔记">
-<meta name="twitter:description" content="记录读这本书的时候，一些笔记，方便以后再看  1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -| |--">
+<meta name="twitter:description" content="记录读这本书的时候，一些笔记，方便以后再看  第一章1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -|">
 
 
 
@@ -415,7 +415,7 @@
         <blockquote>
 <p>记录读这本书的时候，一些笔记，方便以后再看</p>
 </blockquote>
-<h1 id="1-1作用域是什么"><a href="#1-1作用域是什么" class="headerlink" title="1.1作用域是什么"></a>1.1作用域是什么</h1><p>传统编译语言，代码在执行前，会经历三个步骤：</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1作用域是什么"><a href="#1-1作用域是什么" class="headerlink" title="1.1作用域是什么"></a>1.1作用域是什么</h2><p>传统编译语言，代码在执行前，会经历三个步骤：</p>
 <ol>
 <li><p>分词/词法分析</p>
 <p>词法分析，会把一段代码分成一个个模块：<code>var a = 1</code>，会被分成<code>var  a  =  1</code></p>
@@ -454,8 +454,8 @@
 </li>
 </ul>
 <p>作用域的查找，会在当前作用域查询，找不到就会一步一步往上找，直到全局作用域。</p>
-<h1 id="1-2词法作用域"><a href="#1-2词法作用域" class="headerlink" title="1.2词法作用域"></a>1.2词法作用域</h1><p>看不懂。。。。不要使用<code>eval</code>和<code>with</code></p>
-<h1 id="1-3函数作用域和块作用域"><a href="#1-3函数作用域和块作用域" class="headerlink" title="1.3函数作用域和块作用域"></a>1.3函数作用域和块作用域</h1><p><code>function</code>是声明的一个词，就是一个函数声明，否则就是函数表达式</p>
+<h2 id="1-2词法作用域"><a href="#1-2词法作用域" class="headerlink" title="1.2词法作用域"></a>1.2词法作用域</h2><p>看不懂。。。。不要使用<code>eval</code>和<code>with</code></p>
+<h2 id="1-3函数作用域和块作用域"><a href="#1-3函数作用域和块作用域" class="headerlink" title="1.3函数作用域和块作用域"></a>1.3函数作用域和块作用域</h2><p><code>function</code>是声明的一个词，就是一个函数声明，否则就是函数表达式</p>
 <p>IIFE，立即执行函数表达式</p>
 <p>UMD，将运行的函数放在第二位，通过参数导入运行</p>
 <p>块作用域</p>
@@ -471,7 +471,7 @@ obj.addEventListener(&apos;click&apos;, function(e) {
   console.log(a)
 }
 </code></pre><p>通过块结构，让引擎回收<code>a</code></p>
-<h1 id="1-4提升"><a href="#1-4提升" class="headerlink" title="1.4提升"></a>1.4提升</h1><p>先声明，后赋值。使用<code>var</code>和函数声明，都会把变量提升</p>
+<h2 id="1-4提升"><a href="#1-4提升" class="headerlink" title="1.4提升"></a>1.4提升</h2><p>先声明，后赋值。使用<code>var</code>和函数声明，都会把变量提升</p>
 <p>避免重复声明同一个变量函数</p>
 <pre><code>foo() // 1
 
@@ -501,7 +501,138 @@ var foo = function() {
 function foo() {
   console.log(3)
 }
-</code></pre>
+</code></pre><h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="2-1-关于this"><a href="#2-1-关于this" class="headerlink" title="2.1 关于this"></a>2.1 关于this</h2><p><code>this</code>的上下文，取决于函数调用时的条件，与函数所在的位置无关</p>
+<h2 id="2-2-this全面解析"><a href="#2-2-this全面解析" class="headerlink" title="2.2 this全面解析"></a>2.2 this全面解析</h2><p>理解函数调用的位置。首先分析<code>调用栈</code> –&gt; 就是为了到达当前执行位置所调用的所有函数</p>
+<pre><code>// 书中例子
+function baz() {
+  // 调用栈：baz
+  // 调用位置： window
+  console.log(&apos;baz&apos;)
+  bar()
+}
+
+function bar(){
+  // 调用栈： baz -&gt; bar
+  // 调用位置：baz
+  console.log(&apos;bar&apos;)
+  foo()
+}
+
+function foo(){
+  // 调用栈： baz -&gt; bar -&gt; foo
+  // 调用位置：bar
+  console.log(&apos;foo&apos;)
+}
+</code></pre><p>根据函数执行的区域，判断调用的位置</p>
+<p>绑定规则：</p>
+<h3 id="默认绑定，在非严格模式下，当function在全局调用，this默认指向window"><a href="#默认绑定，在非严格模式下，当function在全局调用，this默认指向window" class="headerlink" title="默认绑定，在非严格模式下，当function在全局调用，this默认指向window"></a>默认绑定，在非严格模式下，当<code>function</code>在全局调用，<code>this</code>默认指向<code>window</code></h3><h3 id="隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"><a href="#隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么" class="headerlink" title="隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"></a>隐式绑定，根据调用位置的上下文对象，也就是说调用这个<code>function</code>时，的作用域是什么</h3><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+obj.foo() // 2
+</code></pre><p>上面代码，调用<code>foo</code>时，是在obj的上下文对象下执行，所以<code>this</code>绑定到<code>obj</code>对象上。对象属性引用链治国在最后一层的调用位置上起作用</p>
+<p>隐式绑定有个常见的问题：隐式丢失</p>
+<pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+var bar = obj.foo // 引用了foo
+
+var a = &apos;global&apos;
+
+bar() // &apos;global&apos;
+</code></pre><p>上面代码，<code>bar</code>引用了<code>foo</code>函数，再调用时，是在全局上下文执行的，所以<code>this</code>绑定到全局对象上</p>
+<h3 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h3><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+foo.call(obj) // 2
+</code></pre><p>上面代码，强制把<code>this</code>绑定到<code>obj</code>上</p>
+<h4 id="硬绑定："><a href="#硬绑定：" class="headerlink" title="硬绑定："></a>硬绑定：</h4><pre><code>function foo() {
+  console.log(this.a)
+}
+
+var obj = {
+  a: 2,
+  foo: foo
+}
+
+var bar = function() {
+  foo.call(obj)
+}
+
+bar() // 2
+setTimeout(bar, 100) // 2
+bar.call(window) // 2
+</code></pre><p>上面代码，在<code>bar</code>函数内部，直接调用<code>foo.call(obj)</code>，所以无论<code>bar</code>在哪里调用，<code>foo</code>的上下文都是<code>obj</code></p>
+<h3 id="new绑定，使用new来调用函数时，会发生以下操作："><a href="#new绑定，使用new来调用函数时，会发生以下操作：" class="headerlink" title="new绑定，使用new来调用函数时，会发生以下操作："></a>new绑定，使用new来调用函数时，会发生以下操作：</h3><ol>
+<li>创建一个新的对象</li>
+<li>这个新对象会被执行到<code>[[Prototype]]</code>连接</li>
+<li>这个新对象会绑定到函数调用的this</li>
+<li><p>如果函数没有返回其他对象，那么<code>new</code>后会返回这个新对象</p>
+<p> function foo(a) {<br>   this.a = a<br> }</p>
+<p> var bar = new foo(2)<br> console.log(bar.a) // 2</p>
+</li>
+</ol>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>默认绑定是最低级的</p>
+<p>显式大于隐式</p>
+<p>new大于隐式</p>
+<p>显示绑定后的对象，new一个新的实例，<code>this</code>是指向新的实例</p>
+<h3 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h3><p><code>foo.call(null)</code>, 会触发默认绑定</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>根据外层作用域来判断<code>this</code>的指向</p>
+<h2 id="2-3-对象"><a href="#2-3-对象" class="headerlink" title="2.3 对象"></a>2.3 对象</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>在<code>js</code>中，有六种基本类型：</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+</ul>
+<p>为什么<code>typeof null</code>也是’object’呢？原理：不同的对象在底层都表示为二进制，在<code>js</code>中，前三位为<code>0</code>，判断为<code>object</code>，而<code>null</code>的二进制全为0，所以才会出现<code>object</code></p>
+<p>基本类型都有其内置函数</p>
+<h3 id="复制对象"><a href="#复制对象" class="headerlink" title="复制对象"></a>复制对象</h3><p>有浅拷贝和深拷贝</p>
+<h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><p>基本类型值会复制，而对象，则会引用</p>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>对象，把每一层的值，复制到新的对象里，如果是数组和对象，就会遍历它，一个个的复制</p>
+<p><code>JSON.parse(JSON.stringify(data))</code>，粗暴的复制</p>
+<h3 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h3><pre><code>var my = {
+  a: 2
+}
+Object.getOwnPropertyDescriptor(my, &apos;1&apos;)
+// {
+//  value: 2,
+//  writable: true,  可写
+//  enumerable: true,  可枚举
+//  configurable: true  可配置
+// }
+</code></pre><p>使用<code>getOwnPropertyDescriptor</code>，就能获取到这几个属性描述符</p>
+<p>我们可以使用<code>defineProperty</code>来设置这4个值</p>
+<pre><code>var my = {}
+Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
+ value: 2,
+ writable: true,  可写
+ enumerable: true,  可枚举
+ configurable: true  可配置
+})
+</code></pre><h4 id="writable"><a href="#writable" class="headerlink" title="writable"></a>writable</h4><p>设置为<code>false</code>，就不能再修改这个对象，修改了也会无效，严格模式下回报错</p>
+<h4 id="enumerable"><a href="#enumerable" class="headerlink" title="enumerable"></a>enumerable</h4><p>设置为<code>false</code>，<code>for..in</code>就不会枚举到此属性</p>
+<h4 id="configurable"><a href="#configurable" class="headerlink" title="configurable"></a>configurable</h4><p>设置为<code>false</code>,不可配置，就不能设置这四个属性</p>
+
       
     </div>
     
@@ -627,7 +758,7 @@ function foo() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -638,7 +769,7 @@ function foo() {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -649,7 +780,7 @@ function foo() {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -697,7 +828,7 @@ function foo() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1作用域是什么"><span class="nav-number">1.</span> <span class="nav-text">1.1作用域是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2词法作用域"><span class="nav-number">2.</span> <span class="nav-text">1.2词法作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3函数作用域和块作用域"><span class="nav-number">3.</span> <span class="nav-text">1.3函数作用域和块作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-4提升"><span class="nav-number">4.</span> <span class="nav-text">1.4提升</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1作用域是什么"><span class="nav-number">1.1.</span> <span class="nav-text">1.1作用域是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2词法作用域"><span class="nav-number">1.2.</span> <span class="nav-text">1.2词法作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3函数作用域和块作用域"><span class="nav-number">1.3.</span> <span class="nav-text">1.3函数作用域和块作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4提升"><span class="nav-number">1.4.</span> <span class="nav-text">1.4提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-关于this"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 关于this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-this全面解析"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 this全面解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认绑定，在非严格模式下，当function在全局调用，this默认指向window"><span class="nav-number">2.2.1.</span> <span class="nav-text">默认绑定，在非严格模式下，当function在全局调用，this默认指向window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"><span class="nav-number">2.2.2.</span> <span class="nav-text">隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示绑定"><span class="nav-number">2.2.3.</span> <span class="nav-text">显示绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬绑定："><span class="nav-number">2.2.3.1.</span> <span class="nav-text">硬绑定：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new绑定，使用new来调用函数时，会发生以下操作："><span class="nav-number">2.2.4.</span> <span class="nav-text">new绑定，使用new来调用函数时，会发生以下操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-number">2.2.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定例外"><span class="nav-number">2.2.6.</span> <span class="nav-text">绑定例外</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.7.</span> <span class="nav-text">箭头函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-对象"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型"><span class="nav-number">2.3.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制对象"><span class="nav-number">2.3.2.</span> <span class="nav-text">复制对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浅拷贝"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">深拷贝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性描述符"><span class="nav-number">2.3.3.</span> <span class="nav-text">属性描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#writable"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">writable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#enumerable"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">enumerable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#configurable"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">configurable</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

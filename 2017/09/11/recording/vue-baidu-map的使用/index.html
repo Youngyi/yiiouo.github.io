@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ajax," />
+  <meta name="keywords" content="vue," />
 
 
 
@@ -94,19 +94,17 @@
 
 
 
-<meta name="description" content="主要复习下ajax的使用，包括原生、jquery和jsonp的使用。  原生的ajaxajax是一种无刷新获取数据的技术，通过xhr对象实现，现在有个新的标准是fetch api，这里就不讨论它了。 var xhr = new XMLHttpRequest(); xhr.open(&amp;quot;GET&amp;quot;,&amp;quot;http://localhost/ajax/test.php&amp;quot;">
-<meta name="keywords" content="ajax">
+<meta name="description" content="vue-baidu-map的使用 vue-baidu-map是百度地图插件封装成vue的一个组件，能让我们更好在vue中使用百度地图的功能  三个任务： 自定义覆盖物、自定义菜单、画轨迹 关键词 百度地图 vue-baidu-map 经纬度 百度地图坐标  百度地图一些基础知识百度api key使用百度地图前，要有自己的密钥才能使用 坐标（经纬度）WGS84 – 通常我们手机和浏览器获取到的gps">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ajax的使用">
-<meta property="og:url" content="http://yoursite.com/2017/07/08/recording/ajax的使用/index.html">
+<meta property="og:title" content="vue-baidu-map的使用">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="主要复习下ajax的使用，包括原生、jquery和jsonp的使用。  原生的ajaxajax是一种无刷新获取数据的技术，通过xhr对象实现，现在有个新的标准是fetch api，这里就不讨论它了。 var xhr = new XMLHttpRequest(); xhr.open(&amp;quot;GET&amp;quot;,&amp;quot;http://localhost/ajax/test.php&amp;quot;">
-<meta property="og:image" content="http://yoursite.com/images/xhr状态.jpg">
-<meta property="og:updated_time" content="2017-09-06T09:53:41.547Z">
+<meta property="og:description" content="vue-baidu-map的使用 vue-baidu-map是百度地图插件封装成vue的一个组件，能让我们更好在vue中使用百度地图的功能  三个任务： 自定义覆盖物、自定义菜单、画轨迹 关键词 百度地图 vue-baidu-map 经纬度 百度地图坐标  百度地图一些基础知识百度api key使用百度地图前，要有自己的密钥才能使用 坐标（经纬度）WGS84 – 通常我们手机和浏览器获取到的gps">
+<meta property="og:updated_time" content="2017-09-11T15:33:31.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ajax的使用">
-<meta name="twitter:description" content="主要复习下ajax的使用，包括原生、jquery和jsonp的使用。  原生的ajaxajax是一种无刷新获取数据的技术，通过xhr对象实现，现在有个新的标准是fetch api，这里就不讨论它了。 var xhr = new XMLHttpRequest(); xhr.open(&amp;quot;GET&amp;quot;,&amp;quot;http://localhost/ajax/test.php&amp;quot;">
-<meta name="twitter:image" content="http://yoursite.com/images/xhr状态.jpg">
+<meta name="twitter:title" content="vue-baidu-map的使用">
+<meta name="twitter:description" content="vue-baidu-map的使用 vue-baidu-map是百度地图插件封装成vue的一个组件，能让我们更好在vue中使用百度地图的功能  三个任务： 自定义覆盖物、自定义菜单、画轨迹 关键词 百度地图 vue-baidu-map 经纬度 百度地图坐标  百度地图一些基础知识百度api key使用百度地图前，要有自己的密钥才能使用 坐标（经纬度）WGS84 – 通常我们手机和浏览器获取到的gps">
 
 
 
@@ -135,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/08/recording/ajax的使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/"/>
 
 
 
 
 
-  <title>ajax的使用 | Blog</title>
+  <title>vue-baidu-map的使用 | Blog</title>
   
 
 
@@ -303,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/recording/ajax的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rni-L">
@@ -320,7 +318,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ajax的使用</h2>
+          <h2 class="post-title" itemprop="name headline">vue-baidu-map的使用</h2>
         
 
         <div class="post-meta">
@@ -332,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T23:25:03+08:00">
-                2017-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T23:32:39+08:00">
+                2017-09-11
               </time>
             
 
@@ -355,8 +353,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
+                  <a href="/categories/recording/" itemprop="url" rel="index">
+                    <span itemprop="name">recording</span>
                   </a>
                 </span>
 
@@ -373,9 +371,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/08/recording/ajax的使用/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/11/recording/vue-baidu-map的使用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/08/recording/ajax的使用/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/11/recording/vue-baidu-map的使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -383,7 +381,7 @@
 
           
           
-             <span id="/2017/07/08/recording/ajax的使用/" class="leancloud_visitors" data-flag-title="ajax的使用">
+             <span id="/2017/09/11/recording/vue-baidu-map的使用/" class="leancloud_visitors" data-flag-title="vue-baidu-map的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,144 +412,102 @@
       
 
       
-        <blockquote>
-<p>主要复习下ajax的使用，包括原生、jquery和jsonp的使用。</p>
+        <h1 id="vue-baidu-map的使用"><a href="#vue-baidu-map的使用" class="headerlink" title="vue-baidu-map的使用"></a>vue-baidu-map的使用</h1><blockquote>
+<p>vue-baidu-map是百度地图插件封装成vue的一个组件，能让我们更好在vue中使用百度地图的功能</p>
 </blockquote>
-<h2 id="原生的ajax"><a href="#原生的ajax" class="headerlink" title="原生的ajax"></a>原生的ajax</h2><p>ajax是一种无刷新获取数据的技术，通过xhr对象实现，现在有个新的标准是<code>fetch api</code>，这里就不讨论它了。</p>
-<pre><code>var xhr = new XMLHttpRequest();
-xhr.open(&quot;GET&quot;,&quot;http://localhost/ajax/test.php&quot;,true);
-xhr.send();
-xhr.onreadystatechange = function(){
-    //这样就能获取到返回的数据了
-    console.log(xhr.response)
-}
-</code></pre><p>上面例子，很简单就获取到了，没有做其他条件的判断。下面我们一步步地看，每个状态发生了事情。</p>
-<pre><code>var xhr = new XMLHttpRequest();
-xhr.open(&quot;GET&quot;,&quot;http://localhost/ajax/test.php&quot;,true);
-</code></pre><p>这里实例化一个xhr对象，并打开了一个链接，使用了<code>GET</code>方法，<code>true</code>是异步请求。</p>
-<h3 id="open方法"><a href="#open方法" class="headerlink" title="open方法"></a>open方法</h3><p>open方法总共有5个参数的：</p>
-<ol>
-<li>method，请求方法，可以有：GET,POST,PUT,DELETE等。</li>
-<li>url，请求的链接。</li>
-<li>async，是否异步请求，默认为true。</li>
-<li>用户名，可选参数，为授权使用。默认参数为空string。</li>
-<li>密码，可选参数，为授权使用。默认参数为空string。</li>
-</ol>
-<p>第四、五个，没用过，不怎么清楚。第三个，通常都是用异步请求的，可能特殊情况才用到同步吧。主要是第一个和第二个参数。</p>
-<h3 id="send方法"><a href="#send方法" class="headerlink" title="send方法"></a>send方法</h3><pre><code>xhr.send();
-</code></pre><p>这里就是发送请求。如果使用的是<code>GET</code>方法，就不需要传参数，如果是<code>POST</code>或是其他方法。</p>
-<p>如果是要发送内容的话，就像下面这样：</p>
-<pre><code>xhr.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
-xhr.send(&quot;a=1&amp;b=cba&amp;c=&quot;+JSON.stringify({test:&apos;hahaha&apos;}));
-</code></pre><p>将你要传的参数变成字符串，通过<code>&amp;</code>进行分隔多个参数。要传<code>{c:123}</code>对象的话，就要变成JSON字符串。</p>
-<p>我们还看到，在还送请求前，使用了<code>setRequestHeader()</code>这个方法。从字面上理解，就是设置请求头部，它接受两个参数，头部的名称和值。</p>
-<p>我们把请求的内容格式，设置成<code>aaplicaiont/x-www-form-urlencoded</code>。</p>
-<h3 id="发送请求的状态"><a href="#发送请求的状态" class="headerlink" title="发送请求的状态"></a>发送请求的状态</h3><p><code>onreadystatechange</code>，会一直把信息发送给客户端，会不断地执行回调函数，不能直接在回调函数做事情，不然就会不断地进行操作。</p>
-<p>xhr会有一个状态的属性，判断当前是什么状态。</p>
-<pre><code>xhr.readyState
-</code></pre><p><img src="/images/xhr状态.jpg" alt="xhr状态"></p>
-<p>从上图可以看到，当状态为3时，就获取到数据。</p>
-<p>每个状态的意义：</p>
-<ol>
-<li>0（还没开始）</li>
-<li>1（读取中）</li>
-<li>2（已读取）</li>
-<li>3（数据交换中）</li>
-<li>4（一切完成）</li>
-</ol>
-<p>虽然在3已经获取到数据了，可能是我们这里数据比较小。所以，最安全，已经在状态为4时，才执行后续操作。</p>
-<h3 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h3><pre><code>xhr.status
-</code></pre><p>当我们<code>xhr.readyState === 4</code>时，我们就可以验证http状态码。</p>
-<p>常见的http状态码：200,404,302,304,500。。。。。</p>
-<pre><code>xhr.onreadystatechange = function(x){
-    if(xhr.readyState === 4){
-        //传送完毕
-        var _status = xhr.status;
-        if((_status &gt;= 200 &amp;&amp; _status &lt; 300) || _status === 304){
-            //成功
-            success(xhr.response);
-        }else{
-            //有问题
-            console.log(_status)
-        }
-    }
-}
-</code></pre><p>就是这么简单（还没兼容旧版本的ie），获取到<code>xhr.response</code>就可以进行一系列的操作</p>
-<p>完整代码：</p>
-<pre><code>var xhr = new XMLHttpRequest();
-xhr.open(&quot;POST&quot;,&quot;http://localhost/ajax/test.php&quot;,true);
-xhr.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
-xhr.send(&quot;c=&quot;+JSON.stringify({test:&apos;hahaha&apos;}));
-xhr.onreadystatechange = function(x){
-    if(xhr.readyState === 4){
-        //传送完毕
-        var _status = xhr.status;
-        if((_status &gt;= 200 &amp;&amp; _status &lt; 300) || _status === 304){
-            //成功
-            console.log(xhr)
-        }else{
-            //有问题
-            console.log(_status)
-        }
-    }
-}
-//php代码：
-&lt;?php
-    echo $_POST[&apos;c&apos;];
-?&gt;
-</code></pre><p>在ie8运行都是可以的，ie7、6就不讨论了。</p>
-<h2 id="jquery的ajax"><a href="#jquery的ajax" class="headerlink" title="jquery的ajax"></a>jquery的ajax</h2><pre><code>$.ajax({
-    url:&apos;http://localhost/ajax/test.php&apos;,
-    type:&apos;POST&apos;,
-    data:{c:123},
-    dataType:&apos;json&apos;,
-    success:function(res){
-        console.log(res)
-    },
-    error:function(error){
-        console.log(error)        
-    }
-})
-</code></pre><p>jq的ajax很简单，帮我们封装好了，兼容性又好。</p>
-<ul>
-<li>url:请求的地址</li>
-<li>type:请求的方法</li>
-<li>data:请求所带的数据</li>
-<li>dataType:预期服务器返回的数据类型</li>
-<li>success:成功后的回调函数</li>
-<li>error:失败后的回调函数</li>
+<p>三个任务： 自定义覆盖物、自定义菜单、画轨迹</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><ul>
+<li><a href="http://lbsyun.baidu.com/index.php?title=jspopular/guide/introduction" target="_blank" rel="external">百度地图</a></li>
+<li><a href="https://github.com/Dafrok/vue-baidu-map" target="_blank" rel="external">vue-baidu-map</a></li>
+<li>经纬度</li>
+<li>百度地图坐标</li>
 </ul>
-<p>详细大家可以看下jquery的文档。</p>
-<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><p>因为浏览器的同源策略，所以无法请求跨域的数据。</p>
-<p>当前协议不同(http和https)，端口不同，域名不同，都是跨域的。</p>
-<p>在后端，可以设置跨域头，这样ajax就可以跨域获取数据，但是这个ie9以下都不支持。</p>
-<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p>jsonp就是通过script标签，获取数据。</p>
-<pre><code>function addScriptTag(src){
-    var script = document.createElement(&apos;script&apos;);
-    script.setAttribute(&quot;type&quot;,&quot;text/javascript&quot;);
-    script.src = src;
-    document.body.appendChild(script);
+<h2 id="百度地图一些基础知识"><a href="#百度地图一些基础知识" class="headerlink" title="百度地图一些基础知识"></a>百度地图一些基础知识</h2><h3 id="百度api-key"><a href="#百度api-key" class="headerlink" title="百度api key"></a>百度api key</h3><p>使用百度地图前，要有自己的密钥才能使用</p>
+<h3 id="坐标（经纬度）"><a href="#坐标（经纬度）" class="headerlink" title="坐标（经纬度）"></a>坐标（经纬度）</h3><p>WGS84 – 通常我们手机和浏览器获取到的gps坐标，是通用类型的坐标系</p>
+<p>BD09 – 这是百度地图使用的坐标系</p>
+<p>所以我们使用百度地图<code>api</code>以外的方法获取到的经纬度，要经过转换，才能在百度地图上使用，而百度有提供<code>api</code>去转换这个坐标</p>
+<p>而且，百度地图大部分的组件，都是需要坐标才能显示</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code>&lt;baidu-map :center=&apos;center&apos; class=&quot;map&quot; ak=&quot;bb1wdmvddqf1Ghaov4lr3txx&quot; @ready=&quot;handler&quot; :zoom=&quot;zoom&quot;  :scroll-wheel-zoom=&quot;true&quot;&gt;&lt;/baidu-map&gt;
+// 引入组件
+import { BaiduMap } from &apos;vue-baidu-map&apos;
+</code></pre><p>像我们平时使用<code>vue</code>组件一样，使用即可，然后一些属性和方法</p>
+<p><code>center</code>这个属性，接受一个对象，百度地图显示就会根据经纬度的值进行显示相应的位置。当我们改变<code>center</code>值，百度地图就会相应地改变</p>
+<pre><code>// 经纬度
+{
+  lng: 123,
+  lat: 123
 }
-addScriptTag(&quot;http://localhost/ajax/test.php?c=1&amp;callback=result&quot;);
-function result(data) {
-    console.log(data)
+</code></pre><h3 id="获取百度地图实例"><a href="#获取百度地图实例" class="headerlink" title="获取百度地图实例"></a>获取百度地图实例</h3><p>这里只说明<code>vue</code>组件的</p>
+<p>伪代码：</p>
+<pre><code>// html
+&lt;baidu-map :center=&apos;center&apos; @ready=&quot;handler&quot;&gt;&lt;/baidu-map&gt;
+
+// js
+import &apos;baiduMap&apos; from &apos;vue-baidu-map&apos;
+// 地图组件初始化，获取实例
+handler: function({ BMap }) {
+    this.BMap = BMap
 }
-//php代码
-echo $_GET[&apos;callback&apos;].&quot;(&quot;.$_GET[&apos;c&apos;].&quot;)&quot;;
-</code></pre><p>原理很简单，通过创建script标签，请求相应的url。在url，我们携带了要传的参数。所以这样只能使用<code>GET</code>。</p>
-<p>而在PHP代码中，我们可以把那段代码意思转变一下：<code>result(data)</code>。其实就是当script标签加载完后， 就会执行你传的回调函数。</p>
-<h4 id="jquery中使用jsonp"><a href="#jquery中使用jsonp" class="headerlink" title="jquery中使用jsonp"></a>jquery中使用jsonp</h4><pre><code>$.getJSON(&quot;http://localhost/ajax/test.php?a=1&amp;c=1&amp;callback=?&quot;,function(data){
-    console.log(data);
-});
-//or
-$.ajax({
-    url:&quot;http://localhost/ajax/test.php?a=1&amp;c=1&amp;callback=?&quot;,   
-    dataType:&quot;jsonp&quot;,
-    success:function(data){
-        console.log(data);
-    }
-});
-</code></pre><p>使用jquery的jsonp的话，更简单，不用特地写一个函数做回调，jquery会自动帮你完成。</p>
+</code></pre><p>获取了百度地图实例后，就能使用相应的<code>api</code>方法，比如转换<code>gps</code>坐标</p>
+<h2 id="自定义覆盖物"><a href="#自定义覆盖物" class="headerlink" title="自定义覆盖物"></a>自定义覆盖物</h2><p>自定义覆盖物功能，传入坐标数据，在地图某个点显示<code>marker</code>和信息窗口</p>
+<p>下面大概说下，如何实现点击地图某个位置，显示一个<code>marker</code>和信息窗口</p>
+<pre><code>// html
+&lt;baidu-map @click=&apos;getClickMapData&apos;&gt;
+  &lt;!-- 自定义标记和信息框 --&gt;
+  &lt;div v-for=&apos;v, i in markerArr&apos; :key=&apos;v.title&apos;&gt;
+    &lt;bm-marker :position=&quot;v.markerPoint&quot; :dragging=&quot;true&quot; :icon=&quot;icon&quot;&gt;&lt;/bm-marker&gt;
+    &lt;bm-info-window :position=&quot;v.markerPoint&quot; :title=&quot;v.title&quot; :show=&quot;v.ifShowWindow&quot; &gt;
+      &lt;p v-text=&quot;v.contents&quot;&gt;&lt;/p&gt;
+    &lt;/bm-info-window&gt;
+  &lt;/div&gt;
+&lt;/baidu-map&gt;
+
+// js
+// 引用bm-marker和bm-info-window组件
+import { BmMarker, BmInfoWindow } from &apos;vue-baidu-map&apos;
+
+// 给baidu-map组件添加点击事件，点击地图，获取对应的百度坐标
+getClickMapData({ point }) {
+  // 添加一个新的对象
+  this.markerArr.push({
+    markerPoint: point,
+    ifShowWindow: false,
+    title: &apos;Info Window Title&apos;,
+    contents: &apos;1&apos;
+  })
+}
+</code></pre><h2 id="自定义菜单"><a href="#自定义菜单" class="headerlink" title="自定义菜单"></a>自定义菜单</h2><p>在百度地图，显示一个自定义的菜单，有一系列的自定义功能</p>
+<pre><code>// html
+&lt;bm-control anchor=&apos;BMAP_ANCHOR_TOP_RIGHT&apos; :offset=&apos;{width: 20, height: 20}&apos; class=&apos;map-control&apos;&gt;
+  &lt;div class=&quot;map-control-wrap&quot;&gt;
+    &lt;div class=&quot;map-control-btnOne map-control-btn&quot; @click=&apos;backInPlace&apos;&gt;回到原位&lt;/div&gt;
+    &lt;div class=&quot;map-control-btnTwo map-control-btn&quot; @click=&apos;createAutoMarker&apos;&gt;{{ createMarkerBtnTxt }}&lt;/div&gt;
+    &lt;div class=&quot;map-control-btnthr map-control-btn&quot; @click=&quot;addPolyLinePath&quot;&gt;添加路径&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/bm-control&gt;
+
+// js
+import { BmControl } from &apos;vue-baidu-map&apos;
+</code></pre><p><code>anchor</code>是显示的位置，有4个选项，左上左下，右上右下。<code>offset</code>是偏离的位置</p>
+<p>要实现自定义的功能，就添加事件就好了，比如<code>回到当前位置</code>的功能：</p>
+<p>触发点击事件 –&gt;  获取当前gps坐标 –&gt; 转换成百度坐标 –&gt; 更改<code>baidu-map</code>的<code>center</code>值</p>
+<h2 id="画轨迹"><a href="#画轨迹" class="headerlink" title="画轨迹"></a>画轨迹</h2><p>使用折线，<code>BmPolyline</code>这个组件，进行画轨迹</p>
+<pre><code>// html
+&lt;bm-polyline :path=&quot;comPolylinePath&quot; &gt;&lt;/bm-polyline&gt;
+
+//js
+data: function() {
+  return {
+    comPolylinePath: [{
+      lat: 123,
+      lng: 123
+    }]
+  }
+}
+</code></pre><p><code>path</code>接受一个数组，根据这个数组的一个个坐标点，按顺序连接成线</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><code>navigator.geolocation.getCurrentPosition</code>使用这个方法可以获取到当前位置坐标，但是这个方法只能在<code>https</code>下才能使用，有个替代方法，使用百度获取位置的<code>api</code>，但只能精确到市的位置</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>vue-baidu-map</code>是一个百度地图封装成<code>vue</code>的组件，方便在<code>vue</code>使用</p>
+<p>我之前发现了一个<code>bug</code>，使用<code>h5</code>方法获取当前位置的<code>gps</code>坐标，再转换成百度地图坐标，赋值给<code>center</code>，然后点击一些标识，例如商场或者停车场，百度地图会跳转到别的地方去。然后我在<code>github</code>提了个<code>issue</code>，当天就有人解决了这个<code>bug</code>，这个组件还是有人在维护的，效率也挺不错的。</p>
 
       
     </div>
@@ -569,7 +525,7 @@ $.ajax({
       
         <div class="post-tags">
           
-            <a href="/tags/ajax/" rel="tag"># ajax</a>
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
         </div>
       
@@ -582,8 +538,8 @@ $.ajax({
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/technology/php-workman-gateway/" rel="next" title="'php-gateway的使用';">
-                <i class="fa fa-chevron-left"></i> 'php-gateway的使用';
+              <a href="/2017/09/06/technology/nodemailer的使用/" rel="next" title="nodemailer的使用">
+                <i class="fa fa-chevron-left"></i> nodemailer的使用
               </a>
             
           </div>
@@ -591,10 +547,6 @@ $.ajax({
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/11/technology/移动端布局方式/" rel="prev" title="移动端布局方式">
-                移动端布局方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -748,7 +700,7 @@ $.ajax({
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生的ajax"><span class="nav-number">1.</span> <span class="nav-text">原生的ajax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#open方法"><span class="nav-number">1.1.</span> <span class="nav-text">open方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#send方法"><span class="nav-number">1.2.</span> <span class="nav-text">send方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送请求的状态"><span class="nav-number">1.3.</span> <span class="nav-text">发送请求的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http状态码"><span class="nav-number">1.4.</span> <span class="nav-text">http状态码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery的ajax"><span class="nav-number">2.</span> <span class="nav-text">jquery的ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">3.</span> <span class="nav-text">跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">3.1.</span> <span class="nav-text">jsonp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jquery中使用jsonp"><span class="nav-number">3.1.1.</span> <span class="nav-text">jquery中使用jsonp</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-baidu-map的使用"><span class="nav-number">1.</span> <span class="nav-text">vue-baidu-map的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键词"><span class="nav-number">1.1.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#百度地图一些基础知识"><span class="nav-number">1.2.</span> <span class="nav-text">百度地图一些基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#百度api-key"><span class="nav-number">1.2.1.</span> <span class="nav-text">百度api key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标（经纬度）"><span class="nav-number">1.2.2.</span> <span class="nav-text">坐标（经纬度）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.3.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取百度地图实例"><span class="nav-number">1.3.1.</span> <span class="nav-text">获取百度地图实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义覆盖物"><span class="nav-number">1.4.</span> <span class="nav-text">自定义覆盖物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义菜单"><span class="nav-number">1.5.</span> <span class="nav-text">自定义菜单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#画轨迹"><span class="nav-number">1.6.</span> <span class="nav-text">画轨迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.7.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -891,9 +843,9 @@ $.ajax({
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/07/08/recording/ajax的使用/';
-          this.page.identifier = '2017/07/08/recording/ajax的使用/';
-          this.page.title = 'ajax的使用';
+          this.page.url = 'http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/';
+          this.page.identifier = '2017/09/11/recording/vue-baidu-map的使用/';
+          this.page.title = 'vue-baidu-map的使用';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-yiiouo-github-io.disqus.com/embed.js';
