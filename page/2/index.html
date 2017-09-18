@@ -301,6 +301,647 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/nodejs的学习和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/04/recording/nodejs的学习和使用/" itemprop="url">nodejs的学习和使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T16:52:41+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/04/recording/nodejs的学习和使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/04/recording/nodejs的学习和使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/04/recording/nodejs的学习和使用/" class="leancloud_visitors" data-flag-title="nodejs的学习和使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>记录一些nodejs学习的内容</p>
+</blockquote>
+<p>这篇文字，是(<a href="https://github.com/nswbmw/N-blog/)[https://github.com/nswbmw/N-blog/]这里进行学习nodejs，进行归纳的" target="_blank" rel="external">https://github.com/nswbmw/N-blog/)[https://github.com/nswbmw/N-blog/]这里进行学习nodejs，进行归纳的</a></p>
+<h1 id="使用express"><a href="#使用express" class="headerlink" title="使用express"></a>使用express</h1><p>cnpm i express –save</p>
+<p>新建<code>index.js</code>文件</p>
+<pre><code>var express = require(&apos;express&apos;)
+var app = express()
+
+app.get(&apos;/&apos;, function(req, res) {
+  res.send(&apos;hello, 11&apos;)
+})
+
+app.listen(3000)
+</code></pre><p>开启服务：<code>node indexjs</code></p>
+<h1 id="supervisor"><a href="#supervisor" class="headerlink" title="supervisor"></a>supervisor</h1><p>安装在全局下：<code>npm install -g supervisor</code></p>
+<p>启动程序：<code>supervisor --harmony index</code></p>
+<p>这个包的作用，当你更改后，刷新网页会更新，而不用重新开启服务才刷新</p>
+<h1 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h1><p><code>cnpm i ejs -S</code></p>
+<p>安装<code>ejs</code>，可以使用模板引擎，进行服务的渲染</p>
+<pre><code>// 路由
+router.get(&apos;/:name&apos;, function(req, res) {
+  // 进行渲染
+  res.render(&apos;users&apos;, {
+    name: req.params.name
+  })
+})
+
+// 模板文件（users.ejs)
+&lt;h1&gt;&lt;%= name.toUpperCase() %&gt;&lt;/h1&gt;
+&lt;p&gt;hello, &lt;%= name %&gt;&lt;/p&gt;
+
+// 入口文件，启用ejs
+app.set(&apos;views&apos;, path.join(__dirname, &apos;myblog/views&apos;));// 设置存放模板文件的目录
+app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/mongodb使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/04/recording/mongodb使用/" itemprop="url">mongodb使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T15:35:12+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/04/recording/mongodb使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/04/recording/mongodb使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/04/recording/mongodb使用/" class="leancloud_visitors" data-flag-title="mongodb使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>记录了mongodb安装、配置和基本的使用</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li>在官网下载你所需要的版本（我的是windows）</li>
+<li>安装（可以指定目录）</li>
+<li>windows是要配置环境变量，不然会出现闪退的情况</li>
+</ol>
+<p>在系统变量的PATH中，添加一个新的变量，是你mongodb下载的路径（我的是：C:\Program Files\MongoDB\Server\3.4\bin）</p>
+<ol>
+<li>可以选择你数据库文件放在的位置（好像默认是在C盘的）</li>
+</ol>
+<p>在命令行，进入到mongod.exe的目录下，输入：</p>
+<pre><code>mongod.exe --dbpath h:\mongodb\data\db
+</code></pre><p>这样就能更改数据库数据存放的位置</p>
+<h1 id="moongodb可视化工具"><a href="#moongodb可视化工具" class="headerlink" title="moongodb可视化工具"></a>moongodb可视化工具</h1><p>我这里使用的是<code>studio 3T</code></p>
+<p>到官网下载即可</p>
+<p><a href="https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/</a></p>
+<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="常用词"><a href="#常用词" class="headerlink" title="常用词"></a>常用词</h2><p>将比较长的词进行简写：</p>
+<ul>
+<li>COLLECTION_NAME:CN（集合名）</li>
+</ul>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li>show dbs：显示有什么数据库存在</li>
+<li>show tables：显示集合</li>
+<li>db：显示当前的数据库或集合</li>
+<li>use db：连接特定的数据库</li>
+</ul>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>进入目标数据库后，执行：<code>db.dropDatabase()</code></p>
+<h3 id="删除collection"><a href="#删除collection" class="headerlink" title="删除collection"></a>删除collection</h3><p><code>db.CN.drop()</code></p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>find(), findOne()</p>
+<pre><code>db.CN.find(query, projection)
+</code></pre><ul>
+<li>query ：可选，使用查询操作符指定查询条件</li>
+<li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）</li>
+</ul>
+<p>例子：</p>
+<pre><code>db.CN.find()
+// 添加查询条件
+db.CN.find({&apos;_id&apos;: 2})
+// 只显示匹配到的第一条
+db.CN.findOne()
+// 美化查询结果
+db.CN.find().pretty()
+</code></pre><h4 id="数组查询"><a href="#数组查询" class="headerlink" title="数组查询"></a>数组查询</h4><p><code>$elemMath</code> 操作符为数组元素指定复合条件，以查询数组中至少一个元素满足所有指定条件的文档</p>
+<pre><code>// 查询 finished 数组至少包含 一个大于 ($gt) 15 并且小于 ($lt) 20 
+db.CN.find( { finished: { $elemMatch: { $gt: 15, $lt: 20 } } } )
+</code></pre><h3 id="映射字段"><a href="#映射字段" class="headerlink" title="映射字段"></a>映射字段</h3><p>指定显示或排除哪些字段</p>
+<p>1或true，为显示;0或false，为隐藏</p>
+<p><code>_id</code>字段，默认显示</p>
+<p>不能在映射文档中组合 包含和排除 语句</p>
+<pre><code>// 显示所有字段
+db.CN.find( { status: &quot;A&quot; } )
+
+// 只显示&apos;_id&apos; , status&apos; 和 &apos;name&apos;
+db.CN.find( { status: &quot;A&quot; }, { name: 1, status: 1 } )
+
+// 只显示&apos;status&apos;
+db.CN.find( { status: &quot;A&quot; }, { status: 1, _id: 0 } )
+
+// 除了&apos;favorites&apos; 和 &apos;points&apos;，其他字段都显示
+db.CN.find( { status: &quot;A&quot; }, { favorites: 0, points: 0 } )
+
+// 包含 favorites 文档中的 food 字段（排除同理）
+db.CN.find(
+   { status: &quot;A&quot; },
+   { name: 1, &quot;favorites.food&quot;: 1 }
+)
+// result
+{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;cake&quot; } }
+{ &quot;_id&quot; : 6, &quot;name&quot; : &quot;abc&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;pizza&quot; } }
+
+// 数组，points中的bonus字段（排除同理）
+db.CN.find( { status: &quot;A&quot; }, { name: 1, &quot;points.bonus&quot;: 1 } )
+// result
+{ &quot;_id&quot; : 2, &quot;name&quot; : &quot;bob&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 20 }, { &quot;bonus&quot; : 12 } ] }
+{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 8 }, { &quot;bonus&quot; : 20 } ] }
+</code></pre><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>insert() , insertOne() , insertMany()</p>
+<p>添加字段，如果没有<code>_id</code>字段的话，会自动生成</p>
+<p><code>db.CN.insert(document)</code></p>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><pre><code>db.CN.insert({
+  title: 1,
+  name: &apos;name&apos;
+})
+</code></pre><h4 id="insertMany"><a href="#insertMany" class="headerlink" title="insertMany"></a>insertMany</h4><pre><code>// 插入多条数据
+db.CN.insertMany(
+   [
+     { name: &quot;bob&quot;, age: 42, status: &quot;A&quot;, },
+     { name: &quot;ahn&quot;, age: 22, status: &quot;A&quot;, },
+     { name: &quot;xi&quot;, age: 34, status: &quot;D&quot;, }
+   ]
+)
+</code></pre><p><code>insert</code>方法貌似都可以代替<code>insertOne</code>和<code>insertMany</code>，根据其他文章所知，<code>insert</code>在主要驱动程序已被弃用</p>
+<p>同理，update,delete,find一样    </p>
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>update, updateOne, updateMany, replaceOne, save</p>
+<h4 id="update"><a href="#update" class="headerlink" title="update"></a>update</h4><pre><code>db.CN.update(
+  &lt;query&gt;,
+  &lt;update&gt;,
+  {
+    upsert: &lt;boolean&gt;,
+    multi: &lt;boolean&gt;,
+    writeConcern: &lt;document&gt;
+  }
+)
+</code></pre><h4 id="replaceOne"><a href="#replaceOne" class="headerlink" title="replaceOne"></a>replaceOne</h4><pre><code>// 替换&apos;name&apos; === &apos;abc&apos;那个文档
+db.CN.replaceOne(
+  { name: &quot;abc&quot; },
+  { name: &quot;amy&quot;, age: 34, type: 2, status: &quot;P&quot;, favorites: { &quot;artist&quot;: &quot;Dali&quot;, food: &quot;donuts&quot; } }
+)
+</code></pre><h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><pre><code>db.CN.save({
+  _id: 1
+  title: 1,
+  name: &apos;name&apos;
+})
+</code></pre><p>如果不指定id，和Insert一样，指定id，就会替换对应的数据</p>
+<p>参数：</p>
+<ul>
+<li>query : update的查询条件</li>
+<li>update : update的对象和值</li>
+<li>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入</li>
+<li>multi : 可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新</li>
+<li>writeConcern :可选，抛出异常的级别</li>
+</ul>
+<p>例子：</p>
+<pre><code>// 将&apos;_id&apos;为2的数据，&apos;title&apos;改为&apos;hahahahaha&apos;
+// $set，可以单独处理某个字段
+db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos;}})
+</code></pre><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>remove , deleteOne , deleteMany</p>
+<h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><pre><code>db.CN.remove(
+  &lt;query&gt;,
+  {
+    justOne: &lt;boolean&gt;,
+    writeConcern: &lt;document&gt;
+  }
+)
+</code></pre><ul>
+<li>query :（可选）删除的文档的条件</li>
+<li>justOne : （可选）如果设为 true 或 1，则只删除一个文档，默认false</li>
+<li>writeConcern :（可选）抛出异常的级别</li>
+</ul>
+<p>例子：</p>
+<pre><code>db.CN.remove{
+  {&apos;_id&apos;: 2},
+  {
+    justOne: true // 删除全部匹配的
+  }
+}
+// 清空数据库
+db.CN.remove({})
+</code></pre><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
+<li>(&gt;) 大于 - $gt</li>
+<li>(&lt;) 小于 - $lt</li>
+<li>(&gt;=) 大于等于 - $gte</li>
+<li>(&lt;= ) 小于等于 - $lte</li>
+<li>(!=) 不等于 - $ne</li>
+<li>(or) 或者 - $or</li>
+<li>$in （在相同的字段，使用$in而不是$or）</li>
+</ul>
+<p>例子：</p>
+<pre><code>// 显示: &apos;likes&apos;大于100的数据
+db.col.find({&quot;likes&quot; : {$gt : 100}})
+// 显示：&apos;likes&apos;大于100且小于200的数据
+db.col.find({likes : {$lt :200, $gt : 100}})
+</code></pre><h4 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h4><pre><code>// status === &quot;A&quot; &amp;&amp; age &gt; 30
+db.CN.find( { status: &quot;A&quot;, age: { $lt: 30 } } )
+</code></pre><h4 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h4><pre><code>// status === &quot;A&quot; || age &gt; 30
+db.CN.find(
+   {
+     $or: [ { status: &quot;A&quot; }, { age: { $lt: 30 } } ]
+   }
+)
+</code></pre><h4 id="AND-和-OR-混用"><a href="#AND-和-OR-混用" class="headerlink" title="AND 和 OR 混用"></a>AND 和 OR 混用</h4><pre><code>// status === &quot;A&quot; &amp;&amp; ( age &gt; 30 || type === 1 )
+db.CN.find(
+  {
+    status: &quot;A&quot;,
+    $or: [ { age: { $lt: 30 } }, { type: 1 } ]
+  }
+)
+</code></pre><h4 id="type"><a href="#type" class="headerlink" title="$type"></a>$type</h4><p>每种数据类型的$type值</p>
+<ul>
+<li>Double  1  </li>
+<li>String  2  </li>
+<li>Object  3  </li>
+<li>Array 4  </li>
+<li>Binary data 5  </li>
+<li>Undefined 6 已废弃。</li>
+<li>Object id 7  </li>
+<li>Boolean 8  </li>
+<li>Date  9  </li>
+<li>Null  10   </li>
+<li>Regular Expression  11   </li>
+<li>JavaScript  13   </li>
+<li>Symbol  14   </li>
+<li>JavaScript (with scope) 15   </li>
+<li>32-bit integer  16   </li>
+<li>Timestamp 17   </li>
+<li>64-bit integer  18   </li>
+<li>Min key 255 Query with -1.</li>
+<li><p>Max key 127</p>
+<p>  // 获取到’title’是字符串的数据<br>  db.CN.find({“title” : {$type : 2}})</p>
+</li>
+</ul>
+<h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><pre><code>// 只修改某个字段
+db.CN.update(id: 1, { $set: { name: &apos;123&apos; } })
+</code></pre><h3 id="其他的一些方法"><a href="#其他的一些方法" class="headerlink" title="其他的一些方法"></a>其他的一些方法</h3><h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>限制读取数据的数量</p>
+<pre><code>// 限制读取的数量为2
+db.CN.find({},{&quot;title&quot;:1,_id:0}).limit(2)
+</code></pre><h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><p>从第几个开始</p>
+<pre><code>// 获取匹配到的数据，从第10行开始显示
+db.CN.find().skip(10)
+
+//混合使用，获取匹配到的数据，从10开始获取，获取100个
+db.CN.find().skip(10).limit(100)
+</code></pre><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><p>排序，1和-1，1为升序，-1为降序。</p>
+<p>sort() =&gt; skip() =&gt; limit()</p>
+<pre><code>// 以key值，升序排序
+db.CN.find().sort({KEY:1})
+</code></pre><h4 id="aggregate-gt-聚合"><a href="#aggregate-gt-聚合" class="headerlink" title="aggregate() =&gt; 聚合"></a>aggregate() =&gt; 聚合</h4><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
+<li>database：数据库</li>
+<li>collection：集合（表）</li>
+<li>document：文档（row）</li>
+<li>field：域（字段）</li>
+<li>index：索引</li>
+<li>primary key（主键，自动将_id设置为主键）</li>
+</ol>
+<p>BSON是一种类json的一种二进制形式的存储格式,简称Binary JSON</p>
+<p>mongodb可以说是json的格式</p>
+<h4 id="document"><a href="#document" class="headerlink" title="document"></a>document</h4><p>文档是一组<strong>键值（Key-value）</strong>对</p>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
+<li>文档的键/值对是<strong>有序</strong>的</li>
+<li>不仅可以是在双引号里面的字符串，还可以是其他几种数据类型</li>
+<li>区分类型和大小写</li>
+<li>不能有重复的键</li>
+<li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符</li>
+</ol>
+<h5 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
+<li>键不能含有\0（空字符）</li>
+<li>.和$有特别意义</li>
+<li>以’_’开头的键是保留（不推荐）</li>
+</ol>
+<h4 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h4><h5 id="命名规范-1"><a href="#命名规范-1" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
+<li>不能说空字符串</li>
+<li>不能含有\0（空字符）</li>
+<li>不能以’system.’开头</li>
+</ol>
+<h5 id="capped-collections"><a href="#capped-collections" class="headerlink" title="capped collections"></a>capped collections</h5><p>固定大小的collection，性能更好</p>
+<p>collection的数据存储空间值要提前分配</p>
+<p><code>db.createCollection(&quot;mycoll&quot;, {capped:true, size:100000})</code></p>
+<h4 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h4><p>数据库的信息存储在集合中</p>
+<p><code>dbname.system.*</code></p>
+<ul>
+<li>.namespaces：列出所有名字空间</li>
+<li>.indexes：列出所有索引</li>
+<li>.profile：包含数据库概要信息</li>
+<li>.CN：列出所有可访问数据库的用户</li>
+<li>.sources：包含复制对端的服务器信息和状态</li>
+</ul>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ul>
+<li>String，在MongoDB中，UTF-8编码的字符串才是合法的</li>
+<li>Integer，整型，32位或64位</li>
+<li>Boolean</li>
+<li>Double，双精度浮点值</li>
+<li>Min/Max keys，将一个值与BSON元素的最低值和最高值相对比</li>
+<li>Arrays，数组或列表</li>
+<li>Timestamp，时间戳</li>
+<li>Object：内嵌文档</li>
+<li>Null</li>
+<li>Symbol，符号</li>
+<li>Date：日期时间</li>
+<li>Object ID，对象ID，用于创建文档的ID</li>
+<li>Binary Data：二进制数据</li>
+<li>Code：代码类型，用于在文档存储javascript代码</li>
+<li>Regular expression：正则</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><ul>
+<li>本地：<code>mongodb://localhost</code></li>
+<li>有用户名和密码：<code>mongodb://user:pwd@localhost</code></li>
+<li>数据库：<code>mongodb://fred:foobar@localhost/db</code></li>
+<li>连接服务器1和服务器2：<code>mongodb://example1.com:27017,example2.com:27017</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/recording/hexo操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -673,7 +1314,7 @@ npm i hexo -g
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/17/recording/linux指令/" itemprop="url">linux指令</a></h2>
+                <a class="post-title-link" href="/2017/07/17/recording/linux指令/" itemprop="url">linux指令和操作</a></h2>
         
 
         <div class="post-meta">
@@ -736,7 +1377,7 @@ npm i hexo -g
 
           
           
-             <span id="/2017/07/17/recording/linux指令/" class="leancloud_visitors" data-flag-title="linux指令">
+             <span id="/2017/07/17/recording/linux指令/" class="leancloud_visitors" data-flag-title="linux指令和操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -794,6 +1435,10 @@ npm i hexo -g
 </li>
 <li>netstat -tunpl : 查看端口</li>
 </ul>
+<h2 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h2><p>我用的是<code>centos</code> ， <code>centos</code> 使用 <code>yum</code> 进行包的管理</p>
+<p><code>yum -y install nginx</code> 直接按照 <code>nginx</code> 和 所依赖的包</p>
+<p><code>service nginx start</code> 就能开启服务，不用带路径那样输入命令开启服务</p>
+<h2 id="nginx-配置"><a href="#nginx-配置" class="headerlink" title="nginx 配置"></a>nginx 配置</h2><p><code>yum</code> 安装的 <code>nginx</code> 在 <code>etc/nginx</code></p>
 <h2 id="linux-安装git"><a href="#linux-安装git" class="headerlink" title="linux 安装git"></a>linux 安装git</h2><p>如果有<code>yum</code></p>
 <p><code>yum install git-core</code></p>
 <p>安装完毕后，设置用户</p>
@@ -836,7 +1481,8 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
     proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
   }
 }
-</code></pre>
+</code></pre><p>pkill php-fpm: 关闭php-fpm<br><a href="https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/" target="_blank" rel="external">https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/</a></p>
+
           
         
       
@@ -2140,494 +2786,11 @@ new ColorPicker({
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/technology/h5图片上传处理总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/20/technology/h5图片上传处理总结/" itemprop="url">h5图片上传处理总结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T10:53:23+08:00">
-                2017-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/20/technology/h5图片上传处理总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/20/technology/h5图片上传处理总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/03/20/technology/h5图片上传处理总结/" class="leancloud_visitors" data-flag-title="h5图片上传处理总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>这篇文章主要是总结，我在做图片上传，图片处理，图片合成，生成图片遇到过的坑。这个项目只在微信上展示，所以移动端的浏览器都没怎么测试，都是在android和ios的微信上进行测试。主要的坑都是来自ios上。</p>
-</blockquote>
-<h1 id="HTML5图片上传遇到的坑"><a href="#HTML5图片上传遇到的坑" class="headerlink" title="HTML5图片上传遇到的坑"></a>HTML5图片上传遇到的坑</h1><h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><h3 id="使用input-type-”file”-获取图片"><a href="#使用input-type-”file”-获取图片" class="headerlink" title="使用input[type=”file”]获取图片"></a>使用input[type=”file”]获取图片</h3><p>使用input[type=”file”]进行图片的上传，这个标签就能让用户拍照或者上传相册的图片了。<br><code>&lt;input type=&quot;file&quot;  accept=&quot;image/*&quot; capture=&quot;camera&quot;&gt;</code><br><code>accept=&#39;image/*</code>用来定义上传文件的类型<br><code>capture=&#39;camera&#39;</code>这个会强制打开相机拍摄，但只有一些浏览器会支持，我试了下，安卓的qq浏览器会，但是UC会直接打不开文件上传，而在微信没有什么问题。<br>当用户选择完毕后，我们就要处理返回的数据，而且input[type=’file’]获取的图片是跨域的。</p>
-<h3 id="对获取到图片进行处理，展示在img上"><a href="#对获取到图片进行处理，展示在img上" class="headerlink" title="对获取到图片进行处理，展示在img上"></a>对获取到图片进行处理，展示在img上</h3><p>上传后，不能直接用value值扔给img.src上的，要先获取上传图片的数据<code>var file = this.files[0]</code>，再使用<code>URL.createObjectURL(blob)</code>方法来实现的。</p>
-<p>URL.createObjectURL() 静态方法会创建一个DOMString，它的 URL 表示参数中的对象，这个新的URL <strong>对象表示着指定的 File 对象或者 Blob 对象。</strong><br>而Blob对象表示一个<strong>不可变的，原始数据的类似文件对象</strong>  反正就是一个存储数据的对象吧。<br>createObjectURL这个方法，是存在window.URL这个对象里的。在网上也有要写兼容的<code>var windowUrl = window.URL || window.webkitURL</code>。最终就是<code>var data = windowUrl.createObjectURL(file)</code>，就成功获取了可以展示的图片数据，然后<code>img.src=data</code>就行了。完整代码：</p>
-<pre><code>var oFile = document.getElementById(&apos;file&apos;),
-    oShowImg = document.getElementById(&apos;showImg&apos;)
-oFile.addEventListener(&apos;change&apos;, function(e){
-    //input值发生改变后
-    var file = this.files[0]
-    var windowUrl = window.URL || window.webkitURL;
-    //把上传的图片，赋值到Img
-    oShowImg.src = windowUrl.createObjectURL(file)
-}, false);
-</code></pre><hr>
-<h2 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h2><p>然后就是图片的处理。项目的需求是，让用户选择滤镜效果，然后再选择一个海报的图片，编辑里面的文字，最后生成一个新的图片。我看到滤镜那部分，只能去找下插件。<a href="https://github.com/arahaya/ImageFilters.js" target="_blank" rel="external">github图片滤镜</a>，我找到的是这个，按照它的用法，很简单，效果又多，然后就继续下一个效果的实现。<br>让用户选择一个海报的图片，然后编辑的里面的文字。我是用input标签先去代替，当用户输入完毕，要生成图片了，我就根据选择的海报图片和编辑的文字进行添加。</p>
-<hr>
-<h2 id="生成图片到canvas"><a href="#生成图片到canvas" class="headerlink" title="生成图片到canvas"></a>生成图片到canvas</h2><p>根据用户选择的滤镜效果，海报图片，输入的文字，用canvas进行合成，输出一个新的图片。这里用到canvas的toDataURL();</p>
-<pre><code>    //先把宽高给了canvas
-var oCan = document.getElementById(&apos;canvas&apos;),
-    gct = oCan.getContext(&apos;2d&apos;),
-    w = document.documentElement.clientWidth,
-    h = document.documentElement.clientHeight
-
-oCan.width = w
-oCan.height = h
-
-//写了个图片的公共方法
-function cacheImg(url , callback ){
-        if(!url){
-            callback.call()
-            return false;
-        }
-    var img = new Image()
-
-    img.crossOrigin = &quot;Anonymous&quot;;
-
-    img.onload = function() {
-        //图片加载完，执行回调
-      callback.call(img)
-    }
-    img.src = url;
-
-    }
-</code></pre><p>一开始先给canvas宽高，然后这个<code>cacheImg(url,callback)</code>的函数，设置图片的crossOrigin，当图片load完成后，执行回调。</p>
-<h3 id="crossOrigin"><a href="#crossOrigin" class="headerlink" title="crossOrigin"></a>crossOrigin</h3><p>MDN是这样解释crossOrigin:启用CORS的图像在<code>&lt;canvas&gt;</code>元素中可以重复使用而不会被污染。如果图像被污染了，在最后toDataURL中，就会输出不了，我们后面再看看会是怎么样。详情大家可以去MDN看下<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img" target="_blank" rel="external">img标签的crossOrigin属性</a>。<br><strong>一旦加了这个属性的话，如果图片的数据被改变了，在canvas中就会出现不了。</strong></p>
-<h3 id="img-onload"><a href="#img-onload" class="headerlink" title="img.onload"></a>img.onload</h3><p>然后就是img.onload了。如果没有在图片onload完，就进行toDataURL()，生成图片，就会出现白屏或黑屏的现象。因为图片还没加载完，就生成图片，就会没有画像。</p>
-<h3 id="生成图片到canvas-1"><a href="#生成图片到canvas-1" class="headerlink" title="生成图片到canvas"></a>生成图片到canvas</h3><pre><code>function createImg(){
-    cacheImg(oShowImg.src,function(){
-        gct.drawImage(this, 
-            0,0,w,h
-        );
-    })
-}
-</code></pre><p>上传图片后，触发这段代码，图片就会输出到canvas了。在安卓没问题，但是在ios上问题就大了，图片会出现横向。<br><img src="/images/iospic1.jpg" alt="ios拍摄的图片"><br>第一张图片是img上的，然后第二张图片是在canvas上的。canvas的图片就会出现变横向。这样问题就大了，然后只能百度了。看到解决的方法是用exif.js。要在上传图片后那步就开始处理图片。</p>
-<pre><code>//这个是处理图片旋转问题
-function getImgData(img,dir,next){
-    var image=new Image();
-    image.onload=function(){
-        var degree=0,drawWidth,drawHeight,width,height;
-        //原始宽高
-        drawWidth=this.naturalWidth;
-        drawHeight=this.naturalHeight;
-        //以下改变一下图片大小
-        var maxSide = Math.max(drawWidth, drawHeight);
-        if (maxSide &gt; 1024) {
-        var minSide = Math.min(drawWidth, drawHeight);
-        minSide = minSide / maxSide * 1024;
-        maxSide = 1024;
-        if (drawWidth &gt; drawHeight) {
-            drawWidth = maxSide;
-            drawHeight = minSide;
-        } else {
-            drawWidth = minSide;
-            drawHeight = maxSide;
-        }
-    }
-    //使用canvas修正图片的方向
-    var canvas=document.createElement(&apos;canvas&apos;);
-    canvas.width=width=drawWidth;
-    canvas.height=height=drawHeight;
-    var context=canvas.getContext(&apos;2d&apos;);
-    //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
-    switch(dir){
-        //iphone横屏拍摄，此时home键在左侧
-        case 3:
-        degree=180;
-        drawWidth=-width;
-        drawHeight=-height;
-    break;
-    //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
-    case 6:
-        canvas.width=height;
-        canvas.height=width;
-        degree=90;
-        drawWidth=width;
-        drawHeight=-height;
-    break;
-    //iphone竖屏拍摄，此时home键在上方
-    case 8:
-        canvas.width=height;
-        canvas.height=width;
-        degree=270;
-        drawWidth=-width;
-        drawHeight=height;
-    break;
-    }
-        //使用canvas旋转校正
-        context.rotate(degree*Math.PI/180);
-        context.drawImage(this,0,0,drawWidth,drawHeight);
-        //返回校正图片
-        next(canvas.toDataURL(&quot;image/png&quot;));
-    }
-    image.src=img;
-}
-
-function change(){
-    var file = this.files[0];
-    var orientation;
-    //EXIF js 可以读取图片的元信息 https://github.com/exif-js/exif-js
-    EXIF.getData(file,function(){
-        //获取图片的拍摄方向的数据
-        orientation=EXIF.getTag(this,&apos;Orientation&apos;);
-    });
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        //修正图片方向
-        getImgData(this.result,orientation,function(data){
-        var img = new Image();
-        img.onload = function(){
-            oShowImg.src = data
-            createImg()
-        }
-        img.src = data;
-
-
-    });
-    }
-    reader.readAsDataURL(file);
-}
-</code></pre><p>change这段代码，使用了new FileReader()，而不是我一开始那个createObjectURL，最后也能生成新的图片。ios测试，OK没问题。这里用的exif.js，可以获取图片的元数据，就比如这个拍摄方向的数据<code>EXIF.getTag(this,&#39;Orientation&#39;);</code>这就获取到了，我用iphone7拍摄试了下，有4个方向:</p>
-<ol>
-<li>1:横屏，home键在右边</li>
-<li>3:横屏，home键在左边</li>
-<li>6:竖屏，home键在下边</li>
-<li>8:竖屏，home键在上边<br>然后就是使用canvas的修改方向了。</li>
-</ol>
-<p>加了<code>img.crossOrigin = &quot;Anonymous&quot;</code>后，在ios上，canvas看不了图片，安卓没问题。好。。。真坑。然后不加这个属性的话，好像也没什么问题，那这个属性有什么用呢。。。<br>我们再看看<code>Anonymous</code>是什么作用。MDN是这解释的：<strong>执行一个跨域的请求（比如，有 Origin: HTTP header）。但是没有发送证书（比如，没有cookie，没有X.509证书，没有HTTP基本的授权认证）。如果服务器没有给源站证书（没有设置Access-Control-Allow-Origin: HTTP头），图像会被污染而且它的使用会被限制。</strong></p>
-<hr>
-<p>没有设置跨域头，图像被污染的话，会被限制使用。crossOrigin就是防止图片被污染，因为被污染的话，就不能使用canvas的toDataURL等一些的方法，会抛出安全错误。但是我在PC运行没报错，手机运行貌似没问题。好吧我要研究下，反正现在就是暂时不需要用它，因为用了它，污染了图片的数据化，会在ios的canvas显示不了，除非你设置了跨域头（我现在测试的时候没设置）。</p>
-<hr>
-<h2 id="生成一张新的图片"><a href="#生成一张新的图片" class="headerlink" title="生成一张新的图片"></a>生成一张新的图片</h2><p>使用canvas.toDataURL()这方法。这方法第一个参数，来指定生成的图片是什么格式的，’image/png’，或者’image/jpeg’，或者’image/webp’，第二个参数指定图片的质量，0到1，只有png格式不支持。最终<code>canvas.toDataURL(&#39;image/png&#39;)</code>就能生成图片了。<br>使用toDataURL这个方法，会发现可以使用canvas来搞出很多的效果，最终生成一张图片，各种diy，生成新的图片，这感觉是不错。比如对上传的图片进行涂鸦啊，添加文字，滤镜，各种美化。</p>
-<h3 id="在本地测试报错"><a href="#在本地测试报错" class="headerlink" title="在本地测试报错"></a>在本地测试报错</h3><pre><code>Uncaught SecurityError: Failed to execute &apos;toDataURL&apos; on &apos;HTMLCanvasElement&apos;: Tainted canvases may not be exported.(anonymous function) @ canvas_image.html:49img.onload @ canvas_image.html:70
-</code></pre><p>因为有海报图片，所有是要两张图片合成一张，在本地直接打开，就报错了，而线上却没事。然后加上<code>img.crossOrigin = &quot;Anonymous&quot;</code>就会报出跨域的错误了。在本地打开的图片是跨域的，所以在本地测试的话，要在服务器上打开。</p>
-<hr>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总结下这里写的几个坑<br>1.没有在img.onload后才添加到src上，canvas会显示不出来。<br>2.img标签的crossOrigin属性，当图片数据被污染了，要设置了跨域头才能显示出来。<br>3.上传后的图片，在ios上，图片会变旋转，要用exit.js处理。</p>
-<p>其实还有的，图片上传后，尺寸的修正，上传的图片大小限制。这篇就大概总结一下，而且看了下exit.js的api，发现可以挖掘的图片数据很多，这个可以深究。<br>这是我第一次写文章，写得不太好，我会继续努力的。这是<a href="https://github.com/yiiouo/canvas-Image-processing" target="_blank" rel="external">demo地址</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/18/first/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/18/first/" itemprop="url">first</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-18T11:35:23+08:00">
-                2017-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/18/first/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/18/first/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/03/18/first/" class="leancloud_visitors" data-flag-title="first">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>This is a regular paragraph.</p>
-<p>标题：</p>
-<h1 id="This-is-an-H1"><a href="#This-is-an-H1" class="headerlink" title="This is an H1"></a>This is an H1</h1><h2 id="This-is-an-H2"><a href="#This-is-an-H2" class="headerlink" title="This is an H2"></a>This is an H2</h2><h6 id="This-is-an-H6"><a href="#This-is-an-H6" class="headerlink" title="This is an H6"></a>This is an H6</h6><p>引言：</p>
-<blockquote>
-<p>This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.<br>Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</p>
-<p>Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse<br>id sem consectetuer libero luctus adipiscing.</p>
-</blockquote>
-<hr>
-<p>代码：<br>Here is an example of AppleScript:</p>
-<pre><code>tell application &quot;Foo&quot;
-    beep
-end tell
-</code></pre><p>Use the <code>printf()</code> function.</p>
-<p>链接：<br>This is <a href="http://example.com/" title="Title" target="_blank" rel="external">an example</a> inline link.</p>
-<p><a href="http://example.net/" target="_blank" rel="external">This link</a> has no title attribute.</p>
-<p>强调：<br><em>single asterisks</em></p>
-<p><em>single underscores</em></p>
-<p><strong>double asterisks</strong></p>
-<p><strong>double underscores</strong></p>
-<p>图片<br><img src="../images/to/logo.gif" alt="Alt text"></p>
-<p><img src="../images/logo.gif" alt="Alt text" title="Optional title"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2673,7 +2836,7 @@ end tell
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

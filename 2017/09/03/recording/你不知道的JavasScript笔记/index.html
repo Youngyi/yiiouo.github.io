@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/03/recording/你不知道的JavasScript笔记/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="记录读这本书的时候，一些笔记，方便以后再看  第一章1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -|">
-<meta property="og:updated_time" content="2017-09-11T16:28:51.440Z">
+<meta property="og:updated_time" content="2017-09-12T16:04:46.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的JavasScript笔记">
 <meta name="twitter:description" content="记录读这本书的时候，一些笔记，方便以后再看  第一章1.1作用域是什么传统编译语言，代码在执行前，会经历三个步骤：  分词/词法分析 词法分析，会把一段代码分成一个个模块：var a = 1，会被分成var  a  =  1  解析/语法分析 将词法单元流（数组）转换成一个由元素组成的树（AST），抽象语法树 |-- Identifier (a)  VariableDeclaration -|">
@@ -632,6 +632,33 @@ Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
 </code></pre><h4 id="writable"><a href="#writable" class="headerlink" title="writable"></a>writable</h4><p>设置为<code>false</code>，就不能再修改这个对象，修改了也会无效，严格模式下回报错</p>
 <h4 id="enumerable"><a href="#enumerable" class="headerlink" title="enumerable"></a>enumerable</h4><p>设置为<code>false</code>，<code>for..in</code>就不会枚举到此属性</p>
 <h4 id="configurable"><a href="#configurable" class="headerlink" title="configurable"></a>configurable</h4><p>设置为<code>false</code>,不可配置，就不能设置这四个属性</p>
+<h3 id="Getter-and-Setter"><a href="#Getter-and-Setter" class="headerlink" title="Getter and Setter"></a>Getter and Setter</h3><p><code>Getter</code> 和 <code>Setter</code> 是一个隐藏函数，在获取值和设置值的时候，会触发这个函数</p>
+<p>当一个熟悉定义了<code>Getter</code> 和 <code>Setter</code> ，就会被定义为“访问描述符”</p>
+<pre><code>var myO = {
+  get a() {
+    return this._a_
+  },
+  set a(val) {
+    this._a_ = val
+  }
+}
+// 或者使用defineProperty定义
+Object.defineProperty(myO, b, {
+  get: function() {
+    return this.a * 2
+  },
+  enumerable: true
+})
+</code></pre><h3 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h3><p>判断属性值是 <code>undefined</code> 还是没有这个属性</p>
+<pre><code>var myO = {
+  a: 2
+}
+(&quot;a&quot; in myO) // true
+(&quot;b&quot; in myO) // false
+myO.hasOwnProperty(&quot;a&quot;) // true
+myO.hasOwnProperty(&quot;b&quot;) // false
+</code></pre><p><code>in</code> 操作符会检查属性是否在对象和原型链中，而 <code>hasOwnProperty</code> 不会检查原型链</p>
+<p>使用获取、检查属性的方法适合，要确认是否会检查原型链</p>
 
       
     </div>
@@ -758,7 +785,7 @@ Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -828,7 +855,7 @@ Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1作用域是什么"><span class="nav-number">1.1.</span> <span class="nav-text">1.1作用域是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2词法作用域"><span class="nav-number">1.2.</span> <span class="nav-text">1.2词法作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3函数作用域和块作用域"><span class="nav-number">1.3.</span> <span class="nav-text">1.3函数作用域和块作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4提升"><span class="nav-number">1.4.</span> <span class="nav-text">1.4提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-关于this"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 关于this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-this全面解析"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 this全面解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认绑定，在非严格模式下，当function在全局调用，this默认指向window"><span class="nav-number">2.2.1.</span> <span class="nav-text">默认绑定，在非严格模式下，当function在全局调用，this默认指向window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"><span class="nav-number">2.2.2.</span> <span class="nav-text">隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示绑定"><span class="nav-number">2.2.3.</span> <span class="nav-text">显示绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬绑定："><span class="nav-number">2.2.3.1.</span> <span class="nav-text">硬绑定：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new绑定，使用new来调用函数时，会发生以下操作："><span class="nav-number">2.2.4.</span> <span class="nav-text">new绑定，使用new来调用函数时，会发生以下操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-number">2.2.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定例外"><span class="nav-number">2.2.6.</span> <span class="nav-text">绑定例外</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.7.</span> <span class="nav-text">箭头函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-对象"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型"><span class="nav-number">2.3.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制对象"><span class="nav-number">2.3.2.</span> <span class="nav-text">复制对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浅拷贝"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">深拷贝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性描述符"><span class="nav-number">2.3.3.</span> <span class="nav-text">属性描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#writable"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">writable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#enumerable"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">enumerable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#configurable"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">configurable</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1作用域是什么"><span class="nav-number">1.1.</span> <span class="nav-text">1.1作用域是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2词法作用域"><span class="nav-number">1.2.</span> <span class="nav-text">1.2词法作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3函数作用域和块作用域"><span class="nav-number">1.3.</span> <span class="nav-text">1.3函数作用域和块作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4提升"><span class="nav-number">1.4.</span> <span class="nav-text">1.4提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-关于this"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 关于this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-this全面解析"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 this全面解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认绑定，在非严格模式下，当function在全局调用，this默认指向window"><span class="nav-number">2.2.1.</span> <span class="nav-text">默认绑定，在非严格模式下，当function在全局调用，this默认指向window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么"><span class="nav-number">2.2.2.</span> <span class="nav-text">隐式绑定，根据调用位置的上下文对象，也就是说调用这个function时，的作用域是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示绑定"><span class="nav-number">2.2.3.</span> <span class="nav-text">显示绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬绑定："><span class="nav-number">2.2.3.1.</span> <span class="nav-text">硬绑定：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new绑定，使用new来调用函数时，会发生以下操作："><span class="nav-number">2.2.4.</span> <span class="nav-text">new绑定，使用new来调用函数时，会发生以下操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-number">2.2.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定例外"><span class="nav-number">2.2.6.</span> <span class="nav-text">绑定例外</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.7.</span> <span class="nav-text">箭头函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-对象"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型"><span class="nav-number">2.3.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制对象"><span class="nav-number">2.3.2.</span> <span class="nav-text">复制对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浅拷贝"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">深拷贝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性描述符"><span class="nav-number">2.3.3.</span> <span class="nav-text">属性描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#writable"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">writable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#enumerable"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">enumerable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#configurable"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">configurable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getter-and-Setter"><span class="nav-number">2.3.4.</span> <span class="nav-text">Getter and Setter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在性"><span class="nav-number">2.3.5.</span> <span class="nav-text">存在性</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

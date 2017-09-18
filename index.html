@@ -301,6 +301,506 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/technology/canvas图片粒子动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/18/technology/canvas图片粒子动画/" itemprop="url">canvas图片粒子动画</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T16:51:48+08:00">
+                2017-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/18/technology/canvas图片粒子动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/18/technology/canvas图片粒子动画/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/18/technology/canvas图片粒子动画/" class="leancloud_visitors" data-flag-title="canvas图片粒子动画">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="canvas图片粒子化效果的实现"><a href="#canvas图片粒子化效果的实现" class="headerlink" title="canvas图片粒子化效果的实现"></a>canvas图片粒子化效果的实现</h1><blockquote>
+<p>这次分享的是 <code>cavans</code> ，通过 <code>js</code> 控制图形、动画的实现。而这次主要是分享粒子动画的实现原理，而不是介绍 <code>canvas</code> 的 <code>api</code> ， <code>api</code> 大家去 <code>MDN</code> 看看就好了</p>
+</blockquote>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><ul>
+<li>canvas</li>
+<li>ImageData</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/" target="_blank" rel="external">requestAnimationFrame</a></li>
+</ul>
+<h2 id="相关基础要点"><a href="#相关基础要点" class="headerlink" title="相关基础要点"></a>相关基础要点</h2><h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p><code>canvas</code> 的兼容性是支持 <code>ie9</code> ， <code>requestAnimationFrame</code> 的兼容性支持是 <code>ie10</code> 不过 <code>requestAnimationFrame</code> 可以使用 <code>setTimeout</code> 代替</p>
+<h3 id="canvas-的坐标系统"><a href="#canvas-的坐标系统" class="headerlink" title="canvas 的坐标系统"></a>canvas 的坐标系统</h3><pre><code>var canvas = document.querySeletor(&apos;canvas&apos;)
+canvas.width = 200
+canvas.height = 200
+</code></pre><p>每个 <code>canavs</code> 的坐标起始点，都是 <code>(0, 0)</code> ，起始点是<strong>左上角</strong></p>
+<p><img src="./images/canvas_png1.png" alt=""></p>
+<h3 id="获取随机范围值"><a href="#获取随机范围值" class="headerlink" title="获取随机范围值"></a>获取随机范围值</h3><p>这个获取随机范围值，在后面会用到，实现的算法也有多个，这里凑合下</p>
+<pre><code>function random(max, min) {
+  return Math.ceil(Math.random()*(max-min+1)+min)
+}
+</code></pre><h2 id="如何使用-canvas"><a href="#如何使用-canvas" class="headerlink" title="如何使用 canvas"></a>如何使用 canvas</h2><pre><code>// 获取 canvas 的上下文
+var canvas = document.querySeleteror(&apos;canvas&apos;)
+var ctx = canvas.getContext(&apos;2d&apos;)
+</code></pre><p><code>.getContext(2d)</code> 这个方法获取一个 <code>2d</code> 的 <code>canvas</code> 的上下文对象，后面的绘制和渲染都要靠 <code>ctx</code> 执行</p>
+<p>然后我们就可以使用 <code>ctx</code> 这个上下文进行操作</p>
+<pre><code>// 获取一个图片实例
+var img = new Image()
+// 图片加载完毕后，绘制在 canvas 
+img.onload = function() {
+  ctx.drawImage(img, 0, 0)
+}
+// 赋值图片地址
+img.src = &apos;./icon/set.png&apos;
+</code></pre><p>上面的代码执行后，就会在 <code>canvas</code> 上出现一张图片了。绘制图片的话，一定要等图片加载完毕后，才能执行 <code>canvas</code> 的绘制，不然什么都没有</p>
+<h2 id="实现粒子动画"><a href="#实现粒子动画" class="headerlink" title="实现粒子动画"></a>实现粒子动画</h2><p>这里就大概说说实现粒子动画的原理</p>
+<p>通俗点，就是多个粒子，在起始位置，去到终点位置，有一个持续性的效果。</p>
+<p>我们先要获取两个数据，起始位置和终点位置</p>
+<p>而每个粒子都有属于自己的起始位置，终点位置，速度，颜色，大小等属性，也就是说每个粒子都是一个独立的个体</p>
+<p>伪代码：</p>
+<pre><code>function Create(...){
+  this.firstX = x
+  this.firstY = y
+  this.lastX = lastX
+  this.lastY = lastY
+  this.rgba = rgba
+}
+
+for (var i=0; i&lt; 100; i++) {
+  // 生成100个粒子
+  new Create()
+}
+</code></pre><p>为了效果好看，每个粒子的属性都应该是所有区别的</p>
+<h3 id="起始位置"><a href="#起始位置" class="headerlink" title="起始位置"></a>起始位置</h3><p>起始位置，这个看需求而定，我这里的效果是从下到上显示的动画效果</p>
+<pre><code>function Create() {
+  // 水平中间点
+  this.x = cW / 2
+  // 垂直方向，有一个随机的分布
+  this.y = random(cH + 100, cH)
+}
+</code></pre><h3 id="终点位置"><a href="#终点位置" class="headerlink" title="终点位置"></a>终点位置</h3><p>实现这个粒子动画，最关键的一点就是如何获取每个粒子的终点位置</p>
+<p>这里就要使用 <code>ctx.getImageData</code> 这个方法获取图片的<strong>像素数据</strong></p>
+<h4 id="ImageData"><a href="#ImageData" class="headerlink" title="ImageData"></a>ImageData</h4><p><code>ImageData</code> 有以下三个<strong>只读</strong>属性</p>
+<pre><code>console.log(ctx.getImageData(&apos;2d&apos;))
+// ... 打印数据
+{
+  width: ,
+  height: ,
+  data: []
+}
+</code></pre><p>而 <code>data</code> 这个数组不是普通的数组，是一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray#兼容性注意事项" target="_blank" rel="external">Uint8ClampedArray</a> 8位无符号整型固定数组，里面的每一个值都是在 [0 - 255] 之间的</p>
+<p>使用 <code>getImageData</code> 获取到的数据，其实就是每一个像素点的 <code>rgba</code> 值</p>
+<pre><code>var rgba1 = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3]})`
+var rgba2 = `rgba(${data[4]}, ${data[5]}, ${data[6]}, ${data[7]})`
+......
+</code></pre><p>也就是说，每4位就组成一个像素点的值</p>
+<p>而在一个 <code>200 * 200</code> 的 <code>canvas</code> ，通过 <code>getImageData</code> 获取的数据是：</p>
+<pre><code>{
+  width: 200,
+  height: 200,
+  data: [160000]
+}
+</code></pre><p><code>data</code> 的长度就会有16万长，是这样算的： 200 <em> 200 </em> 4</p>
+<p>那么我们究竟如何获取到需要的终点位置？</p>
+<p>我们要明确一点，这是像素级的操作，每一个点，代表1像素 </p>
+<p><img src="./images/canvas_png2.png" alt=""></p>
+<p>上面一个圆圈代表1像素，总共有4个像素那么每个像素点的坐标是不是这样：<code>[0, 0], [0, 1], [1, 0], [1, 1]</code></p>
+<p>在 <code>200 * 200</code> 的 画布里，就会有4万个像素点</p>
+<pre><code>for (var x = 0; x &lt; width; x++) {
+  for (var y = 0; y &lt; height; y++) {
+    // 这样就能获取到所有像素点的位置
+  }
+}
+</code></pre><p>如果我们让4万个粒子同时在画布里动起来，那肯定会卡死的，我们肯定要进行筛选，获取对我们“有用”的像素点</p>
+<h4 id="筛选有用的像素点"><a href="#筛选有用的像素点" class="headerlink" title="筛选有用的像素点"></a>筛选有用的像素点</h4><p><img src="./images/canvas_png3.jpg" alt=""></p>
+<p>先看看这张图片，我是在 PS 上进行截图的，除了黑色线，其余都是透明的，我们获取后的 <code>ImageData</code> ，透明的点表现的数值是：(0, 0, 0, 0) 这样的，这对我们根本没用，所以我们可以根据透明度进行筛选像素点</p>
+<p>因为 <code>ImageData</code> 是 <code>Uint8ClampedArray</code> ，里面所有的值都是 [0 - 255] 之间的，我们只需要筛选透明度值是 128 以上的像素点就行了</p>
+<pre><code>for (var x = 0; x &lt; width; x++) {
+  for (var y = 0; y &lt; height; y++) {
+    // 筛选
+    var i = 4*(y * width + x)
+    if (data[i + 3] &gt;= 128) {
+      // ... 获取到坐标和像素值
+      {
+        x: x,
+        y: y,
+        rgba: ...
+      }
+    }
+  }
+}
+</code></pre><p>上面的 <code>var i = 4*(y * width + x)</code> 这步骤，就是获取这个像素点的索引值，至于为什么是这样呢，我还没找到具体的解析。。。</p>
+<p>这样获取后的像素点会减少了很多，如果想减少更多的话：</p>
+<pre><code>for (var x = 0; x &lt; width; x+= 4) {
+  for (var y = 0; y &lt; height; y+= 4) {
+  }
+}
+</code></pre><h3 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h3><p>粒子需要的数据都获取到了，然后就是实现动画效果，这里就不详细说了，贴上主要的代码：</p>
+<pre><code>// 计算粒子的坐标
+function compute(v) {
+  if (frames &gt; 120) {
+    v.x = v.maxX
+    v.y = v.maxY
+  }
+  return v
+}
+// 绘制粒子
+function drawPoint() {
+  // 擦除画布
+  ctx.clearRect(0, 0, w, h)
+  for(var i=0;i&lt;list.length;i++){
+    var v = list[i]
+    // 计算
+    var _v = compute(v)
+    if (_v) {
+      v.x = _v.x
+      v.y = _v.y
+    }
+    // 开始路径
+    ctx.beginPath()
+    ctx.fillStyle = v.rgba
+    ctx.arc(v.x, v.y, 1, 0, Math.PI*2, true)
+    ctx.fill()
+    // 关闭路径
+    ctx.closePath()
+  }
+}
+// 运行
+function animate() {
+  drawPoint()
+  if (frames &gt; 120) {
+    return false
+  }
+  frames++
+  requestAnimationFrame(animate)
+}
+animate()
+</code></pre><p><code>requestAnimationFrame</code> ，现在的浏览器支持的是60帧，也就是说1秒要运行60次，这是最佳的效果。但是当我们<code>js</code>有复杂的运算的话，会达不到这效果，而 <code>requestAnimationFrame</code> 当回调函数完成后，才会触发下一个回调函数，这就是 <code>requestAnimationFrame</code> 优于 <code>setTimeout</code> 的地方。 <code>setTimeout</code> 无论你的回调函数是否在指定时间内完成，只要过了设置的时间，都会执行下一步的回调，从而造成了卡顿的效果</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的分享，主要是介绍下 <code>canvas</code> 和普通动画的实现。通过 <code>ImageData</code> 获取到像素点的属性位置等等属性，从而实现粒子动画。 <code>canvas</code> 的功能远远不止这些，能做的事情有很多。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/recording/node-canvas的安装和使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/13/recording/node-canvas的安装和使用/" itemprop="url">node-canvas的安装和使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-13T15:26:51+08:00">
+                2017-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/recording/" itemprop="url" rel="index">
+                    <span itemprop="name">recording</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/13/recording/node-canvas的安装和使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/13/recording/node-canvas的安装和使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/13/recording/node-canvas的安装和使用/" class="leancloud_visitors" data-flag-title="node-canvas的安装和使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><ul>
+<li><a href="https://github.com/Automattic/node-canvas/wiki/Installation---Windows" target="_blank" rel="external">node-canvas 官方windows安装教程</a></li>
+<li><a href="https://github.com/nodejs/node-gyp#on-windows" target="_blank" rel="external">node-gyp 官方windows安装教程</a></li>
+</ul>
+<h2 id="windows环境下安装"><a href="#windows环境下安装" class="headerlink" title="windows环境下安装"></a>windows环境下安装</h2><p><code>windows</code> 要使用 <code>node-canvas</code> 的话，要额外安装其他的工具或库来支持的，比如 <code>node-gyp</code> ，而安装 <code>node-gyp</code> 就要安装其他的工具，像 <code>Python2.7</code> ，一定要<strong>2.7</strong>版本，然后VC。</p>
+<h3 id="安装-node-gyp"><a href="#安装-node-gyp" class="headerlink" title="安装 node-gyp"></a>安装 <code>node-gyp</code></h3><p>这个现在就很简单了，我在网上看到的教程是以前的，安装的步骤可能比较复杂，而现在只需要一句命令，打开管理员的 <code>cmd</code>，输入 <code>npm install --global --production windows-build-tools</code> ，就会自动安装依赖了，包括 <code>Python</code> 和 <code>vc</code></p>
+<h3 id="安装-node-canvas"><a href="#安装-node-canvas" class="headerlink" title="安装 node-canvas"></a>安装 <code>node-canvas</code></h3><p>安装完 <code>node-gyp</code> 后，然后就要安装另外两个依赖， <code>GTK</code> 和 <code>libjpeg-turbo</code> ，这两个都要安装在<strong>C盘</strong>根目录</p>
+<p><a href="http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip" target="_blank" rel="external">GTK</a></p>
+<p>然后添加环境变量：<code>C:\GTK\bin</code></p>
+<p><a href="https://sourceforge.net/projects/libjpeg-turbo/files/1.5.1/" target="_blank" rel="external">libjpeg-turbo</a>，选择 <code>libjpeg-turbo-1.5.1-vc64.exe</code> 这个版本(64位)</p>
+<p>最后，在管理员的 <code>cmd</code> 输入 <code>npm i canvas</code> 就完成了</p>
+<h2 id="centos环境下安装（待测试）"><a href="#centos环境下安装（待测试）" class="headerlink" title="centos环境下安装（待测试）"></a>centos环境下安装（待测试）</h2><p><code>yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango-devel</code></p>
+<p><code>cnpm i node-gyp -g</code></p>
+<p><code>cnpm i node-gyp -d</code></p>
+<p><code>cnpm i canvas -d</code></p>
+<p>完成！</p>
+<h3 id="g-not-found"><a href="#g-not-found" class="headerlink" title="g++ not found"></a>g++ not found</h3><pre><code>yum -y update gcc
+yum -y install gcc+ gcc-c++
+</code></pre><h2 id="node-canvas使用"><a href="#node-canvas使用" class="headerlink" title="node-canvas使用"></a>node-canvas使用</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/recording/vue-baidu-map的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1172,6 +1672,33 @@ Object.getOwnPropertyDescriptor(my, &apos;a&apos;, {
 </code></pre><h4 id="writable"><a href="#writable" class="headerlink" title="writable"></a>writable</h4><p>设置为<code>false</code>，就不能再修改这个对象，修改了也会无效，严格模式下回报错</p>
 <h4 id="enumerable"><a href="#enumerable" class="headerlink" title="enumerable"></a>enumerable</h4><p>设置为<code>false</code>，<code>for..in</code>就不会枚举到此属性</p>
 <h4 id="configurable"><a href="#configurable" class="headerlink" title="configurable"></a>configurable</h4><p>设置为<code>false</code>,不可配置，就不能设置这四个属性</p>
+<h3 id="Getter-and-Setter"><a href="#Getter-and-Setter" class="headerlink" title="Getter and Setter"></a>Getter and Setter</h3><p><code>Getter</code> 和 <code>Setter</code> 是一个隐藏函数，在获取值和设置值的时候，会触发这个函数</p>
+<p>当一个熟悉定义了<code>Getter</code> 和 <code>Setter</code> ，就会被定义为“访问描述符”</p>
+<pre><code>var myO = {
+  get a() {
+    return this._a_
+  },
+  set a(val) {
+    this._a_ = val
+  }
+}
+// 或者使用defineProperty定义
+Object.defineProperty(myO, b, {
+  get: function() {
+    return this.a * 2
+  },
+  enumerable: true
+})
+</code></pre><h3 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h3><p>判断属性值是 <code>undefined</code> 还是没有这个属性</p>
+<pre><code>var myO = {
+  a: 2
+}
+(&quot;a&quot; in myO) // true
+(&quot;b&quot; in myO) // false
+myO.hasOwnProperty(&quot;a&quot;) // true
+myO.hasOwnProperty(&quot;b&quot;) // false
+</code></pre><p><code>in</code> 操作符会检查属性是否在对象和原型链中，而 <code>hasOwnProperty</code> 不会检查原型链</p>
+<p>使用获取、检查属性的方法适合，要确认是否会检查原型链</p>
 
           
         
@@ -1710,12 +2237,19 @@ gulp.watch([&apos;*.js&apos;], function(e) {
             <h1 id="git日常操作"><a href="#git日常操作" class="headerlink" title="git日常操作"></a>git日常操作</h1><ul>
 <li>删除：git rm</li>
 <li>删除文件夹： git rm -r</li>
+</ul>
+<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><ul>
+<li>查看标签： git tag</li>
+<li>新建标签： git tag -a v1.0 -m ‘…’</li>
+<li>推送标签： git push origin v1.0</li>
+</ul>
+<h2 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h2><ul>
 <li>回滚：git revert</li>
 <li>回滚报错取消：git revert –abort</li>
 </ul>
 <p>git revert回滚操作，只能一级一级的回滚，不能跳级回滚</p>
-<p>.gitignore</p>
-<p>如果要忽悠某个原本已经在仓库的文件，要先删除它才行</p>
+<h2 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h2><p>.gitignore</p>
+<p>如果要忽略某个原本已经在仓库的文件，要先删除它才行</p>
 
           
         
@@ -2451,652 +2985,11 @@ getApp()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/nodejs的学习和使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/04/recording/nodejs的学习和使用/" itemprop="url">nodejs的学习和使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T16:52:41+08:00">
-                2017-08-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/04/recording/nodejs的学习和使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/04/recording/nodejs的学习和使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/04/recording/nodejs的学习和使用/" class="leancloud_visitors" data-flag-title="nodejs的学习和使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>记录一些nodejs学习的内容</p>
-</blockquote>
-<p>这篇文字，是(<a href="https://github.com/nswbmw/N-blog/)[https://github.com/nswbmw/N-blog/]这里进行学习nodejs，进行归纳的" target="_blank" rel="external">https://github.com/nswbmw/N-blog/)[https://github.com/nswbmw/N-blog/]这里进行学习nodejs，进行归纳的</a></p>
-<h1 id="使用express"><a href="#使用express" class="headerlink" title="使用express"></a>使用express</h1><p>cnpm i express –save</p>
-<p>新建<code>index.js</code>文件</p>
-<pre><code>var express = require(&apos;express&apos;)
-var app = express()
-
-app.get(&apos;/&apos;, function(req, res) {
-  res.send(&apos;hello, 11&apos;)
-})
-
-app.listen(3000)
-</code></pre><p>开启服务：<code>node indexjs</code></p>
-<h1 id="supervisor"><a href="#supervisor" class="headerlink" title="supervisor"></a>supervisor</h1><p>安装在全局下：<code>npm install -g supervisor</code></p>
-<p>启动程序：<code>supervisor --harmony index</code></p>
-<p>这个包的作用，当你更改后，刷新网页会更新，而不用重新开启服务才刷新</p>
-<h1 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h1><p><code>cnpm i ejs -S</code></p>
-<p>安装<code>ejs</code>，可以使用模板引擎，进行服务的渲染</p>
-<pre><code>// 路由
-router.get(&apos;/:name&apos;, function(req, res) {
-  // 进行渲染
-  res.render(&apos;users&apos;, {
-    name: req.params.name
-  })
-})
-
-// 模板文件（users.ejs)
-&lt;h1&gt;&lt;%= name.toUpperCase() %&gt;&lt;/h1&gt;
-&lt;p&gt;hello, &lt;%= name %&gt;&lt;/p&gt;
-
-// 入口文件，启用ejs
-app.set(&apos;views&apos;, path.join(__dirname, &apos;myblog/views&apos;));// 设置存放模板文件的目录
-app.set(&apos;view engine&apos;, &apos;ejs&apos;);// 设置模板引擎为 ejs
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/04/recording/mongodb使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/04/recording/mongodb使用/" itemprop="url">mongodb使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T15:35:12+08:00">
-                2017-08-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/04/recording/mongodb使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/04/recording/mongodb使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/04/recording/mongodb使用/" class="leancloud_visitors" data-flag-title="mongodb使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>记录了mongodb安装、配置和基本的使用</p>
-</blockquote>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li>在官网下载你所需要的版本（我的是windows）</li>
-<li>安装（可以指定目录）</li>
-<li>windows是要配置环境变量，不然会出现闪退的情况</li>
-</ol>
-<p>在系统变量的PATH中，添加一个新的变量，是你mongodb下载的路径（我的是：C:\Program Files\MongoDB\Server\3.4\bin）</p>
-<ol>
-<li>可以选择你数据库文件放在的位置（好像默认是在C盘的）</li>
-</ol>
-<p>在命令行，进入到mongod.exe的目录下，输入：</p>
-<pre><code>mongod.exe --dbpath h:\mongodb\data\db
-</code></pre><p>这样就能更改数据库数据存放的位置</p>
-<h1 id="moongodb可视化工具"><a href="#moongodb可视化工具" class="headerlink" title="moongodb可视化工具"></a>moongodb可视化工具</h1><p>我这里使用的是<code>studio 3T</code></p>
-<p>到官网下载即可</p>
-<p><a href="https://studio3t.com/" target="_blank" rel="external">https://studio3t.com/</a></p>
-<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><h2 id="常用词"><a href="#常用词" class="headerlink" title="常用词"></a>常用词</h2><p>将比较长的词进行简写：</p>
-<ul>
-<li>COLLECTION_NAME:CN（集合名）</li>
-</ul>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
-<li>show dbs：显示有什么数据库存在</li>
-<li>show tables：显示集合</li>
-<li>db：显示当前的数据库或集合</li>
-<li>use db：连接特定的数据库</li>
-</ul>
-<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>进入目标数据库后，执行：<code>db.dropDatabase()</code></p>
-<h3 id="删除collection"><a href="#删除collection" class="headerlink" title="删除collection"></a>删除collection</h3><p><code>db.CN.drop()</code></p>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>find(), findOne()</p>
-<pre><code>db.CN.find(query, projection)
-</code></pre><ul>
-<li>query ：可选，使用查询操作符指定查询条件</li>
-<li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）</li>
-</ul>
-<p>例子：</p>
-<pre><code>db.CN.find()
-// 添加查询条件
-db.CN.find({&apos;_id&apos;: 2})
-// 只显示匹配到的第一条
-db.CN.findOne()
-// 美化查询结果
-db.CN.find().pretty()
-</code></pre><h4 id="数组查询"><a href="#数组查询" class="headerlink" title="数组查询"></a>数组查询</h4><p><code>$elemMath</code> 操作符为数组元素指定复合条件，以查询数组中至少一个元素满足所有指定条件的文档</p>
-<pre><code>// 查询 finished 数组至少包含 一个大于 ($gt) 15 并且小于 ($lt) 20 
-db.CN.find( { finished: { $elemMatch: { $gt: 15, $lt: 20 } } } )
-</code></pre><h3 id="映射字段"><a href="#映射字段" class="headerlink" title="映射字段"></a>映射字段</h3><p>指定显示或排除哪些字段</p>
-<p>1或true，为显示;0或false，为隐藏</p>
-<p><code>_id</code>字段，默认显示</p>
-<p>不能在映射文档中组合 包含和排除 语句</p>
-<pre><code>// 显示所有字段
-db.CN.find( { status: &quot;A&quot; } )
-
-// 只显示&apos;_id&apos; , status&apos; 和 &apos;name&apos;
-db.CN.find( { status: &quot;A&quot; }, { name: 1, status: 1 } )
-
-// 只显示&apos;status&apos;
-db.CN.find( { status: &quot;A&quot; }, { status: 1, _id: 0 } )
-
-// 除了&apos;favorites&apos; 和 &apos;points&apos;，其他字段都显示
-db.CN.find( { status: &quot;A&quot; }, { favorites: 0, points: 0 } )
-
-// 包含 favorites 文档中的 food 字段（排除同理）
-db.CN.find(
-   { status: &quot;A&quot; },
-   { name: 1, &quot;favorites.food&quot;: 1 }
-)
-// result
-{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;cake&quot; } }
-{ &quot;_id&quot; : 6, &quot;name&quot; : &quot;abc&quot;, &quot;favorites&quot; : { &quot;food&quot; : &quot;pizza&quot; } }
-
-// 数组，points中的bonus字段（排除同理）
-db.CN.find( { status: &quot;A&quot; }, { name: 1, &quot;points.bonus&quot;: 1 } )
-// result
-{ &quot;_id&quot; : 2, &quot;name&quot; : &quot;bob&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 20 }, { &quot;bonus&quot; : 12 } ] }
-{ &quot;_id&quot; : 3, &quot;name&quot; : &quot;ahn&quot;, &quot;points&quot; : [ { &quot;bonus&quot; : 8 }, { &quot;bonus&quot; : 20 } ] }
-</code></pre><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>insert() , insertOne() , insertMany()</p>
-<p>添加字段，如果没有<code>_id</code>字段的话，会自动生成</p>
-<p><code>db.CN.insert(document)</code></p>
-<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><pre><code>db.CN.insert({
-  title: 1,
-  name: &apos;name&apos;
-})
-</code></pre><h4 id="insertMany"><a href="#insertMany" class="headerlink" title="insertMany"></a>insertMany</h4><pre><code>// 插入多条数据
-db.CN.insertMany(
-   [
-     { name: &quot;bob&quot;, age: 42, status: &quot;A&quot;, },
-     { name: &quot;ahn&quot;, age: 22, status: &quot;A&quot;, },
-     { name: &quot;xi&quot;, age: 34, status: &quot;D&quot;, }
-   ]
-)
-</code></pre><p><code>insert</code>方法貌似都可以代替<code>insertOne</code>和<code>insertMany</code>，根据其他文章所知，<code>insert</code>在主要驱动程序已被弃用</p>
-<p>同理，update,delete,find一样    </p>
-<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>update, updateOne, updateMany, replaceOne, save</p>
-<h4 id="update"><a href="#update" class="headerlink" title="update"></a>update</h4><pre><code>db.CN.update(
-  &lt;query&gt;,
-  &lt;update&gt;,
-  {
-    upsert: &lt;boolean&gt;,
-    multi: &lt;boolean&gt;,
-    writeConcern: &lt;document&gt;
-  }
-)
-</code></pre><h4 id="replaceOne"><a href="#replaceOne" class="headerlink" title="replaceOne"></a>replaceOne</h4><pre><code>// 替换&apos;name&apos; === &apos;abc&apos;那个文档
-db.CN.replaceOne(
-  { name: &quot;abc&quot; },
-  { name: &quot;amy&quot;, age: 34, type: 2, status: &quot;P&quot;, favorites: { &quot;artist&quot;: &quot;Dali&quot;, food: &quot;donuts&quot; } }
-)
-</code></pre><h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><pre><code>db.CN.save({
-  _id: 1
-  title: 1,
-  name: &apos;name&apos;
-})
-</code></pre><p>如果不指定id，和Insert一样，指定id，就会替换对应的数据</p>
-<p>参数：</p>
-<ul>
-<li>query : update的查询条件</li>
-<li>update : update的对象和值</li>
-<li>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入</li>
-<li>multi : 可选，mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新</li>
-<li>writeConcern :可选，抛出异常的级别</li>
-</ul>
-<p>例子：</p>
-<pre><code>// 将&apos;_id&apos;为2的数据，&apos;title&apos;改为&apos;hahahahaha&apos;
-// $set，可以单独处理某个字段
-db.CN.update({&apos;_id&apos;: 2},{$set:{&apos;title&apos;:&apos;hahahahaha&apos;}})
-</code></pre><h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>remove , deleteOne , deleteMany</p>
-<h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><pre><code>db.CN.remove(
-  &lt;query&gt;,
-  {
-    justOne: &lt;boolean&gt;,
-    writeConcern: &lt;document&gt;
-  }
-)
-</code></pre><ul>
-<li>query :（可选）删除的文档的条件</li>
-<li>justOne : （可选）如果设为 true 或 1，则只删除一个文档，默认false</li>
-<li>writeConcern :（可选）抛出异常的级别</li>
-</ul>
-<p>例子：</p>
-<pre><code>db.CN.remove{
-  {&apos;_id&apos;: 2},
-  {
-    justOne: true // 删除全部匹配的
-  }
-}
-// 清空数据库
-db.CN.remove({})
-</code></pre><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
-<li>(&gt;) 大于 - $gt</li>
-<li>(&lt;) 小于 - $lt</li>
-<li>(&gt;=) 大于等于 - $gte</li>
-<li>(&lt;= ) 小于等于 - $lte</li>
-<li>(!=) 不等于 - $ne</li>
-<li>(or) 或者 - $or</li>
-<li>$in （在相同的字段，使用$in而不是$or）</li>
-</ul>
-<p>例子：</p>
-<pre><code>// 显示: &apos;likes&apos;大于100的数据
-db.col.find({&quot;likes&quot; : {$gt : 100}})
-// 显示：&apos;likes&apos;大于100且小于200的数据
-db.col.find({likes : {$lt :200, $gt : 100}})
-</code></pre><h4 id="AND"><a href="#AND" class="headerlink" title="AND"></a>AND</h4><pre><code>// status === &quot;A&quot; &amp;&amp; age &gt; 30
-db.CN.find( { status: &quot;A&quot;, age: { $lt: 30 } } )
-</code></pre><h4 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h4><pre><code>// status === &quot;A&quot; || age &gt; 30
-db.CN.find(
-   {
-     $or: [ { status: &quot;A&quot; }, { age: { $lt: 30 } } ]
-   }
-)
-</code></pre><h4 id="AND-和-OR-混用"><a href="#AND-和-OR-混用" class="headerlink" title="AND 和 OR 混用"></a>AND 和 OR 混用</h4><pre><code>// status === &quot;A&quot; &amp;&amp; ( age &gt; 30 || type === 1 )
-db.CN.find(
-  {
-    status: &quot;A&quot;,
-    $or: [ { age: { $lt: 30 } }, { type: 1 } ]
-  }
-)
-</code></pre><h4 id="type"><a href="#type" class="headerlink" title="$type"></a>$type</h4><p>每种数据类型的$type值</p>
-<ul>
-<li>Double  1  </li>
-<li>String  2  </li>
-<li>Object  3  </li>
-<li>Array 4  </li>
-<li>Binary data 5  </li>
-<li>Undefined 6 已废弃。</li>
-<li>Object id 7  </li>
-<li>Boolean 8  </li>
-<li>Date  9  </li>
-<li>Null  10   </li>
-<li>Regular Expression  11   </li>
-<li>JavaScript  13   </li>
-<li>Symbol  14   </li>
-<li>JavaScript (with scope) 15   </li>
-<li>32-bit integer  16   </li>
-<li>Timestamp 17   </li>
-<li>64-bit integer  18   </li>
-<li>Min key 255 Query with -1.</li>
-<li><p>Max key 127</p>
-<p>  // 获取到’title’是字符串的数据<br>  db.CN.find({“title” : {$type : 2}})</p>
-</li>
-</ul>
-<h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><pre><code>// 只修改某个字段
-db.CN.update(id: 1, { $set: { name: &apos;123&apos; } })
-</code></pre><h3 id="其他的一些方法"><a href="#其他的一些方法" class="headerlink" title="其他的一些方法"></a>其他的一些方法</h3><h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>限制读取数据的数量</p>
-<pre><code>// 限制读取的数量为2
-db.CN.find({},{&quot;title&quot;:1,_id:0}).limit(2)
-</code></pre><h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><p>从第几个开始</p>
-<pre><code>// 获取匹配到的数据，从第10行开始显示
-db.CN.find().skip(10)
-
-//混合使用，获取匹配到的数据，从10开始获取，获取100个
-db.CN.find().skip(10).limit(100)
-</code></pre><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><p>排序，1和-1，1为升序，-1为降序。</p>
-<p>sort() =&gt; skip() =&gt; limit()</p>
-<pre><code>// 以key值，升序排序
-db.CN.find().sort({KEY:1})
-</code></pre><h4 id="aggregate-gt-聚合"><a href="#aggregate-gt-聚合" class="headerlink" title="aggregate() =&gt; 聚合"></a>aggregate() =&gt; 聚合</h4><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="mongodb组成"><a href="#mongodb组成" class="headerlink" title="mongodb组成"></a>mongodb组成</h3><ol>
-<li>database：数据库</li>
-<li>collection：集合（表）</li>
-<li>document：文档（row）</li>
-<li>field：域（字段）</li>
-<li>index：索引</li>
-<li>primary key（主键，自动将_id设置为主键）</li>
-</ol>
-<p>BSON是一种类json的一种二进制形式的存储格式,简称Binary JSON</p>
-<p>mongodb可以说是json的格式</p>
-<h4 id="document"><a href="#document" class="headerlink" title="document"></a>document</h4><p>文档是一组<strong>键值（Key-value）</strong>对</p>
-<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
-<li>文档的键/值对是<strong>有序</strong>的</li>
-<li>不仅可以是在双引号里面的字符串，还可以是其他几种数据类型</li>
-<li>区分类型和大小写</li>
-<li>不能有重复的键</li>
-<li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符</li>
-</ol>
-<h5 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
-<li>键不能含有\0（空字符）</li>
-<li>.和$有特别意义</li>
-<li>以’_’开头的键是保留（不推荐）</li>
-</ol>
-<h4 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h4><h5 id="命名规范-1"><a href="#命名规范-1" class="headerlink" title="命名规范"></a>命名规范</h5><ol>
-<li>不能说空字符串</li>
-<li>不能含有\0（空字符）</li>
-<li>不能以’system.’开头</li>
-</ol>
-<h5 id="capped-collections"><a href="#capped-collections" class="headerlink" title="capped collections"></a>capped collections</h5><p>固定大小的collection，性能更好</p>
-<p>collection的数据存储空间值要提前分配</p>
-<p><code>db.createCollection(&quot;mycoll&quot;, {capped:true, size:100000})</code></p>
-<h4 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h4><p>数据库的信息存储在集合中</p>
-<p><code>dbname.system.*</code></p>
-<ul>
-<li>.namespaces：列出所有名字空间</li>
-<li>.indexes：列出所有索引</li>
-<li>.profile：包含数据库概要信息</li>
-<li>.CN：列出所有可访问数据库的用户</li>
-<li>.sources：包含复制对端的服务器信息和状态</li>
-</ul>
-<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ul>
-<li>String，在MongoDB中，UTF-8编码的字符串才是合法的</li>
-<li>Integer，整型，32位或64位</li>
-<li>Boolean</li>
-<li>Double，双精度浮点值</li>
-<li>Min/Max keys，将一个值与BSON元素的最低值和最高值相对比</li>
-<li>Arrays，数组或列表</li>
-<li>Timestamp，时间戳</li>
-<li>Object：内嵌文档</li>
-<li>Null</li>
-<li>Symbol，符号</li>
-<li>Date：日期时间</li>
-<li>Object ID，对象ID，用于创建文档的ID</li>
-<li>Binary Data：二进制数据</li>
-<li>Code：代码类型，用于在文档存储javascript代码</li>
-<li>Regular expression：正则</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><ul>
-<li>本地：<code>mongodb://localhost</code></li>
-<li>有用户名和密码：<code>mongodb://user:pwd@localhost</code></li>
-<li>数据库：<code>mongodb://fred:foobar@localhost/db</code></li>
-<li>连接服务器1和服务器2：<code>mongodb://example1.com:27017,example2.com:27017</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3142,7 +3035,7 @@ db.CN.find().sort({KEY:1})
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

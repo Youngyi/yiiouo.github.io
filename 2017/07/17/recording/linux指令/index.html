@@ -97,13 +97,13 @@
 <meta name="description" content="最要记录我平时用的linux指令，方便查找   ls : 显示当前目录的文件 cd : 进入某个文件  service nginx / mysql / vsftpd restart : 重启服务  cat …. : 查看某个文件 vi …. : 编辑某个文件 :q …. : 编辑文件时，不保存退出 :w …. : ….保存 :q, :w … : 强制退出或保存 :qw … : ….保存并退出 r">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux指令">
+<meta property="og:title" content="linux指令和操作">
 <meta property="og:url" content="http://yoursite.com/2017/07/17/recording/linux指令/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="最要记录我平时用的linux指令，方便查找   ls : 显示当前目录的文件 cd : 进入某个文件  service nginx / mysql / vsftpd restart : 重启服务  cat …. : 查看某个文件 vi …. : 编辑某个文件 :q …. : 编辑文件时，不保存退出 :w …. : ….保存 :q, :w … : 强制退出或保存 :qw … : ….保存并退出 r">
-<meta property="og:updated_time" content="2017-09-10T15:00:39.027Z">
+<meta property="og:updated_time" content="2017-09-15T02:58:52.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux指令">
+<meta name="twitter:title" content="linux指令和操作">
 <meta name="twitter:description" content="最要记录我平时用的linux指令，方便查找   ls : 显示当前目录的文件 cd : 进入某个文件  service nginx / mysql / vsftpd restart : 重启服务  cat …. : 查看某个文件 vi …. : 编辑某个文件 :q …. : 编辑文件时，不保存退出 :w …. : ….保存 :q, :w … : 强制退出或保存 :qw … : ….保存并退出 r">
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <title>linux指令 | Blog</title>
+  <title>linux指令和操作 | Blog</title>
   
 
 
@@ -318,7 +318,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">linux指令</h2>
+          <h2 class="post-title" itemprop="name headline">linux指令和操作</h2>
         
 
         <div class="post-meta">
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2017/07/17/recording/linux指令/" class="leancloud_visitors" data-flag-title="linux指令">
+             <span id="/2017/07/17/recording/linux指令/" class="leancloud_visitors" data-flag-title="linux指令和操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -437,6 +437,10 @@
 </li>
 <li>netstat -tunpl : 查看端口</li>
 </ul>
+<h2 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h2><p>我用的是<code>centos</code> ， <code>centos</code> 使用 <code>yum</code> 进行包的管理</p>
+<p><code>yum -y install nginx</code> 直接按照 <code>nginx</code> 和 所依赖的包</p>
+<p><code>service nginx start</code> 就能开启服务，不用带路径那样输入命令开启服务</p>
+<h2 id="nginx-配置"><a href="#nginx-配置" class="headerlink" title="nginx 配置"></a>nginx 配置</h2><p><code>yum</code> 安装的 <code>nginx</code> 在 <code>etc/nginx</code></p>
 <h2 id="linux-安装git"><a href="#linux-安装git" class="headerlink" title="linux 安装git"></a>linux 安装git</h2><p>如果有<code>yum</code></p>
 <p><code>yum install git-core</code></p>
 <p>安装完毕后，设置用户</p>
@@ -479,7 +483,8 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
     proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
   }
 }
-</code></pre>
+</code></pre><p>pkill php-fpm: 关闭php-fpm<br><a href="https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/" target="_blank" rel="external">https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/</a></p>
+
       
     </div>
     
@@ -605,7 +610,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -675,7 +680,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-安装git"><span class="nav-number">1.</span> <span class="nav-text">linux 安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nvm"><span class="nav-number">2.</span> <span class="nav-text">安装nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装node包"><span class="nav-number">3.</span> <span class="nav-text">安装node包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装mongodb"><span class="nav-number">4.</span> <span class="nav-text">安装mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作mongodb"><span class="nav-number">5.</span> <span class="nav-text">操作mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-nginx配置"><span class="nav-number">6.</span> <span class="nav-text">nodejs - nginx配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#centos"><span class="nav-number">1.</span> <span class="nav-text">centos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-配置"><span class="nav-number">2.</span> <span class="nav-text">nginx 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-安装git"><span class="nav-number">3.</span> <span class="nav-text">linux 安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nvm"><span class="nav-number">4.</span> <span class="nav-text">安装nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装node包"><span class="nav-number">5.</span> <span class="nav-text">安装node包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装mongodb"><span class="nav-number">6.</span> <span class="nav-text">安装mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作mongodb"><span class="nav-number">7.</span> <span class="nav-text">操作mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-nginx配置"><span class="nav-number">8.</span> <span class="nav-text">nodejs - nginx配置</span></a></li></ol></div>
             
 
           </div>
@@ -820,7 +825,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2017/07/17/recording/linux指令/';
           this.page.identifier = '2017/07/17/recording/linux指令/';
-          this.page.title = 'linux指令';
+          this.page.title = 'linux指令和操作';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-yiiouo-github-io.disqus.com/embed.js';
