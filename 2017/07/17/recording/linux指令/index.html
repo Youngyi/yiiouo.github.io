@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/17/recording/linux指令/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="最要记录我平时用的linux指令，方便查找   ls : 显示当前目录的文件 cd : 进入某个文件  service nginx / mysql / vsftpd restart : 重启服务  cat …. : 查看某个文件 vi …. : 编辑某个文件 :q …. : 编辑文件时，不保存退出 :w …. : ….保存 :q, :w … : 强制退出或保存 :qw … : ….保存并退出 r">
-<meta property="og:updated_time" content="2017-09-15T02:58:52.130Z">
+<meta property="og:updated_time" content="2017-09-21T08:12:53.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux指令和操作">
 <meta name="twitter:description" content="最要记录我平时用的linux指令，方便查找   ls : 显示当前目录的文件 cd : 进入某个文件  service nginx / mysql / vsftpd restart : 重启服务  cat …. : 查看某个文件 vi …. : 编辑某个文件 :q …. : 编辑文件时，不保存退出 :w …. : ….保存 :q, :w … : 强制退出或保存 :qw … : ….保存并退出 r">
@@ -464,7 +464,7 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc  
 </code></pre><p>开始安装<code>mongodb</code>：<code>yum -y install mongodb-org</code></p>
 <p>安装完后，<code>log</code>和<code>db</code>位置都配置好了</p>
-<p><code>systemctl start mongod.service</code>，开启mongodb服务</p>
+<p><code>systemctl start mongod.service</code> // <code>service mongod start</code> ，开启mongodb服务</p>
 <p><code>systemctl status mongod.service</code>，查看mongodb开启状态</p>
 <p>如果<code>Active</code>不是<code>active</code>，就是失败了。查看<code>/var/log/mongodb/mongod.log</code>日志，看看是否有这样的错误<code>Failed to unlink socket file /tmp/mongodb-27017.sock Operation not permitted</code>，如果有，就去<code>/tmp</code>下，删除那个<code>.sock</code>文件。然后重新运行成功</p>
 <h2 id="操作mongodb"><a href="#操作mongodb" class="headerlink" title="操作mongodb"></a>操作mongodb</h2><p><code>mongo</code>，运行<code>shell</code></p>
@@ -610,7 +610,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +632,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
