@@ -301,6 +301,462 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/recording/lowdb使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/recording/lowdb使用/" itemprop="url">lowdb使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T21:04:49+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/21/recording/lowdb使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/21/recording/lowdb使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/21/recording/lowdb使用/" class="leancloud_visitors" data-flag-title="lowdb使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>cnpm i lowdb --save-dev
+
+
+// nodejs
+const low = require(&apos;lowdb&apos;)
+const FileSync = require(&apos;lowdb/adapters/FileSync&apos;)
+// 进行异步模式
+const adapter = new FileSync(&apos;db.json&apos;)
+// 实例一个db对象
+const db = low(adapter)
+// 设置默认值，并写入
+db.defaults({
+  banner: [],
+  category: [],
+  product: [],
+  usre: []
+}).write()
+</code></pre><p><code>db.get(&#39;banner[0]&#39;), db.get(&#39;user.title&#39;), db.get(&#39;banner[0].title&#39;)</code>，都是获取某个值，最后要加上<code>.value()</code></p>
+<p><code>db.getState()</code>，查看db的状态</p>
+<p><code>db.setState({})</code>，清空db</p>
+<p><code>db.write().id</code>，自动插入随机id值</p>
+<p><code>db.has(&#39;posts&#39;).value()</code>，判断是否有这个值</p>
+<p><code>db.set(&#39;posts&#39;, []).write()</code>，将<code>posts</code>值设置为[]</p>
+<p>使用<code>.push()</code>插入数据，在插入数据前，要先<code>get(&#39;filed&#39;)</code>，声明向谁插入，最后就写入<code>write()</code></p>
+<p><code>db.get(&#39;banner&#39;).size().value()</code>，获取banner有多少条数据</p>
+<p><code>db.get(&#39;posts&#39;).find({ title: &#39;low!&#39; }).assign({ title: &#39;hi!&#39;}).write()</code>，获取<code>posts</code>字段，搜索<code>title</code>为’low!’的值，替换成’hi!’，最后写入</p>
+<p><code>db.get(&#39;posts&#39;).remove({ title: &#39;low!&#39; }).write()</code> ，删除</p>
+<p><code>db.unset(&#39;user.name&#39;).write()</code>，删除一个字段</p>
+<h1 id="发现个严重问题"><a href="#发现个严重问题" class="headerlink" title="发现个严重问题"></a>发现个严重问题</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/recording/mongoose的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/10/recording/mongoose的使用/" itemprop="url">mongoose的使用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T11:14:37+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/10/recording/mongoose的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/10/recording/mongoose的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/10/recording/mongoose的使用/" class="leancloud_visitors" data-flag-title="mongoose的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>学习了mongodb后，接着就是和nodejs进行对接，怎么在nodejs上使用mongodb。我这里选择的是mongoose，至于为啥，可能教程稍微多点吧。不过，这个mongoose还是有点复杂的。。。</p>
+</blockquote>
+<p><a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">官方文档</a></p>
+<p><a href="https://mongoose.shujuwajue.com/guide/schemas.html" target="_blank" rel="external">中文文档</a></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>// 安装包
+npm i mongoose -S
+</code></pre><p>我nodejs使用的框架是<code>express</code>。</p>
+<pre><code>// 首先导入mongoose
+var mongoose = require(&apos;mongoose&apos;)
+// 实例化一个骨架
+var Schema = mongoose.Schema
+/*
+  Schema里面的参数，{ paw: String }
+  是规定，执行操作的时，约定的字段和类型
+  让格式更清晰吧
+  而且可以定义默认值
+*/
+var testSchema = new Schema({
+  name: { type: String, default: &apos;Val&apos;},
+  paw: String
+})
+
+/* 
+  为&quot;users&quot;的model，添加自定义方法
+  这个&quot;users&quot;是你要操作的集合（collection）
+*/
+testSchema.methods.findSimilarTypes = function(cb) {
+  // .find({})这些就跟操作mongodb时一样了，cb就是回调函数
+  return this.model(&apos;users&apos;).find({ name: this.name }, cb)
+}
+testSchema.methods.findSimilarTypes2 = function(cb) {
+  return this.model(&apos;users&apos;).find({ paw: this.paw }, cb)
+}
+
+// 将骨架发布为model，同理这个&quot;users&quot;是要操作的集合
+var Test = mongoose.model(&apos;users&apos;, testSchema)
+
+// 实例一个实体(entity)，传一个{}参数
+var _entity = new Test({ name: &apos;232&apos;, paw: &apos;22&apos; })
+
+// 执行之前定义的方法，打印获取到的数据
+_entity.findSimilarTypes2(function(err, data) {
+  console.log(data)
+})
+</code></pre><p>总结下：</p>
+<ol>
+<li>首先定义一个骨架，约定好字段和字段的类型(String, Array, Number这些，还有很多种)</li>
+<li>为这个骨架添加自定义方法，这里就是要对数据库CRUD了</li>
+<li>然后根据这个骨架，发布一个model，对要操作的数据库，定义好</li>
+<li>接着就实例一个实体（entity），传入之前约定好的字段</li>
+<li>最后就是执行之前自定义好的方法，获取到数据</li>
+</ol>
+<p>还有，不一定使用自定义方法，mongoose内置很多定义的方法</p>
+<p>下面我们详细说下每个东西的详细值</p>
+<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>Schema，就是这个操作的骨架，形式，约定好字段和字段的类型。例如在后面的操作，会出现什么字段，是什么类型的，一些操作，都在这里定义好。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Buffer</li>
+<li>Boolean</li>
+<li>Mixed</li>
+<li>Objectid</li>
+<li><p>Array</p>
+<p>  new Schema({</p>
+<pre><code>name: String,
+data: Array,
+list: {
+  type: Array,
+  default: [1, 2, 3]
+}
+msg: {
+  type: String,
+  default: &apos;abc&apos;,
+  lowercase: true, // 小写
+  trim: true // 去空格
+},
+updated: { type: Date, default: Date.now },
+age: { type: Number, min: 18, max: 65 },
+</code></pre><p>  })</p>
+</li>
+</ul>
+<p>可以看到，有很多内置方法，这些都能减轻工作</p>
+<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><h3 id="内置方法"><a href="#内置方法" class="headerlink" title="内置方法"></a>内置方法</h3><p>先定义个骨架</p>
+<pre><code>var User = new Schema({
+  name: String,
+  pwd: String,
+  avatar: String,
+  createdTime: {
+    type: Date,
+    default: Date.now
+  },
+  email: String,
+  token: String
+})
+</code></pre><p>再生成一个model</p>
+<pre><code>var Test = mognoose.model(&apos;user&apos;, User)
+</code></pre><p>使用内置的方法</p>
+<pre><code>Test.find(function(error, data){
+  console.log(data)
+})
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/recording/微信小程序学习记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2410,444 +2866,6 @@ $.ajax({
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/technology/php-workman-gateway/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/14/technology/php-workman-gateway/" itemprop="url">'php-gateway的使用';</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T09:14:55+08:00">
-                2017-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/14/technology/php-workman-gateway/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/14/technology/php-workman-gateway/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/06/14/technology/php-workman-gateway/" class="leancloud_visitors" data-flag-title="'php-gateway的使用';">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="php-gateway"><a href="#php-gateway" class="headerlink" title="php-gateway"></a>php-gateway</h1><blockquote>
-<p>在<a href="https://github.com/yiiouo/js-vod-system" target="_blank" rel="external">自己的项目</a>中，用到了php的gateway，gateway是基于workerman再次开发的一个网络框架，看下<a href="http://doc2.workerman.net" target="_blank" rel="external">手册</a>和DEMO，就可以基本的使用了。</p>
-</blockquote>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="下载，增加php环境变量"><a href="#下载，增加php环境变量" class="headerlink" title="下载，增加php环境变量"></a>下载，增加php环境变量</h3><p>我电脑是Windows，所以下载的是Windos版本。在官网下载文件后（<a href="http://www.workerman.net/download" target="_blank" rel="external">下载地址</a>），随意找个地方解压就好了。然后在系统-&gt;高级系统设置-&gt;环境变量-&gt;用户变量中的path，编辑-&gt;添加你的php所在的目录地址。</p>
-<p>我用的是wamp，所以php的地址是：D:\wamp\bin\php\php5.3.10  </p>
-<p>最后打开解压后的文件，会有个start_for_win.bat的批处理，点击打开它就OK了。这样就会打开服务，可以使用。</p>
-<h3 id="使用Websocket"><a href="#使用Websocket" class="headerlink" title="使用Websocket"></a>使用Websocket</h3><p>Gateway文件夹，大部分文件我们不用理的，只要关注Applications/YourApp/文件中的Events.php 和start_gateway.php这两个文件就行了。</p>
-<p>Events.php是处理业务代码。start_gateway.php是处理使用什么协议，端口是多少。</p>
-<p>因为我用的是Websocket，在start_gateway.php中，将协议改成webscoket,并写上ip地址。</p>
-<pre><code>$gateway = new Gateway(&quot;websocket://127.0.0.1:8282&quot;);
-</code></pre><p>这里ip地址如果是<code>127.0.0.1</code>，只能让本机使用，<code>本机ip地址</code>，能让内网中的ip使用。</p>
-<h2 id="开发功能"><a href="#开发功能" class="headerlink" title="开发功能"></a>开发功能</h2><h3 id="Events-php"><a href="#Events-php" class="headerlink" title="Events.php"></a>Events.php</h3><p>在Events.php中，大概结构是这样的：</p>
-<pre><code>class Events{
-   public static function onConnect($client_id){}
-   public static function onMessage($client_id,$message){}
-   public static function onClose($client_id){}
-}
-</code></pre><ul>
-<li>onConnect：当链接连接成功后的回调函数</li>
-<li>onMessage：当客户端发送信息后的回调函数</li>
-<li>onClose：当链接关闭后的回调函数</li>
-</ul>
-<p>主要用到的是<code>onMessage</code>，客户端通过websocket发送信息，就会触发此函数，我们就可以通过gateway给的一些方法，把要处理的数据，发送给全部用户或者特定的用户。</p>
-<p>每个函数的参数功能，都如同它的名字一样。<code>$client_id</code>是发送数据的用户id，这个id由Gateway生成的，不用我们是理。<code>$message</code>是用户发送的数据，发送的数据格式，最好就是字符串，所以前端后端，要把数据发送出去，都要先将它转成字符串。</p>
-<pre><code>public static function onConnect($client_id){
-    //当客户端连接成功后，就发送一条当前用户的id给所有连接此连接的客户端
-    Gateway::sendToAll(&quot;$client_id&quot;);
-}
-</code></pre><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>前端的代码也是很简单</p>
-<pre><code>&lt;div&gt;send data&lt;/div&gt;
-&lt;script&gt;
-    //这里的地址要和start_gateway.php中注册的Gateway地址一样
-    var ws = new WebSocket(&apos;ws:127.0.0.1:8282&apos;)
-    ws.addEventListener(&apos;open&apos;, function(e){
-        console.log(e)
-    }, false)
-    ws.addEventListener(&apos;message&apos;, function(e){
-        console.log(e)
-    }, false)
-    document.querySelector(&apos;div&apos;).addEventListener(&apos;click&apos;,function(){
-        ws.send(&apos;我发了信息，111&apos;)
-    },false)
-&lt;/script&gt;
-</code></pre><p>页面打开后，连接成功，就会收到了一条信息。如果我们将再新建一个页面，同样的代码，两个页面都会收到信息。</p>
-<p>同样，我们主要写的代码，也是放在<code>message</code>的回调函数里。</p>
-<h3 id="Gateway常用的方法"><a href="#Gateway常用的方法" class="headerlink" title="Gateway常用的方法"></a>Gateway常用的方法</h3><p>这里列出我用到的，详细大家可以看手册。</p>
-<ul>
-<li>sendToAll：对所有用户发送数据，<code>Gateway::sendToAll($data)</code></li>
-<li>sendToClient：对某个用户发送数据，<code>Gateway::sendToClient($client_id,$data)</code></li>
-<li>joinGroup：添加用户到某个组，<code>Gateway::joinGroup($group_name,$client_id)</code></li>
-<li>sendToGroup：对某个组内的所有用户发送数据,<code>Gateway::sendToGroup($group_name,$data)</code></li>
-</ul>
-<p>我现在暂时用到这4个，其他还没研究。这里说下Gateway的group。一个组可以含有多个用户，一个用户可以加入多个组，而且用户断线后，会自动从组里删除。这个是非常好用的，指定某个群组的人，发送数据。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/23/technology/php-verificationCode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/23/technology/php-verificationCode/" itemprop="url">'前后端分离，php验证码处理';</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T17:24:55+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/23/technology/php-verificationCode/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/23/technology/php-verificationCode/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/05/23/technology/php-verificationCode/" class="leancloud_visitors" data-flag-title="'前后端分离，php验证码处理';">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前后端分离，php验证码处理"><a href="#前后端分离，php验证码处理" class="headerlink" title="前后端分离，php验证码处理"></a>前后端分离，php验证码处理</h1><blockquote>
-<p>在<a href="https://github.com/yiiouo/todo-vue" target="_blank" rel="external">自己的项目</a>，登录注册要用到验证码功能，而这个项目是接后端分离的。因为我是一边学php一边写接口，所以写得不怎么好，继续努力吧。</p>
-</blockquote>
-<h2 id="使用GD生成验证码"><a href="#使用GD生成验证码" class="headerlink" title="使用GD生成验证码"></a>使用GD生成验证码</h2><p>这个我google了下，看了下代码，很简单就能实现了。</p>
-<pre><code>$string = &quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;;
-$str = &quot;&quot;;
-
-for($i=0;$i&lt;6;$i++){
-  //随机获取验证码中的数字
-  $pos = rand(0,35);
-  $str .= $string{$pos};
-}
-
-$img_handle = Imagecreate(80, 20);  //图片大小80X20
-$back_color = ImageColorAllocate($img_handle, 255, 255, 255); //背景颜色（白色）
-$txt_color = ImageColorAllocate($img_handle, 0,0, 0);  //文本颜色（黑色）
-
-//加入干扰线
-for($i=0;$i&lt;3;$i++)
-{
-  $line = ImageColorAllocate($img_handle,rand(0,255),rand(0,255),rand(0,255));
-  Imageline($img_handle, rand(0,15), rand(0,15), rand(100,150),rand(10,50), $line);
-}
-//加入干扰象素
-for($i=0;$i&lt;200;$i++) 
-{
-  $randcolor = ImageColorallocate($img_handle,rand(0,255),rand(0,255),rand(0,255));
-  Imagesetpixel($img_handle, rand()%100 , rand()%50 , $randcolor);
-}
-
-Imagefill($img_handle, 0, 0, $back_color);             //填充图片背景色
-ImageString($img_handle, 28, 10, 0, $str, $txt_color);//水平填充一行字符串
-header(&quot;Content-type: image/jpg&quot;); //生成验证码图片    
-/*
-  比如这个接口链接是http://localhost:80/api/code.php，直接在img中的src给予链接，就会显示出验证码了。
- */
-Imagepng($img_handle);//显示图片
-</code></pre><p>因为这是前后端分离的，都是用token进行验证登录状态的，没有用到session（至于为什么，我还没去了解），所以要给一个标识id，知道用户发送的验证码对应的是后台中的哪一个。</p>
-<h2 id="将图片转成base64，发送给前端"><a href="#将图片转成base64，发送给前端" class="headerlink" title="将图片转成base64，发送给前端"></a>将图片转成base64，发送给前端</h2><p>上面GD生成的验证码，如果前端用ajax去获取的话，会一堆乱码，前端要用到<code>FileReader</code>对象的<code>readAsDataURL</code>方法，将它转成图片。但是这样就获取不了获取到的验证码的标识id了。</p>
-<p>所以我想将GD库生成的验证码图片，转成base64，这样就可以组合成个数组，发给前端了。</p>
-<p>谷歌了下，找到了方法：</p>
-<pre><code>ob_start (); 
-  //$img_handle，就是gd生成的图片
-  imagejpeg ($img_handle);
-  $image_data = ob_get_contents (); 
-
-ob_end_clean (); 
-//生成base64图片
-$image_data_base64 = &apos;data:image/base64;base64&apos;.base64_encode ($image_data);
-</code></pre><p>这样就能生成了base64的图片，是字符串来的，所以最后再组装下数据结构，就可以发送给前端了：</p>
-<pre><code>//生成此验证码图片的id, uniqid()方法生成验证码的标识id
-echo json_encode(array(
-    &apos;pic&apos;=&gt;$image_data_base64,
-    &apos;id&apos; =&gt; uniqid(),
-    &apos;status&apos; =&gt; 0
-))
-</code></pre><h2 id="验证码答案和标识id存放在哪里？"><a href="#验证码答案和标识id存放在哪里？" class="headerlink" title="验证码答案和标识id存放在哪里？"></a>验证码答案和标识id存放在哪里？</h2><p>这个问题困扰了我，可以存在数据库，txt文件，cookie，缓存。。。还有其他我就不知道了。缓存这个好像是最好的，后面再研究下。然后如果是读写数据库和txt文件的话，感觉会浪费性能，所以先用了cookie去存储，后面再去了解缓存是怎么操作的。<br>    //id是验证码的标识，pwd是验证码的答案<br>    setcookie(“code”, json_encode(array(‘id’=&gt;$id , ‘pwd’=&gt;$pwd)), time()+3600);</p>
-<p>要判断的时候获取下cookie再去判断就好了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>多尝试点不会的技术吧…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2898,7 +2916,7 @@ echo json_encode(array(
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2909,7 +2927,7 @@ echo json_encode(array(
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

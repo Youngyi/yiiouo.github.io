@@ -301,6 +301,386 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/technology/Web新打开窗口方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/20/technology/Web新打开窗口方式/" itemprop="url">Web 打开新窗口方式</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T15:23:23+08:00">
+                2017-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/20/technology/Web新打开窗口方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/20/technology/Web新打开窗口方式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/10/20/technology/Web新打开窗口方式/" class="leancloud_visitors" data-flag-title="Web 打开新窗口方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Web-打开新窗口方式"><a href="#Web-打开新窗口方式" class="headerlink" title="Web 打开新窗口方式"></a>Web 打开新窗口方式</h1><blockquote>
+<p>之前的项目，有个功能是下载文件，这里只要在浏览器输入 url 就会下载那个文件了。当时我只是简单得使用 <code>window.open</code> ，但是却会被浏览器进行拦截，要手动开启才行，然后就搜索研究其他方法，就看到各种各样的，通过 js 打开新窗口的方法了</p>
+</blockquote>
+<h2 id="解决下载功能"><a href="#解决下载功能" class="headerlink" title="解决下载功能"></a>解决下载功能</h2><p>这里就先说解决下载功能的方法，通过同事的提醒，改用 iframe 进行处理，直接对 iframe 的 src 进行赋值，就会自动进行下载文件了，不过，如果后端在 response  header 设置了某个头部，就会报错了：x-frame-options: DENY</p>
+<p>x-frame-options，是否允许 object 和 iframe 展示，有三个参数：</p>
+<ul>
+<li>DENY: 即使是相同域名，也不能显示</li>
+<li>SAMEORIGIN: 可以在相同域名页面展示</li>
+<li>ALLOW-FROM uri: 任何来源都可以展示</li>
+</ul>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options" target="_blank" rel="external">MDN的解释</a></p>
+<p>我的后端同事在要下载的几个接口，添加了 <code>SAMEORIGIN</code> ，最后前端就可以无任何副作用的情况下，通过 js 进行下载文件了</p>
+<pre><code>exportOrder: (url) =&gt; {
+  // 移除旧的节点
+  const oldNode = document.querySelector(&apos;#g-exportOrder-iframe&apos;)
+  if (oldNode) {
+    document.body.removeChild(document.querySelector(&apos;#g-exportOrder-iframe&apos;))
+  }
+  // 生成新节点，进行下载
+  const iframe = document.createElement(&apos;iframe&apos;)
+  iframe.style.display = &quot;none&quot;
+  iframe.id = &apos;g-exportOrder-iframe&apos;
+  iframe.src = url
+  document.body.appendChild(iframe)
+}
+</code></pre><p>只要调用传个 url ，就会自动下载一个文件了</p>
+<h2 id="使用-window-open"><a href="#使用-window-open" class="headerlink" title="使用 window.open"></a>使用 window.open</h2><p>如果我们是点击一个目标，然后同步执行打开窗口操作，用 <code>window.open</code> 是可以的，但是我们把 <code>window.open</code> 放在异步操作里就有问题了</p>
+<pre><code>div.addEventListener(&apos;click&apos;, open, false)
+function open() {
+  setTimeout(() =&gt; {
+    window.open(&apos;/api/admin/adslot/all&apos;)
+  }, 1100)
+}
+</code></pre><p>我在谷歌、火狐和欧朋，这样就会被拦截，然而用 ie9 却不会被拦截，我给10秒，ie 最后还是会弹出来</p>
+<p>从你用点击事件，到 <code>window.open</code> ，只要异步操作超过某个时间，浏览器就会拦截这个弹窗的操作</p>
+<p>如果不添加用户的事件去触发 <code>window.open</code> （比如点击事件，鼠标移入移出等），而是在代码直接运行 <code>window.open</code> 的话，那样浏览器也会拦截</p>
+<pre><code>window.onload = function() {
+  windon.open()
+}
+</code></pre><p>总得来讲，如果没有用用户操作的事件去触发 <code>window.open</code> 就会被拦截，而把 <code>window.open</code> 放在异步操作，且超过一定的事件，也会被拦截</p>
+<p>这里先想到了解决异步也会被拦截的方法</p>
+<pre><code>var test = window.open()
+setTimeout(function() {
+  test.location = &apos;http://www.xxx.com&apos;
+}, 2000)
+</code></pre><p>在异步操作前，先打开窗口，然后再在你要操作的位置，更改这个窗口的 <code>location</code> ，不过这个缺陷有点大，要等异步操作完成了，新的窗口才会从空白变到指定页面，而且这种解决不了，没有人为事件触发 <code>window.open</code> 导致被拦截的问题</p>
+<h2 id="使用-a-标签"><a href="#使用-a-标签" class="headerlink" title="使用 a 标签"></a>使用 a 标签</h2><p>这是最常见打开一个新标签页面的方法</p>
+<pre><code>&lt;a class=&apos;test&apos; href=&apos;http://www.xxx.com&apos; target=&apos;_blank&apos;&gt;&lt;/a&gt;
+</code></pre><p>然后，我点击另外一个 div ，再打开新窗口</p>
+<pre><code>function open() {
+  setTimeout(function() {
+    document.querySelector(&apos;.test&apos;).click()
+  }, 2000)
+}
+</code></pre><p>上面的异步操作，还是不行，就算是重新生成一个 a 标签，再用 <code>click()</code> 触发也是不行</p>
+<h2 id="form-submit"><a href="#form-submit" class="headerlink" title="form submit"></a>form submit</h2><pre><code>&lt;form class=&apos;test&apos; target=&apos;_blank&apos; @click=&apos;open&apos; method=&apos;GET&apos; action=&apos;http://www.xxx.com&apos;&gt;click me&lt;/form&gt;
+function open2() {
+  setTimeout(() =&gt; {
+    document.querySelector(&apos;.test&apos;).submit()
+  }, 2000)
+}
+</code></pre><p>和 a 标签一样</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要下载文件的话，使用 iframe</p>
+<p>如果要打开新窗口，没用用户操作的前提下打开，提示让用户关闭那个拦截吧</p>
+<p>用户操作，且是异步的情况下，就使用 <code>window.open</code> ，然后定义 <code>location</code> 这样就好了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/22/technology/git团队协作流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/22/technology/git团队协作流程/" itemprop="url">未命名</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T23:42:52+08:00">
+                2017-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/22/technology/git团队协作流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/22/technology/git团队协作流程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/22/technology/git团队协作流程/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>—<a href="https://zlargon.gitbooks.io/git-tutorial/content/remote/push.html" target="_blank" rel="external">https://zlargon.gitbooks.io/git-tutorial/content/remote/push.html</a><br>title: git团队协作流程<br>date: 2017-09-22 23:42:52<br>tags: git</p>
+<h2 id="categories-教程"><a href="#categories-教程" class="headerlink" title="categories: 教程"></a>categories: 教程</h2><h1 id="git团队协作流程"><a href="#git团队协作流程" class="headerlink" title="git团队协作流程"></a>git团队协作流程</h1><blockquote>
+<p>这里主要是总结我公司 git 的开发流程，版本的迭代，如何打 tag 等操作</p>
+</blockquote>
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>一个项目的流程，PM 出原型图，主管在 gitlab 建一个仓库，分配权限，分配人手等</p>
+<ol>
+<li>在 master 初始化一个版本</li>
+<li>再 <code>checkout</code> 一个 develop 版本</li>
+<li>开发人员，<code>fork</code> 该项目，然后 <code>git clone</code> 到本地</li>
+<li>然后要添加源仓库的 origin ，</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/recording/log4js的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -897,8 +1277,8 @@ animate()
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -1078,8 +1458,8 @@ yum -y install gcc+ gcc-c++
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/recording/" itemprop="url" rel="index">
-                    <span itemprop="name">recording</span>
+                  <a href="/categories/记录/" itemprop="url" rel="index">
+                    <span itemprop="name">记录</span>
                   </a>
                 </span>
 
@@ -2508,462 +2888,6 @@ gulp.watch([&apos;*.js&apos;], function(e) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/recording/lowdb使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/21/recording/lowdb使用/" itemprop="url">lowdb使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T21:04:49+08:00">
-                2017-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/21/recording/lowdb使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/21/recording/lowdb使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/21/recording/lowdb使用/" class="leancloud_visitors" data-flag-title="lowdb使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>cnpm i lowdb --save-dev
-
-
-// nodejs
-const low = require(&apos;lowdb&apos;)
-const FileSync = require(&apos;lowdb/adapters/FileSync&apos;)
-// 进行异步模式
-const adapter = new FileSync(&apos;db.json&apos;)
-// 实例一个db对象
-const db = low(adapter)
-// 设置默认值，并写入
-db.defaults({
-  banner: [],
-  category: [],
-  product: [],
-  usre: []
-}).write()
-</code></pre><p><code>db.get(&#39;banner[0]&#39;), db.get(&#39;user.title&#39;), db.get(&#39;banner[0].title&#39;)</code>，都是获取某个值，最后要加上<code>.value()</code></p>
-<p><code>db.getState()</code>，查看db的状态</p>
-<p><code>db.setState({})</code>，清空db</p>
-<p><code>db.write().id</code>，自动插入随机id值</p>
-<p><code>db.has(&#39;posts&#39;).value()</code>，判断是否有这个值</p>
-<p><code>db.set(&#39;posts&#39;, []).write()</code>，将<code>posts</code>值设置为[]</p>
-<p>使用<code>.push()</code>插入数据，在插入数据前，要先<code>get(&#39;filed&#39;)</code>，声明向谁插入，最后就写入<code>write()</code></p>
-<p><code>db.get(&#39;banner&#39;).size().value()</code>，获取banner有多少条数据</p>
-<p><code>db.get(&#39;posts&#39;).find({ title: &#39;low!&#39; }).assign({ title: &#39;hi!&#39;}).write()</code>，获取<code>posts</code>字段，搜索<code>title</code>为’low!’的值，替换成’hi!’，最后写入</p>
-<p><code>db.get(&#39;posts&#39;).remove({ title: &#39;low!&#39; }).write()</code> ，删除</p>
-<p><code>db.unset(&#39;user.name&#39;).write()</code>，删除一个字段</p>
-<h1 id="发现个严重问题"><a href="#发现个严重问题" class="headerlink" title="发现个严重问题"></a>发现个严重问题</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/recording/mongoose的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rni-L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/logo.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/10/recording/mongoose的使用/" itemprop="url">mongoose的使用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T11:14:37+08:00">
-                2017-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/记录/" itemprop="url" rel="index">
-                    <span itemprop="name">记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/10/recording/mongoose的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/10/recording/mongoose的使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/08/10/recording/mongoose的使用/" class="leancloud_visitors" data-flag-title="mongoose的使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>学习了mongodb后，接着就是和nodejs进行对接，怎么在nodejs上使用mongodb。我这里选择的是mongoose，至于为啥，可能教程稍微多点吧。不过，这个mongoose还是有点复杂的。。。</p>
-</blockquote>
-<p><a href="http://mongoosejs.com/docs/guide.html" target="_blank" rel="external">官方文档</a></p>
-<p><a href="https://mongoose.shujuwajue.com/guide/schemas.html" target="_blank" rel="external">中文文档</a></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><pre><code>// 安装包
-npm i mongoose -S
-</code></pre><p>我nodejs使用的框架是<code>express</code>。</p>
-<pre><code>// 首先导入mongoose
-var mongoose = require(&apos;mongoose&apos;)
-// 实例化一个骨架
-var Schema = mongoose.Schema
-/*
-  Schema里面的参数，{ paw: String }
-  是规定，执行操作的时，约定的字段和类型
-  让格式更清晰吧
-  而且可以定义默认值
-*/
-var testSchema = new Schema({
-  name: { type: String, default: &apos;Val&apos;},
-  paw: String
-})
-
-/* 
-  为&quot;users&quot;的model，添加自定义方法
-  这个&quot;users&quot;是你要操作的集合（collection）
-*/
-testSchema.methods.findSimilarTypes = function(cb) {
-  // .find({})这些就跟操作mongodb时一样了，cb就是回调函数
-  return this.model(&apos;users&apos;).find({ name: this.name }, cb)
-}
-testSchema.methods.findSimilarTypes2 = function(cb) {
-  return this.model(&apos;users&apos;).find({ paw: this.paw }, cb)
-}
-
-// 将骨架发布为model，同理这个&quot;users&quot;是要操作的集合
-var Test = mongoose.model(&apos;users&apos;, testSchema)
-
-// 实例一个实体(entity)，传一个{}参数
-var _entity = new Test({ name: &apos;232&apos;, paw: &apos;22&apos; })
-
-// 执行之前定义的方法，打印获取到的数据
-_entity.findSimilarTypes2(function(err, data) {
-  console.log(data)
-})
-</code></pre><p>总结下：</p>
-<ol>
-<li>首先定义一个骨架，约定好字段和字段的类型(String, Array, Number这些，还有很多种)</li>
-<li>为这个骨架添加自定义方法，这里就是要对数据库CRUD了</li>
-<li>然后根据这个骨架，发布一个model，对要操作的数据库，定义好</li>
-<li>接着就实例一个实体（entity），传入之前约定好的字段</li>
-<li>最后就是执行之前自定义好的方法，获取到数据</li>
-</ol>
-<p>还有，不一定使用自定义方法，mongoose内置很多定义的方法</p>
-<p>下面我们详细说下每个东西的详细值</p>
-<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>Schema，就是这个操作的骨架，形式，约定好字段和字段的类型。例如在后面的操作，会出现什么字段，是什么类型的，一些操作，都在这里定义好。</p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>String</li>
-<li>Number</li>
-<li>Date</li>
-<li>Buffer</li>
-<li>Boolean</li>
-<li>Mixed</li>
-<li>Objectid</li>
-<li><p>Array</p>
-<p>  new Schema({</p>
-<pre><code>name: String,
-data: Array,
-list: {
-  type: Array,
-  default: [1, 2, 3]
-}
-msg: {
-  type: String,
-  default: &apos;abc&apos;,
-  lowercase: true, // 小写
-  trim: true // 去空格
-},
-updated: { type: Date, default: Date.now },
-age: { type: Number, min: 18, max: 65 },
-</code></pre><p>  })</p>
-</li>
-</ul>
-<p>可以看到，有很多内置方法，这些都能减轻工作</p>
-<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><h3 id="内置方法"><a href="#内置方法" class="headerlink" title="内置方法"></a>内置方法</h3><p>先定义个骨架</p>
-<pre><code>var User = new Schema({
-  name: String,
-  pwd: String,
-  avatar: String,
-  createdTime: {
-    type: Date,
-    default: Date.now
-  },
-  email: String,
-  token: String
-})
-</code></pre><p>再生成一个model</p>
-<pre><code>var Test = mognoose.model(&apos;user&apos;, User)
-</code></pre><p>使用内置的方法</p>
-<pre><code>Test.find(function(error, data){
-  console.log(data)
-})
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3014,7 +2938,7 @@ age: { type: Number, min: 18, max: 65 },
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -3025,7 +2949,7 @@ age: { type: Number, min: 18, max: 65 },
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
