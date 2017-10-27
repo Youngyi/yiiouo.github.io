@@ -492,10 +492,15 @@ code {
   border-radius: 3px;
   font-size: 13px;
 }
+pre {
+  background: #dadada;
+  padding: 20px;
+}
 pre code {
   padding: 0;
   color: #4d4d4c;
-  background: none;
+  background: transparent;
+  color: #a72e2e;
   text-shadow: none;
 }
 .highlight {
@@ -1807,7 +1812,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff8eff;
+  background: #75adee;
 }
 .links-of-blogroll {
   font-size: 13px;
