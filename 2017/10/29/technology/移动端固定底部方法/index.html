@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/29/technology/移动端固定底部方法/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="我们常见的需求，底部或者头部固定一个模块，随着滚动条滚动等，但是在移动端不同的 BUG，这里主要是我在项目中遇到的问题，提出来总结一下  常见固定底部方法fixed123456div&amp;#123;  position: fixed;  top: 0;  left: 0;  width: 100%;  &amp;#125; 这样就可以做到固定效果的实现，如果这是在 PC 端，会很完美，但是在移动端却不行，当">
-<meta property="og:updated_time" content="2017-10-29T10:07:24.930Z">
+<meta property="og:updated_time" content="2017-10-31T11:31:06.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端固定底部方法">
 <meta name="twitter:description" content="我们常见的需求，底部或者头部固定一个模块，随着滚动条滚动等，但是在移动端不同的 BUG，这里主要是我在项目中遇到的问题，提出来总结一下  常见固定底部方法fixed123456div&amp;#123;  position: fixed;  top: 0;  left: 0;  width: 100%;  &amp;#125; 这样就可以做到固定效果的实现，如果这是在 PC 端，会很完美，但是在移动端却不行，当">
@@ -421,6 +421,7 @@
 <p>这种的话，软键盘出现，不会把按钮顶起来，在微信端看起来是也可以的，但是在普通浏览器就不行了，像 chrome，safari，这些滑到最底部，再滑一下，就会多了一块区域，这时候才是 content 的真实高度，而没到那个状态的时候，按钮是会被挡住的。</p>
 <p>第二种的情况，可能我这里还没找到处理方法，而我是从第一种方法的基础下，解决那个软键盘顶起按钮的问题。</p>
 <h2 id="解决软键盘定期按钮的问题"><a href="#解决软键盘定期按钮的问题" class="headerlink" title="解决软键盘定期按钮的问题"></a>解决软键盘定期按钮的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">function hideBtn() &#123;</div><div class="line">  document.querySelector(&apos;input&apos;).value = &apos;1&apos;</div><div class="line">&#125;</div><div class="line">function showBtn() &#123;</div><div class="line">  document.querySelector(&apos;input&apos;).value = &apos;2&apos;</div><div class="line">&#125;</div><div class="line">&lt;!-- input 获取焦点，隐藏按钮，失去焦点，显示按钮 --&gt;</div><div class="line">document.querySelectorAll(&apos;input&apos;).forEach(function(v) &#123;</div><div class="line">  v.addEventListener(&apos;focus&apos;, hideBtn, false)</div><div class="line">  v.addEventListener(&apos;blur&apos;, showBtn, false)</div><div class="line">&#125;)</div><div class="line">var windheight = document.documentElement.clientHeight || document.body.clientHeight</div><div class="line">window.addEventListener(&apos;resize&apos;, function() &#123;</div><div class="line">  var docheight = document.documentElement.clientHeight || document.body.clientHeight</div><div class="line">  if (docheight &lt; windheight) &#123;</div><div class="line">    // 软键盘出现</div><div class="line">    hideBtn()</div><div class="line">  &#125; else &#123;</div><div class="line">    // 软键盘隐藏</div><div class="line">    showBtn()</div><div class="line">  &#125;</div><div class="line">&#125;, false)</div></pre></td></tr></table></figure>
+<p><a href="http://www.rni-l.com/plugins/demo/mobileFixed/index.html" target="_blank" rel="external">demo 链接</a></p>
 <p>其他解决办法，后续补上…</p>
 
       
@@ -452,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/20/technology/Web新打开窗口方式/" rel="next" title="Web 打开新窗口方式">
-                <i class="fa fa-chevron-left"></i> Web 打开新窗口方式
+              <a href="/2017/10/20/technology/Web新打开窗口方式/" rel="next" title="js 打开新窗口方式">
+                <i class="fa fa-chevron-left"></i> js 打开新窗口方式
               </a>
             
           </div>
@@ -461,6 +462,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/01/后发生什么事情/" rel="prev" title="输入 url 后发生什么事情">
+                输入 url 后发生什么事情 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -544,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -566,7 +571,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -301,6 +301,291 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/technology/移动端布局方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rni-L">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/technology/移动端布局方式/" itemprop="url">移动端布局方式</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T15:06:16+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/11/technology/移动端布局方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/11/technology/移动端布局方式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/07/11/technology/移动端布局方式/" class="leancloud_visitors" data-flag-title="移动端布局方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>这篇文章，主要是总结一下，我在移动端布局用过的方法。有三种，一种是响应式布局，利用@meida判断各个size；第二种是REM；最后是设置viewport中的width。</p>
+</blockquote>
+<h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><p>这种感觉是最好理解了，利用@media进行断点，在每个断点中编写css。</p>
+<pre><code>@media (max-width:768px){
+    //css
+}
+</code></pre><p>上面这段代码，在浏览器的宽度低于768时有效。同理，如果把<code>max</code>换成<code>min</code>，就会变成高于768时有效。可以设置宽度，也可以设置高度，也可以同时设置多个值。</p>
+<p>在<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries" target="_blank" rel="external">MDN,@media</a>上，发现很多值都可以做判断的。宽，高，宽高比，颜色（这个是指定输出设备每个像素单位的比特值），是否横屏或竖屏，还有很多，可以去MDN看看。</p>
+<h3 id="媒体类型"><a href="#媒体类型" class="headerlink" title="媒体类型"></a>媒体类型</h3><p>@meida还可以根据媒体类型进行断点。</p>
+<ul>
+<li>all，所有设备</li>
+<li>print，打印</li>
+<li>screen，彩色的电脑屏幕</li>
+<li>speech，不知道什么来的。</li>
+</ul>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><pre><code>@media (max-width:1000px){
+    div{background:blue;}
+}
+@media (min-width:1000px) and (max-width:1150px){
+    div{background: yellow;}
+}
+@media only screen and (max-width:1150px){
+    div{border:solid 1px;}
+}
+@media not print and (max-width:1150px){
+    div{border-radius:50%;}
+}
+</code></pre><ul>
+<li>and，就是‘和’的意思，前后两个条件都达到时</li>
+<li>only，唯一</li>
+<li>not，除了这个之外</li>
+</ul>
+<p>上面4个@media，分别的效果是：</p>
+<ol>
+<li>当浏览器宽度低于1000px时</li>
+<li>当浏览器宽度大于1000px 和 小于1150px时</li>
+<li>当在屏幕上显示 和 宽度小于1150px时</li>
+<li>除了在打印上显示外 和 宽度小于1150px时</li>
+</ol>
+<h3 id="按需‘加载’css"><a href="#按需‘加载’css" class="headerlink" title="按需‘加载’css"></a>按需‘加载’css</h3><p>@media还可以用在link标签上。</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/1.css&quot; media=&apos;(max-width:500px)&apos;&gt;
+</code></pre><p>当浏览器宽度低于500px时，<code>1.css</code>的样式才会有效果。但这不代表大于500px时，就没加载了<code>1.css</code>。使用了<code>@media</code>属性后，只会让你当条件符合了，才让对应的css文件有效果。而且用这种方式有一个好处，就是不用在css里写<code>@media</code>。</p>
+<p><img src="./images/rem_4.jpg" alt="效果图"></p>
+<h3 id="平常响应式网站的开发"><a href="#平常响应式网站的开发" class="headerlink" title="平常响应式网站的开发"></a>平常响应式网站的开发</h3><p>平时响应式网站的开发，我都会先对比PC和MOBILE的设计稿，看看有什么区别，然后才进行编写css。通常都是使用<code>flex</code>。宽度尽量用百分比，间距、高度、字体大小使用 <code>em</code>，就可以很方便的进行大小的控制。</p>
+<h2 id="REM"><a href="#REM" class="headerlink" title="REM"></a>REM</h2><p>REM这个单位，会根据html的<code>font-size</code>大小进行转换。</p>
+<pre><code>html{font-size:100px;}
+p{padding-top:.5rem;}
+</code></pre><p>.5rem = 50px / 100</p>
+<p>转换后p的<code>padding-top</code>就是<code>50px</code>了。只要我们进行适当的计算，当前屏幕的宽度，html的<code>font-size</code>是多少px就OK了。</p>
+<h3 id="如何计算当前html的font-size值"><a href="#如何计算当前html的font-size值" class="headerlink" title="如何计算当前html的font-size值"></a>如何计算当前html的font-size值</h3><p>比如，我们拿到的设计稿是750px，那就设置成当屏幕宽度是750的时候，html的<code>font-size</code>就是<code>100px</code>（当然这个100px你可以随意设置的，我设置成100px只是方便我计算），然后就根据当前屏幕的宽度 / 750 * 100，就得到了当前屏幕宽度的<code>font-size</code>值。</p>
+<pre><code>//当前屏幕宽度 / 750 = 当前屏幕宽度的font-size / 100
+//代码如下
+(function (doc, win) {
+    var docEl = doc.documentElement,
+    resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;,
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 100 * (clientWidth / 750) + &apos;px&apos;;
+    };
+
+    if (!doc.addEventListener) return;
+       win.addEventListener(resizeEvt, recalc, false);
+       doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+})(document, window);
+</code></pre><p>上面这段代码，是直接根据屏幕宽度进行计算font-size的。而<a href="https://github.com/amfe/article/issues/17" target="_blank" rel="external">淘宝移动端REM方案</a>，还根据你的dpr去计算，而且会进行整体的缩放。淘宝的这种方案，比上面的代码会好很多。</p>
+<p><img src="/images/rem_2.png" alt="第一种方案"></p>
+<p><img src="/images/rem_1.jpg" alt="第二种方案"></p>
+<p>大家注意边框的大小。第二张图的边框是比第一张图的小的，两个都是<code>border:solid 1px</code>。其他的边距都是一样。淘宝的方案，解决了另一个问题：边框1px的问题。</p>
+<p>大家可以打开以下链接，看看具体的效果：</p>
+<p><a href="http://www.rni-l.com/mobile/index2.html" target="_blank" rel="external">第一种方案</a></p>
+<p><a href="http://www.rni-l.com/mobile/index.html" target="_blank" rel="external">第二种方案</a></p>
+<h3 id="淘宝移动端REM"><a href="#淘宝移动端REM" class="headerlink" title="淘宝移动端REM"></a>淘宝移动端REM</h3><p>这个很简单，只需要加载js就好了</p>
+<pre><code>&lt;script src=&quot;http://g.tbcdn.cn/mtb/lib-flexible/{{version}}/??flexible_css.js,flexible.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>然后在css中，将px转为rem就好了。我是用scss的，所以写个函数就好了。</p>
+<pre><code>@function s($px) {
+    @return ($px / 75) * 1rem;
+}
+p{
+    font-size:s(40);padding-left: s(52);
+}
+</code></pre><p>比如p的<code>font-size</code>在750的设计稿是<code>40px</code>，然后<code>s(40)</code>就OK了。</p>
+<h2 id="设置viewport中的width"><a href="#设置viewport中的width" class="headerlink" title="设置viewport中的width"></a>设置viewport中的width</h2><p>这种方案，就是定死viewport中的width大小。</p>
+<p>比如设计稿是750的，然后就在代码上写：</p>
+<pre><code>&lt;met name=&apos;viewport&apos; content=&apos;width=750&apos; /&gt;
+</code></pre><p>我们用同样的页面，看看效果是怎么样</p>
+<p><img src="/images/rem_3.jpg" alt="第一种方案"></p>
+<p>链接：<a href="http://www.rni-l.com/mobile/index3.html" target="_blank" rel="external">第三种方案</a></p>
+<p>效果和第二种是一样的，在手机上看也是。</p>
+<pre><code>.top{
+    display: flex;align-items:center;padding:50px 0 113.5px;justify-content:space-between;width:100%;
+    p{
+        font-size:40px;padding-left:52px;
+    }
+    img{
+        width:71.5px;height: 71.5px;display: block;margin-right: 63.5px;
+    }
+}
+</code></pre><p>而代码是直接使用px的，定死的。</p>
+<p>感觉从效果上来看，是很完美的，但是为什么不是这种方法最流行？</p>
+<pre><code>@media screen and (max-width:360px){
+    .box{color:red;}
+}
+
+@media screen and (max-width:520px){
+    .box{color:black;}
+}
+
+@media screen and (max-width:750px){
+    .box{color:yellow;}
+}
+</code></pre><p>我在iphone7，小米5s，谷歌浏览器模拟的iphone6plus上，字体颜色都是<strong>黄色</strong>的。所以<code>@media</code>媒体查询是无法使用的，因为已经将宽度定死了。而REM方案却可以使用媒体查询的。因为移动端有很多奇怪的大小，而且在不同的浏览器或者微信上，高度都是不同的，所以可能会造成间距有很大的问题。</p>
+<pre><code>window.screen.width
+</code></pre><p>用js，可以获取当前设备的宽度。</p>
+<h2 id="对比三种方式"><a href="#对比三种方式" class="headerlink" title="对比三种方式"></a>对比三种方式</h2><h3 id="响应式的优缺点"><a href="#响应式的优缺点" class="headerlink" title="响应式的优缺点"></a>响应式的优缺点</h3><p>优点：兼容性好，@media在ie9以上是支持的，PC和MOBILE是同一套代码的，不用分开。</p>
+<p>缺点：要写得css相对另外两个多很多，而且各个断点都要做好。css样式会稍微大点，更麻烦。</p>
+<h3 id="REM优缺点"><a href="#REM优缺点" class="headerlink" title="REM优缺点"></a>REM优缺点</h3><p>优点：能维持能整体的布局效果，移动端兼容性好，不用写多个css代码，而且还可以利用@media进行优化。</p>
+<p>缺点：开头要引入一段js代码，单位都要改成rem(font-size可以用px)，计算rem比较麻烦(可以引用预处理器，但是增加了编译过程，相对麻烦了点)。pc和mobile要分开。</p>
+<h3 id="设置viewport中的width-1"><a href="#设置viewport中的width-1" class="headerlink" title="设置viewport中的width"></a>设置viewport中的width</h3><p>优点：和REM相同，而且不用写rem，直接使用px，更加快捷。</p>
+<p>缺点：效果可能没rem的好，图片可能会相对模糊，而且无法使用@media进行断点，不同size的手机上显示，高度间距可能会相差很大。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>还是看项目需求，再决定使用哪种方案，如果就手机站的话，我使用REM比较多。如果对距离比较精确的话，大量css3动画的，就使用第三种。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/recording/ajax的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1805,7 +2090,7 @@ end tell
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1827,7 +2112,7 @@ end tell
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
