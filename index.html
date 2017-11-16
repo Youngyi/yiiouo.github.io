@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/后发生什么事情/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/输入url后发生什么事情/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rni-L">
@@ -320,7 +320,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/01/后发生什么事情/" itemprop="url">输入 url 后发生什么事情</a></h2>
+                <a class="post-title-link" href="/2017/11/01/输入url后发生什么事情/" itemprop="url">输入 url 后发生什么事情</a></h2>
         
 
         <div class="post-meta">
@@ -373,9 +373,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/11/01/后发生什么事情/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/01/输入url后发生什么事情/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/01/后发生什么事情/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/01/输入url后发生什么事情/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -383,7 +383,7 @@
 
           
           
-             <span id="/2017/11/01/后发生什么事情/" class="leancloud_visitors" data-flag-title="输入 url 后发生什么事情">
+             <span id="/2017/11/01/输入url后发生什么事情/" class="leancloud_visitors" data-flag-title="输入 url 后发生什么事情">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -501,6 +501,42 @@
 <li>接下来整个 TLS 会话都使用对称密钥进行加密，传输应用层（HTTP）内容</li>
 </ul>
 </li>
+<li>HTTP 协议。。。</li>
+<li>然后好像没挥手。。。。</li>
+<li>浏览器获取到服务的资源后，处理的事情<ul>
+<li>解析 —— HTML、CSS、JS</li>
+<li>渲染 —— 构建 DOM 树 -&gt; 渲染 -&gt; 布局 -&gt; 绘制</li>
+</ul>
+</li>
+<li>HTML 解析<ul>
+<li>浏览器渲染引擎从网络层取得请求的文档，一般情况下文档会分成8KB大小的分块传输</li>
+<li>HTML 解析器的主要工作是对 HTML 文档进行解析，生成解析树</li>
+<li>解析树是以 DOM 元素以及属性为节点的树。 DOM 是文档对象模型（ Document Object Module ）的缩写，它是 HTML 文档的对象表示。树的根部是 Document 对象</li>
+<li>解析算法， HTML 不能使用常见的自顶向下或自底向上方法进行分析<ul>
+<li>语言本身的“宽容”特性</li>
+<li>HTML 本身是残缺的，对于常见的残缺，浏览器需要有传统的容错机制来支持它们</li>
+<li>解析过程需要反复，对于其他语言，源码不会再解析过程变化，但是 HTML 是动态代码</li>
+</ul>
+</li>
+<li>解析接受后，浏览器开始加载网页的外部资源，此时浏览器把文档标记为可交互的（ interactive ），浏览器开始解析处于“推迟（ deferred ）”模式的脚本，之后文档就会变为“完成（ complete ）”，触发 load 事件。 HTML 不会出现无效语法（ Invalid Syntax ）错误，浏览器会修复所有错误内容，继续解析</li>
+</ul>
+</li>
+<li>CSS 解析<ul>
+<li>根据 css词法和句法分析 css 文件和 style 内容（什么是css词法和句法）</li>
+<li>css 解析器可能是自顶向下或自底向上，看浏览器</li>
+</ul>
+</li>
+<li>页面渲染<ul>
+<li>不同的浏览器可能不一样</li>
+<li>通过遍历 DOM 节点树创建一个 Frame 树或者渲染树，计算每个节点的各个 css 值</li>
+<li>通过累加子节点的宽度，该节点的水平 padding, border, margin，自底向上的计算 Frame 树的每个节点的首选宽度（…）</li>
+<li>使用上面的计算结果构建每个节点的坐标</li>
+<li>当存在 floated, abslutely, relatively 属性会有更多复杂计算</li>
+<li>创建 layer 来表示页面中的哪些部分可以成组的被绘制（如何区分），而不用被重新栅格化处理（栅格化处理是啥）</li>
+<li>计算各个层的最终位置，一组命令有 XXX 发出， GPU 命令缓冲区清空，命令传至 GPU 并异步渲染，帧被送到 window server</li>
+</ul>
+</li>
+<li>浏览器渲染这块很迷，要找其他资料</li>
 </ul>
 
           
